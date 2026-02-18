@@ -141,7 +141,7 @@ function openPlayer(url){
   }
 }
 
-function openPlayerDual(link1,link2){
+function openPlayerDual(link1,link2,link3){
   currentLink1=link1;
   currentLink2=link2;
   currentLink3=link3;
@@ -150,7 +150,8 @@ function openPlayerDual(link1,link2){
 
 function switchLink(number){
   if(number===1){ openPlayer(currentLink1); }
-  else{ openPlayer(currentLink2); }
+  else{ openPlayer(currentLink2);
+      else{ openPlayer(currentLink3); }
 }
 
 function closePlayer(){
