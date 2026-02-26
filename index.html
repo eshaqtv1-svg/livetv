@@ -19,7 +19,7 @@ text-align:center;
 
 header{
 padding:25px;
-font-size:30px;
+font-size:32px;
 font-weight:bold;
 background:rgba(0,0,0,0.4);
 backdrop-filter:blur(15px);
@@ -27,27 +27,38 @@ backdrop-filter:blur(15px);
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:25px;
 padding:30px;
 max-width:1300px;
 margin:auto;
 }
 
 .card{
-padding:25px;
 border-radius:25px;
 background:rgba(255,255,255,0.1);
 backdrop-filter:blur(20px);
 cursor:pointer;
 transition:0.3s;
-font-size:18px;
-font-weight:bold;
+padding:15px;
 }
 
 .card:hover{
-transform:scale(1.07);
+transform:scale(1.08);
 background:rgba(255,255,255,0.25);
+}
+
+.card img{
+width:100%;
+height:120px;
+object-fit:contain;
+margin-bottom:10px;
+}
+
+.card span{
+display:block;
+font-weight:bold;
+font-size:18px;
 }
 
 #playerPage{
@@ -63,33 +74,60 @@ box-shadow:0 0 50px rgba(0,0,0,0.7);
 }
 
 button{
-padding:10px 20px;
-margin:15px;
+padding:12px 25px;
+margin:20px;
 border:none;
 border-radius:30px;
 cursor:pointer;
 font-weight:bold;
 background:#00c6ff;
 color:#000;
+font-size:16px;
+}
+
+button:hover{
+background:#0072ff;
+color:#fff;
 }
 </style>
 </head>
 <body>
 
-<header>🔥 Ishaq TV 🔥</header>
+<header>🔥 Ishaq TV VIP 🔥</header>
 
 <div id="homePage">
 <div class="grid">
-<div class="card" onclick="openChannel('tolo','طلوع')">طلوع</div>
-<div class="card" onclick="openChannel('varzesh','ورزش')">ورزش</div>
-<div class="card" onclick="openChannel('irib3','شبکه سه')">شبکه سه</div>
-<div class="card" onclick="openChannel('persiana','پرشیا اسپورت')">پرشیا اسپورت</div>
-<div class="card" onclick="openChannel('solh','صلح اسپورت')">صلح اسپورت</div>
-<div class="card" onclick="openChannel('ariana','آریانا')">آریانا</div>
-<div class="card" onclick="openChannel('arezo','آرزو')">آرزو</div>
-<div class="card" onclick="openChannel('meraj','معراج')">معراج</div>
-<div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')">پرشیا اسپورت 2</div>
-<div class="card" onclick="openChannel('gem','شبکه جیم')">شبکه جیم</div>
+
+<div class="card" onclick="openChannel('tolo','طلوع')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Tolo_TV_logo.png">
+<span>طلوع</span>
+</div>
+
+<div class="card" onclick="openChannel('varzesh','ورزش')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/IRIB_Varzesh_Logo.png">
+<span>ورزش</span>
+</div>
+
+<div class="card" onclick="openChannel('irib3','شبکه سه')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/IRIB_TV3_Logo.png">
+<span>شبکه سه</span>
+</div>
+
+<div class="card" onclick="openChannel('ariana','آریانا')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Ariana_Television_Logo.png">
+<span>آریانا</span>
+</div>
+
+<div class="card" onclick="openChannel('arezo','آرزو')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Arezo_TV_logo.png">
+<span>آرزو</span>
+</div>
+
+<div class="card" onclick="openChannel('meraj','معراج')">
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Meraj_TV_logo.png">
+<span>معراج</span>
+</div>
+
 </div>
 </div>
 
