@@ -3,124 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ishaq NETLIVE Ultra</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<title>Ishaq NETLIVE </title>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Vazirmatn',sans-serif;background:#07070d;color:#fff;overflow-x:hidden;}
-header{padding:20px 50px;font-weight:900;font-size:26px;letter-spacing:2px;background:rgba(10,10,20,0.6);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05);position:sticky;top:0;z-index:10;}
-.hero{padding:60px 40px;text-align:center;background:linear-gradient(180deg,#0c0c18,#07070d);}
-.hero h1{font-size:42px;font-weight:900;margin-bottom:15px;background:linear-gradient(90deg,#00f2fe,#4facfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero p{opacity:0.7;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:30px;padding:50px;max-width:1400px;margin:auto;position:relative;z-index:1;}
-.card{background:rgba(255,255,255,0.05);border-radius:25px;padding:30px;text-align:center;cursor:pointer;transition:0.4s;border:1px solid rgba(255,255,255,0.08);transform-style:preserve-3d;}
-.card:hover{transform:rotateX(6deg) rotateY(6deg) scale(1.06);box-shadow:0 20px 60px rgba(0,255,255,0.3);}
-.card img{width:90px;height:90px;object-fit:contain;margin-bottom:15px;filter:drop-shadow(0 0 10px rgba(0,255,255,0.5));}
-.card span{font-weight:700;}
-#playerPage{display:none;padding:40px;text-align:center;background:#000;}
-video{width:95%;max-width:1300px;border-radius:20px;box-shadow:0 0 80px rgba(0,255,255,0.5);}
-.controls{margin-top:20px;}
-button{padding:12px 30px;margin:5px;border:none;border-radius:40px;font-weight:700;cursor:pointer;background:linear-gradient(45deg,#00f2fe,#4facfe);color:#000;transition:0.3s;}
-button:hover{transform:scale(1.1);box-shadow:0 0 25px #00f2fe;}
-@media(max-width:768px){.grid{padding:20px}.hero h1{font-size:28px}}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0b0f;color:#fff;min-height:100vh}
+header{padding:20px 40px;font-size:24px;font-weight:700;letter-spacing:1px;background:#0b0b0f;border-bottom:1px solid rgba(229,9,20,0.4);color:#e50914}
+.hero{padding:60px 40px 40px 40px}
+.hero h1{font-size:42px;font-weight:700;margin-bottom:10px;color:#e50914}
+.hero p{opacity:0.6;font-size:16px}
+.section{padding:30px 40px 60px 40px}
+.section h2{margin-bottom:20px;font-size:20px;font-weight:500;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px}
+.card{background:#15151c;border-radius:12px;padding:30px 10px;text-align:center;cursor:pointer;transition:all .25s ease;border:1px solid rgba(229,9,20,0.15);font-weight:500}
+.card:hover{transform:translateY(-6px);background:#1f1f29;border-color:#e50914;box-shadow:0 8px 25px rgba(229,9,20,0.4);color:#e50914}
+.player-container{display:none;position:fixed;inset:0;background:#000;justify-content:center;align-items:center;flex-direction:column;z-index:999}
+video{width:90%;max-width:1200px;border-radius:12px;box-shadow:0 0 40px rgba(229,9,20,0.5)}
+.close-btn{position:absolute;top:20px;right:30px;font-size:30px;cursor:pointer;color:#e50914}
+.link-switch{margin-top:20px}
+.link-switch button{padding:10px 20px;margin:5px;background:#15151c;color:#fff;border:1px solid rgba(229,9,20,0.4);border-radius:8px;cursor:pointer;transition:0.3s}
+.link-switch button:hover{background:#e50914}
+@media(max-width:768px){
+  header{padding:15px 20px;font-size:20px}
+  .hero{padding:40px 20px}
+  .hero h1{font-size:28px}
+  .section{padding:20px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
 </style>
 </head>
 <body>
 
-<header>Ishaq NETLIVE Ultra</header>
+<header>Ishaq NETLIVE </header>
 
 <div class="hero">
-<h1>Premium Live Streaming</h1>
-<p>Ultra HD • Multi Source • Smooth Experience</p>
+  <h1>تماشای زنده شبکه‌ها</h1>
+  <p>پخش سریع و بدون پیچیدگی</p>
 </div>
 
-<div id="homePage">
-<div class="grid">
+<div class="section">
+  <h2>شبکه های زنده</h2>
 
-<div class="card" onclick="openChannel('irib3','IRIB 3')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg"><span>IRIB 3</span></div>
-<div class="card" onclick="openChannel('tolo','TOLO')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg"><span>TOLO</span></div>
-<div class="card" onclick="openChannel('sportsaf','Sports AF')"><img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg"><span>Sports AF</span></div>
-<div class="card" onclick="openChannel('aryana','ARYANA')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg"><span>ARYANA</span></div>
-<div class="card" onclick="openChannel('arazo','ARAZO')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg"><span>ARAZO</span></div>
-<div class="card" onclick="openChannel('sohlsport','SOHL SPORT')"><img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg"><span>SOHL SPORT</span></div>
-<div class="card" onclick="openChannel('mhraj','MHRAJ')"><img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg"><span>MHRAJ</span></div>
-<div class="card" onclick="openChannel('varzish','VARZISH')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg"><span>VARZISH</span></div>
-<div class="card" onclick="openChannel('sportpersia','Sport Persia')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg"><span>Sport Persia</span></div>
-<div class="card" onclick="openChannel('sportpersia2','Sport Persia 2')"><img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg"><span>Sport Persia 2</span></div>
+  <div class="grid">
 
+    <div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/tolo/chunklist0.m3u8',
+      'https://kbl-stream.movie.af/live/smil:tolotv.smil/chunklist_w594705989_b5128000.m3u8?profileId=4c6cc9e1-a8f9-405a-ba3d-a95b05dc555a&channelId=3&platform=web',
+    )">طلوع</div>
+
+    <div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/varzesh/chunklist0.m3u8',
+      'https://kbl-stream.movie.af/live/smil:irvarzeshtv.smil/playlist.m3u8?profileId=4c6cc9e1-a8f9-405a-ba3d-a95b05dc555a&channelId=12&platform=web'
+    )">ورزش</div>
+
+    <div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/irib-3/chunklist0.m3u8',
+      'https://kbl-stream.movie.af/live/smil:iribtv3.smil/chunklist_w1952007214_b5128000.m3u8?profileId=4c6cc9e1-a8f9-405a-ba3d-a95b05dc555a&channelId=11&platform=web'
+    )">شبکه سه</div>
+
+    <div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/persiana-sports/chunklist0.m3u8',
+      'https://kbl-stream.movie.af/live/smil:persiasptv.smil/playlist.m3u8?profileId=4c6cc9e1-a8f9-405a-ba3d-a95b05dc555a&channelId=15&platform=web'
+    )">پرشیا اسپورت</div>
+
+    <div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/solh-sports/chunklist0.m3u8',
+      'https://kbl-stream.movie.af/live/smil:solhetv.smil/playlist.m3u8?profileId=4c6cc9e1-a8f9-405a-ba3d-a95b05dc555a&channelId=23&platform=web'
+    )">صلح اسپورت</div>
+
+    <div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/ariana/chunklist0.m3u8',
+      'https://kbl-stream.movie.af/live/smil:atntv.smil/playlist.m3u8?profileId=4c6cc9e1-a8f9-405a-ba3d-a95b05dc555a&channelId=21&platform=web'
+    )">آریانا</div>
+
+    <div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/arezo/chunklist0.m3u8',
+      'https://kbl-stream.movie.af/live/smil:arezotv.smil/playlist.m3u8?profileId=4c6cc9e1-a8f9-405a-ba3d-a95b05dc555a&channelId=31&platform=web'
+    )">آرزو</div>
+
+    <div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/meraj/chunklist0.m3u8',
+      'https://stream1.liveland.af/hls/tv/meraj/chunklist0.m3u8'
+    )">معراج</div>
+
+    <div class="card" onclick="openPlayerDual(
+      'https://kbl-stream.movie.af/live/smil:gemtv.smil/playlist.m3u8?profileId=4c6cc9e1-a8f9-405a-ba3d-a95b05dc555a&channelId=32&platform=web'
+    )">شبکه جیم</div>
+<div class="card" onclick="openPlayerDual(
+      'https://stream1.liveland.af/hls/tv/persiana-sports-2/chunklist0.m3u8',
+      'https://kbl-stream.movie.af/live/smil:persianasp2.smil/playlist.m3u8?profileId=a53a5d27-2242-444e-b013-6706e4e9ba1b&channelId=20&platform=web'
+    )"> 2 پرشیا اسپورت</div>
+    
+  </div>
 </div>
-</div>
 
-<div id="playerPage">
-<h2 id="channelTitle"></h2>
-<video id="video" controls autoplay></video>
+<div class="player-container" id="playerContainer">
+  <div class="close-btn" onclick="closePlayer()">✕</div>
+  <video id="video" controls autoplay playsinline></video>
 
-<div class="controls">
-<button onclick="switchSource('s1')">Source 1</button>
-<button onclick="switchSource('s2')">Source 2</button>
-<button onclick="goBack()">Back</button>
-</div>
+  <div class="link-switch"><button onclick="switchLink(1)">لینک 1</button>
+    <button onclick="switchLink(2)">لینک 2</button>
+  
+  </div>
 </div>
 
 <script>
-let currentChannel="", currentSource="s1", hls;
+let hls;
+const video=document.getElementById('video');
+const container=document.getElementById('playerContainer');
+let currentLink1="";
+let currentLink2="";
+  
+function openPlayer(url){
+  container.style.display="flex";
 
-const sources = {
-"irib3":{"s1":"irib-3/chunklist0.m3u8","s2":"iribtv3/chunklist_w1952007214_b5128000.m3u8"},
-"tolo":{"s1":"tolo/chunklist0.m3u8","s2":"tolotv/chunklist_w594705989_b5128000.m3u8"},
-"sportsaf":{"s1":"tolo-sport/chunklist0.m3u8"},
-"aryana":{"s1":"ariana/chunklist0.m3u8","s2":"atntv/playlist.m3u8"},
-"arazo":{"s1":"arezo/chunklist0.m3u8","s2":"arezotv/playlist.m3u8"},
-"sohlsport":{"s1":"solh-sports/chunklist0.m3u8","s2":"solhetv/playlist.m3u8"},
-"mhraj":{"s1":"meraj/chunklist0.m3u8"},
-"varzish":{"s1":"varzesh/chunklist0.m3u8","s2":"irvarzeshtv/playlist.m3u8"},
-"sportpersia":{"s1":"persiana-sports/chunklist0.m3u8","s2":"persiasptv/playlist.m3u8"},
-"sportpersia2":{"s1":"persiana-sports-2/chunklist0.m3u8","s2":"persianasp2/playlist.m3u8"}
-};
+  if(hls){ hls.destroy(); }
 
-function openChannel(channel,name){
-currentChannel=channel;
-currentSource="s1";
-document.getElementById("channelTitle").innerText=name;
-document.getElementById("homePage").style.display="none";
-document.getElementById("playerPage").style.display="block";
-loadStream();
+  if(Hls.isSupported()){
+    hls=new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
+
+    // خودکار سوئیچ روی لینک دوم اگر لینک اول قطع شد
+    hls.on(Hls.Events.ERROR,(event,data)=>{
+      if(data.fatal && data.type==='networkError'){
+        if(url===currentLink1 && currentLink2!==""){
+          openPlayer(currentLink2);
+        }
+      }
+    });
+
+  }else if(video.canPlayType('application/vnd.apple.mpegurl')){
+    video.src=url;
+  }
 }
 
-function loadStream(){
-const video=document.getElementById("video");
-const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${sources[currentChannel][currentSource]}`;
-
-if(hls){hls.destroy();}
-
-if(Hls.isSupported()){
-hls=new Hls();
-hls.loadSource(url);
-hls.attachMedia(video);
-
-hls.on(Hls.Events.ERROR,(event,data)=>{
-if(data.fatal && currentSource==="s1" && sources[currentChannel]["s2"]){
-currentSource="s2";
-loadStream();
-}
-});
-}else if(video.canPlayType('application/vnd.apple.mpegurl')){
-video.src=url;
-}
+function openPlayerDual(link1,link2){
+  currentLink1=link1;
+  currentLink2=link2;
+  openPlayer(link1);
 }
 
-function switchSource(source){
-if(sources[currentChannel][source]){
-currentSource=source;
-loadStream();
-}
+function switchLink(number){
+  if(number===1){ openPlayer(currentLink1); }
+  else{ openPlayer(currentLink2); }
 }
 
-function goBack(){
-if(hls){hls.destroy();}
-document.getElementById("playerPage").style.display="none";
-document.getElementById("homePage").style.display="block";
+function closePlayer(){
+  container.style.display="none";
+  video.pause();
+  if(hls){ hls.destroy(); }
 }
 </script>
 
