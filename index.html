@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ishaq TV ULTRA VIP</title>
+<title>Ishaq TV VIP</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -19,7 +19,7 @@ text-align:center;
 
 header{
 padding:25px;
-font-size:28px;
+font-size:30px;
 font-weight:bold;
 background:rgba(0,0,0,0.4);
 backdrop-filter:blur(15px);
@@ -28,34 +28,20 @@ backdrop-filter:blur(15px);
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:25px;
+gap:20px;
 padding:30px;
 max-width:1300px;
 margin:auto;
 }
 
 .card{
-padding:20px;
+padding:25px;
 border-radius:25px;
 background:rgba(255,255,255,0.1);
 backdrop-filter:blur(20px);
 cursor:pointer;
 transition:0.3s;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-}
-
-.card img{
-width:80px;
-height:80px;
-object-fit:contain;
-margin-bottom:10px;
-}
-
-.card span{
-font-size:16px;
+font-size:18px;
 font-weight:bold;
 }
 
@@ -100,60 +86,21 @@ color:#fff;
 </head>
 <body>
 
-<header>🔥 Ishaq TV ULTRA VIP 🔥</header>
+<header>🔥 Ishaq TV 🔥</header>
 
 <div id="homePage">
 <div class="grid">
 
-<div class="card" onclick="openChannel('ir3','IRIB 3')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg">
-<span>IRIB 3</span>
-</div>
-
-<div class="card" onclick="openChannel('tolo','TOLO')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg">
-<span>TOLO</span>
-</div>
-
-<div class="card" onclick="openChannel('sportsaf','Sports AF')">
-<img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg">
-<span>Sports AF</span>
-</div>
-
-<div class="card" onclick="openChannel('aryana','ARYANA')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg">
-<span>ARYANA</span>
-</div>
-
-<div class="card" onclick="openChannel('arazo','ARAZO')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg">
-<span>ARAZO</span>
-</div>
-
-<div class="card" onclick="openChannel('sohlsport','SOHL SPORT')">
-<img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg">
-<span>SOHL SPORT</span>
-</div>
-
-<div class="card" onclick="openChannel('mhraj','MHRAJ')">
-<img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg">
-<span>MHRAJ</span>
-</div>
-
-<div class="card" onclick="openChannel('varzish','VARZISH')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg">
-<span>VARZISH</span>
-</div>
-
-<div class="card" onclick="openChannel('sportpersia','Sport Persia')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg">
-<span>Sport Persia</span>
-</div>
-
-<div class="card" onclick="openChannel('sportpersia2','Sport Persia 2')">
-<img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg">
-<span>Sport Persia 2</span>
-</div>
+<div class="card" onclick="openChannel('tolo','طلوع')">طلوع</div>
+<div class="card" onclick="openChannel('varzesh','ورزش')">ورزش</div>
+<div class="card" onclick="openChannel('irib3','شبکه سه')">شبکه سه</div>
+<div class="card" onclick="openChannel('persiana','پرشیا اسپورت')">پرشیا اسپورت</div>
+<div class="card" onclick="openChannel('solh','صلح اسپورت')">صلح اسپورت</div>
+<div class="card" onclick="openChannel('ariana','آریانا')">آریانا</div>
+<div class="card" onclick="openChannel('arezo','آرزو')">آرزو</div>
+<div class="card" onclick="openChannel('meraj','معراج')">معراج</div>
+<div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')">پرشیا اسپورت 2</div>
+<div class="card" onclick="openChannel('gem','شبکه جیم')">شبکه جیم</div>
 
 </div>
 </div>
