@@ -4,26 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ishaq NETLIVE Ultra</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Vazirmatn',sans-serif;background:#07070d;color:#fff;overflow-x:hidden;}
-header{padding:20px 50px;font-weight:900;font-size:26px;letter-spacing:2px;background:rgba(10,10,20,0.6);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05);position:sticky;top:0;z-index:10;}
-.hero{padding:60px 40px;text-align:center;background:linear-gradient(180deg,#0c0c18,#07070d);}
-.hero h1{font-size:42px;font-weight:900;margin-bottom:15px;background:linear-gradient(90deg,#00f2fe,#4facfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero p{opacity:0.7;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:30px;padding:50px;max-width:1400px;margin:auto;position:relative;z-index:1;}
-.card{background:rgba(255,255,255,0.05);border-radius:25px;padding:30px;text-align:center;cursor:pointer;transition:0.4s;border:1px solid rgba(255,255,255,0.08);transform-style:preserve-3d;}
-.card:hover{transform:rotateX(6deg) rotateY(6deg) scale(1.06);box-shadow:0 20px 60px rgba(0,255,255,0.3);}
-.card img{width:90px;height:90px;object-fit:contain;margin-bottom:15px;filter:drop-shadow(0 0 10px rgba(0,255,255,0.5));}
-.card span{font-weight:700;}
-#playerPage{display:none;padding:40px;text-align:center;background:#000;}
-video{width:95%;max-width:1300px;border-radius:20px;box-shadow:0 0 80px rgba(0,255,255,0.5);}
-.controls{margin-top:20px;}
-button{padding:12px 30px;margin:5px;border:none;border-radius:40px;font-weight:700;cursor:pointer;background:linear-gradient(45deg,#00f2fe,#4facfe);color:#000;transition:0.3s;}
-button:hover{transform:scale(1.1);box-shadow:0 0 25px #00f2fe;}
-@media(max-width:768px){.grid{padding:20px}.hero h1{font-size:28px}}
+body{font-family:'Vazirmatn',sans-serif;background:#06060c;color:#fff}
+header{padding:20px 40px;font-size:24px;font-weight:900;background:#0c0c18}
+.hero{text-align:center;padding:50px 20px;background:linear-gradient(180deg,#111,#06060c)}
+.hero h1{font-size:38px;background:linear-gradient(90deg,#00f2fe,#4facfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:25px;padding:40px;max-width:1300px;margin:auto}
+.card{background:#10101a;padding:25px;border-radius:20px;text-align:center;cursor:pointer;transition:.3s}
+.card:hover{transform:scale(1.07);box-shadow:0 0 30px #00f2fe}
+.card img{width:80px;height:80px;object-fit:contain;margin-bottom:10px}
+.card span{font-weight:700}
+#playerPage{display:none;padding:40px;text-align:center}
+video{width:95%;max-width:1200px;border-radius:20px;background:#000}
+button{padding:10px 25px;margin:10px;border:none;border-radius:30px;font-weight:700;cursor:pointer;background:linear-gradient(45deg,#00f2fe,#4facfe);color:#000}
+button:hover{transform:scale(1.1)}
 </style>
 </head>
 <body>
@@ -32,22 +31,50 @@ button:hover{transform:scale(1.1);box-shadow:0 0 25px #00f2fe;}
 
 <div class="hero">
 <h1>Premium Live Streaming</h1>
-<p>Ultra HD • Multi Source • Smooth Experience</p>
 </div>
 
 <div id="homePage">
 <div class="grid">
 
-<div class="card" onclick="openChannel('ir3','IRIB 3')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg"><span>IRIB3</span></div>
-<div class="card" onclick="openChannel('tolo','TOLO')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg"><span>TOLO</span></div>
-<div class="card" onclick="openChannel('sportsaf','Sports AF')"><img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg"><span>Sports AF</span></div>
-<div class="card" onclick="openChannel('aryana','ARYANA')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg"><span>ARYANA</span></div>
-<div class="card" onclick="openChannel('arazo','ARAZO')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg"><span>ARAZO</span></div>
-<div class="card" onclick="openChannel('sohlsport','SOHL SPORT')"><img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg"><span>SOHL SPORT</span></div>
-<div class="card" onclick="openChannel('mhraj','MHRAJ')"><img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg"><span>MHRAJ</span></div>
-<div class="card" onclick="openChannel('varzish','VARZISH')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg"><span>VARZISH</span></div>
-<div class="card" onclick="openChannel('sportpersia','Sport Persia')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg"><span>Sport Persia</span></div>
-<div class="card" onclick="openChannel('sportpersia2','Sport Persia 2')"><img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg"><span>Sport Persia 2</span></div>
+<div class="card" onclick="openChannel('ir3','IRIB 3')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg">
+<span>IRIB 3</span></div>
+
+<div class="card" onclick="openChannel('tolo','TOLO')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg">
+<span>TOLO</span></div>
+
+<div class="card" onclick="openChannel('sportsaf','Sports AF')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg">
+<span>Sports AF</span></div>
+
+<div class="card" onclick="openChannel('aryana','ARYANA')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg">
+<span>ARYANA</span></div>
+
+<div class="card" onclick="openChannel('arazo','ARAZO')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg">
+<span>ARAZO</span></div>
+
+<div class="card" onclick="openChannel('sohlsport','SOHL SPORT')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg">
+<span>SOHL SPORT</span></div>
+
+<div class="card" onclick="openChannel('mhraj','MHRAJ')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg">
+<span>MHRAJ</span></div>
+
+<div class="card" onclick="openChannel('varzish','VARZISH')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg">
+<span>VARZISH</span></div>
+
+<div class="card" onclick="openChannel('sportpersia','Sport Persia')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg">
+<span>Sport Persia</span></div>
+
+<div class="card" onclick="openChannel('sportpersia2','Sport Persia 2')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg">
+<span>Sport Persia 2</span></div>
 
 </div>
 </div>
@@ -55,28 +82,28 @@ button:hover{transform:scale(1.1);box-shadow:0 0 25px #00f2fe;}
 <div id="playerPage">
 <h2 id="channelTitle"></h2>
 <video id="video" controls autoplay></video>
-
-<div class="controls">
+<br>
 <button onclick="switchSource('s1')">Source 1</button>
 <button onclick="switchSource('s2')">Source 2</button>
 <button onclick="goBack()">Back</button>
 </div>
-</div>
 
 <script>
-let currentChannel="", currentSource="s1", hls;
+let currentChannel="";
+let currentSource="s1";
+let hls;
 
-const sources = {
-"ir3":{"s1":"ir3/chunklist0.m3u8","s2":"ir3/playlist.m3u8"},
-"tolo":{"s1":"tolo/chunklist0.m3u8","s2":"tolo/chunklist_w594705989_b5128000.m3u8"},
-"sportsaf":{"s1":"tolo-sport/chunklist0.m3u8"},
-"aryana":{"s1":"ariana/chunklist0.m3u8","s2":"atntv/playlist.m3u8"},
-"arazo":{"s1":"arezo/chunklist0.m3u8","s2":"arezotv/playlist.m3u8"},
-"sohlsport":{"s1":"solh-sports/chunklist0.m3u8","s2":"solhetv/playlist.m3u8"},
-"mhraj":{"s1":"meraj/chunklist0.m3u8"},
-"varzish":{"s1":"varzesh/chunklist0.m3u8","s2":"irvarzeshtv/playlist.m3u8"},
-"sportpersia":{"s1":"persiana-sports/chunklist0.m3u8","s2":"persiasptv/playlist.m3u8"},
-"sportpersia2":{"s1":"persiana-sports-2/chunklist0.m3u8","s2":"persianasp2/playlist.m3u8"}
+const sources={
+ir3:{s1:"ir3-s1",s2:"ir3-s2"},
+tolo:{s1:"tolo-s1",s2:"tolo-s2"},
+sportsaf:{s1:"sportsaf-s1"},
+aryana:{s1:"aryana-s1",s2:"aryana-s2"},
+arazo:{s1:"arazo-s1",s2:"arazo-s2"},
+sohlsport:{s1:"sohlsport-s1",s2:"sohlsport-s2"},
+mhraj:{s1:"mhraj-s1"},
+varzish:{s1:"varzish-s1",s2:"varzish-s2"},
+sportpersia:{s1:"sportpersia-s1",s2:"sportpersia-s2"},
+sportpersia2:{s1:"sportpersia2-s1",s2:"sportpersia2-s2"}
 };
 
 function openChannel(channel,name){
@@ -99,13 +126,13 @@ hls=new Hls();
 hls.loadSource(url);
 hls.attachMedia(video);
 
-hls.on(Hls.Events.ERROR,(event,data)=>{
-if(data.fatal && currentSource==="s1" && sources[currentChannel]["s2"]){
+hls.on(Hls.Events.ERROR,function(event,data){
+if(data.fatal && currentSource==="s1" && sources[currentChannel].s2){
 currentSource="s2";
 loadStream();
 }
 });
-}else if(video.canPlayType('application/vnd.apple.mpegurl')){
+}else{
 video.src=url;
 }
 }
