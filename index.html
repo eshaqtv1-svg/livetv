@@ -3,105 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ishaq TV VIP</title>
+<title>Ishaq TV Ultra</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-margin:0;
 font-family:'Vazirmatn',sans-serif;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+background:#07070d;
 color:#fff;
-text-align:center;
+overflow-x:hidden;
 }
 
+/* Glow cursor */
+.cursor-glow{
+position:fixed;
+width:400px;
+height:400px;
+background:radial-gradient(circle,rgba(0,255,255,0.15),transparent 60%);
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:0;
+}
+
+/* Header */
 header{
-padding:25px;
-font-size:30px;
-font-weight:bold;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(15px);
+padding:20px 50px;
+font-weight:900;
+font-size:26px;
+letter-spacing:2px;
+background:rgba(10,10,20,0.6);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,0.05);
+position:sticky;
+top:0;
+z-index:10;
 }
 
+/* Hero */
+.hero{
+padding:60px 40px;
+text-align:center;
+background:linear-gradient(180deg,#0c0c18,#07070d);
+}
+
+.hero h1{
+font-size:42px;
+font-weight:900;
+margin-bottom:15px;
+background:linear-gradient(90deg,#00f2fe,#4facfe);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+opacity:0.7;
+}
+
+/* Grid */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:20px;
-padding:30px;
-max-width:1300px;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:30px;
+padding:50px;
+max-width:1400px;
 margin:auto;
+position:relative;
+z-index:1;
 }
 
+/* Cards */
 .card{
-padding:25px;
+background:rgba(255,255,255,0.05);
 border-radius:25px;
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(20px);
+padding:30px;
+text-align:center;
 cursor:pointer;
-transition:0.3s;
-font-size:18px;
-font-weight:bold;
+transition:0.4s;
+border:1px solid rgba(255,255,255,0.08);
+transform-style:preserve-3d;
 }
 
 .card:hover{
-transform:scale(1.07);
-background:rgba(255,255,255,0.25);
+transform:rotateX(6deg) rotateY(6deg) scale(1.06);
+box-shadow:0 20px 60px rgba(0,255,255,0.3);
 }
 
+.card img{
+width:90px;
+height:90px;
+object-fit:contain;
+margin-bottom:15px;
+filter:drop-shadow(0 0 10px rgba(0,255,255,0.5));
+}
+
+.card span{
+font-weight:700;
+}
+
+/* Player */
 #playerPage{
 display:none;
-padding:20px;
+padding:40px;
+text-align:center;
+background:#000;
 }
 
 video{
 width:95%;
-max-width:1100px;
-border-radius:25px;
-box-shadow:0 0 50px rgba(0,0,0,0.7);
+max-width:1300px;
+border-radius:20px;
+box-shadow:0 0 80px rgba(0,255,255,0.5);
 }
 
 .controls{
-margin-top:15px;
+margin-top:20px;
 }
 
 button{
-padding:10px 20px;
+padding:12px 30px;
 margin:5px;
 border:none;
-border-radius:30px;
+border-radius:40px;
+font-weight:700;
 cursor:pointer;
-font-weight:bold;
-background:#00c6ff;
+background:linear-gradient(45deg,#00f2fe,#4facfe);
 color:#000;
 transition:0.3s;
 }
 
 button:hover{
-background:#0072ff;
-color:#fff;
+transform:scale(1.1);
+box-shadow:0 0 25px #00f2fe;
+}
+
+@media(max-width:768px){
+.grid{padding:20px}
+.hero h1{font-size:28px}
 }
 </style>
 </head>
 <body>
 
-<header>🔥 Ishaq TV 🔥</header>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<header>ISHAQ TV ULTRA</header>
+
+<div class="hero">
+<h1>Premium Live Streaming</h1>
+<p>Ultra HD • Multi Source • Smooth Experience</p>
+</div>
 
 <div id="homePage">
 <div class="grid">
 
-<div class="card" onclick="openChannel('tolo','طلوع')">طلوع</div>
-<div class="card" onclick="openChannel('varzesh','ورزش')">ورزش</div>
-<div class="card" onclick="openChannel('irib3','شبکه سه')">شبکه سه</div>
-<div class="card" onclick="openChannel('persiana','پرشیا اسپورت')">پرشیا اسپورت</div>
-<div class="card" onclick="openChannel('solh','صلح اسپورت')">صلح اسپورت</div>
-<div class="card" onclick="openChannel('ariana','آریانا')">آریانا</div>
-<div class="card" onclick="openChannel('arezo','آرزو')">آرزو</div>
-<div class="card" onclick="openChannel('meraj','معراج')">معراج</div>
-<div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')">پرشیا اسپورت 2</div>
-<div class="card" onclick="openChannel('gem','شبکه جیم')">شبکه جیم</div>
-  <div class="card" onclick="openChannel('sportsaf','SportsAF')">SportsAF</div>
+<div class="card" onclick="openChannel('ir3','IRIB 3')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg">
+<span>IRIB 3</span>
+</div>
+
+<div class="card" onclick="openChannel('tolo','TOLO')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg">
+<span>TOLO</span>
+</div>
+
+<div class="card" onclick="openChannel('sportsaf','Sports AF')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg">
+<span>Sports AF</span>
+</div>
+
+<div class="card" onclick="openChannel('aryana','ARYANA')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg">
+<span>ARYANA</span>
+</div>
+
+<div class="card" onclick="openChannel('arazo','ARAZO')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg">
+<span>ARAZO</span>
+</div>
+
+<div class="card" onclick="openChannel('sohlsport','SOHL SPORT')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg">
+<span>SOHL SPORT</span>
+</div>
+
+<div class="card" onclick="openChannel('mhraj','MHRAJ')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg">
+<span>MHRAJ</span>
+</div>
+
+<div class="card" onclick="openChannel('varzish','VARZISH')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg">
+<span>VARZISH</span>
+</div>
+
+<div class="card" onclick="openChannel('sportpersia','Sport Persia')">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg">
+<span>Sport Persia</span>
+</div>
+
+<div class="card" onclick="openChannel('sportpersia2','Sport Persia 2')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg">
+<span>Sport Persia 2</span>
+</div>
 
 </div>
 </div>
@@ -113,11 +220,16 @@ color:#fff;
 <div class="controls">
 <button onclick="switchSource('s1')">Source 1</button>
 <button onclick="switchSource('s2')">Source 2</button>
-<button onclick="goBack()">بازگشت</button>
+<button onclick="goBack()">Back</button>
 </div>
 </div>
 
 <script>
+/* Glow Cursor */
+document.addEventListener("mousemove",e=>{
+document.getElementById("cursorGlow").style.left=e.clientX+"px";
+document.getElementById("cursorGlow").style.top=e.clientY+"px";
+});
 
 let currentChannel="";
 let currentSource="s1";
@@ -136,7 +248,7 @@ function loadStream(){
 const video=document.getElementById("video");
 const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${currentChannel}/${currentSource}/chunklist0.m3u8`;
 
-if(hls){ hls.destroy(); }
+if(hls){hls.destroy();}
 
 if(Hls.isSupported()){
 hls=new Hls();
@@ -161,11 +273,10 @@ loadStream();
 }
 
 function goBack(){
-if(hls){ hls.destroy(); }
+if(hls){hls.destroy();}
 document.getElementById("playerPage").style.display="none";
 document.getElementById("homePage").style.display="block";
 }
-
 </script>
 
 </body>
