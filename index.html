@@ -133,7 +133,8 @@ loadStream();
 
 function loadStream(){
 const video=document.getElementById("video");
-const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${currentChannel}/${currentSource}/chunklist0.m3u8`;
+
+let url=`https://ishaq-proxy.eshaqtv1.workers.dev/${currentChannel}/${currentSource}/chunklist0.m3u8`;
 
 if(hls){ hls.destroy(); }
 
@@ -143,9 +144,17 @@ hls.loadSource(url);
 hls.attachMedia(video);
 
 hls.on(Hls.Events.ERROR,function(event,data){
-if(data.fatal && currentSource==="s1"){
+console.log("HLS Error:",data);
+
+if(data.fatal){
+if(currentSource==="s1"){
 currentSource="s2";
 loadStream();
+}else{
+console.log("Trying playlist.m3u8");
+url=`https://ishaq-proxy.eshaqtv1.workers.dev/${currentChannel}/${currentSource}/playlist.m3u8`;
+hls.loadSource(url);
+}
 }
 });
 
