@@ -62,25 +62,15 @@ border-radius:25px;
 box-shadow:0 0 50px rgba(0,0,0,0.7);
 }
 
-.controls{
-margin-top:15px;
-}
-
 button{
 padding:10px 20px;
-margin:5px;
+margin:15px;
 border:none;
 border-radius:30px;
 cursor:pointer;
 font-weight:bold;
 background:#00c6ff;
 color:#000;
-transition:0.3s;
-}
-
-button:hover{
-background:#0072ff;
-color:#fff;
 }
 </style>
 </head>
@@ -90,7 +80,6 @@ color:#fff;
 
 <div id="homePage">
 <div class="grid">
-
 <div class="card" onclick="openChannel('tolo','طلوع')">طلوع</div>
 <div class="card" onclick="openChannel('varzesh','ورزش')">ورزش</div>
 <div class="card" onclick="openChannel('irib3','شبکه سه')">شبکه سه</div>
@@ -101,40 +90,28 @@ color:#fff;
 <div class="card" onclick="openChannel('meraj','معراج')">معراج</div>
 <div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')">پرشیا اسپورت 2</div>
 <div class="card" onclick="openChannel('gem','شبکه جیم')">شبکه جیم</div>
-
 </div>
 </div>
 
 <div id="playerPage">
 <h2 id="channelTitle"></h2>
 <video id="video" controls autoplay></video>
-
-<div class="controls">
-<button onclick="switchSource('s1')">Source 1</button>
-<button onclick="switchSource('s2')">Source 2</button>
+<br>
 <button onclick="goBack()">بازگشت</button>
-</div>
 </div>
 
 <script>
 
-let currentChannel="";
-let currentSource="s1";
 let hls;
 
 function openChannel(channel,name){
-currentChannel=channel;
-currentSource="s1";
+
 document.getElementById("channelTitle").innerText=name;
 document.getElementById("homePage").style.display="none";
 document.getElementById("playerPage").style.display="block";
-loadStream();
-}
 
-function loadStream(){
 const video=document.getElementById("video");
-
-let url=`https://ishaq-proxy.eshaqtv1.workers.dev/${currentChannel}/${currentSource}/chunklist0.m3u8`;
+const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${channel}/chunklist0.m3u8`;
 
 if(hls){ hls.destroy(); }
 
@@ -142,30 +119,10 @@ if(Hls.isSupported()){
 hls=new Hls();
 hls.loadSource(url);
 hls.attachMedia(video);
-
-hls.on(Hls.Events.ERROR,function(event,data){
-console.log("HLS Error:",data);
-
-if(data.fatal){
-if(currentSource==="s1"){
-currentSource="s2";
-loadStream();
-}else{
-console.log("Trying playlist.m3u8");
-url=`https://ishaq-proxy.eshaqtv1.workers.dev/${currentChannel}/${currentSource}/playlist.m3u8`;
-hls.loadSource(url);
-}
-}
-});
-
 }else if(video.canPlayType('application/vnd.apple.mpegurl')){
 video.src=url;
 }
-}
 
-function switchSource(source){
-currentSource=source;
-loadStream();
 }
 
 function goBack(){
