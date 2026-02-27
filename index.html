@@ -92,13 +92,20 @@ animation:fadeIn 0.5s ease-in-out;
 position:relative;
 }
 
+.videoWrapper{
+position:relative;
+display:inline-block;
+}
+
 video{
 width:95%;
 max-width:1200px;
 border-radius:30px;
 box-shadow:0 0 60px rgba(0,255,255,0.4);
+display:block;
 }
 
+/* لوگو روی ویدیو */
 #overlayLogo{
 position:absolute;
 bottom:15px;
@@ -113,6 +120,7 @@ font-weight:700;
 font-size:18px;
 color:#00ffcc;
 backdrop-filter:blur(5px);
+z-index:10;
 }
 
 #overlayLogo img{
@@ -176,37 +184,37 @@ font-size:14px;
 <span>ورزش</span>
 </div>
 
-  <div class="card" onclick="openChannel('persiana','پرشیا اسپورت')">
+<div class="card" onclick="openChannel('persiana','پرشیا اسپورت')">
 <img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg">
 <span>پرشیا اسپورت</span>
 </div>
 
-  <div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')">
+<div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')">
 <img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg">
 <span>پرشیا اسپورت 2</span>
 </div>
 
-  <div class="card" onclick="openChannel('solh','صلح اسپورت')">
+<div class="card" onclick="openChannel('solh','صلح اسپورت')">
 <img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg">
 <span>صلح اسپورت</span>
 </div>
 
-  <div class="card" onclick="openChannel('sportsaf','Sports AF')">
-  <img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg" alt="Sports AF">
-  <span>Sports AF</span>
+<div class="card" onclick="openChannel('sportsaf','Sports AF')">
+<img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg">
+<span>Sports AF</span>
 </div>
-  
-  <div class="card" onclick="openChannel('arezo','آرزو')">
+
+<div class="card" onclick="openChannel('arezo','آرزو')">
 <img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg">
 <span>آرزو</span>
 </div>
-  
+
 <div class="card" onclick="openChannel('ariana','آریانا')">
 <img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg">
 <span>آریانا</span>
 </div>
 
-  <div class="card" onclick="openChannel('meraj','معراج')">
+<div class="card" onclick="openChannel('meraj','معراج')">
 <img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg">
 <span>معراج</span>
 </div>
@@ -216,11 +224,14 @@ font-size:14px;
 
 <div id="playerPage">
 <h2 id="channelTitle"></h2>
+<div class="videoWrapper">
 <video id="video" controls autoplay></video>
 
+<!-- لوگو روی ویدیو -->
 <div id="overlayLogo">
 <img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg" alt="Logo">
 <span>Ishaq TV</span>
+</div>
 </div>
 
 <br>
@@ -234,7 +245,6 @@ font-size:14px;
 let hls;
 
 function openChannel(channel,name){
-
 document.getElementById("channelTitle").innerText=name;
 document.getElementById("homePage").style.display="none";
 document.getElementById("playerPage").style.display="block";
@@ -251,7 +261,6 @@ hls.attachMedia(video);
 }else if(video.canPlayType('application/vnd.apple.mpegurl')){
 video.src=url;
 }
-
 }
 
 function goBack(){
