@@ -89,6 +89,7 @@ display:none;
 text-align:center;
 padding:30px;
 animation:fadeIn 0.5s ease-in-out;
+position:relative;
 }
 
 video{
@@ -96,6 +97,29 @@ width:95%;
 max-width:1200px;
 border-radius:30px;
 box-shadow:0 0 60px rgba(0,255,255,0.4);
+}
+
+#overlayLogo{
+position:absolute;
+bottom:15px;
+left:15px;
+display:flex;
+align-items:center;
+gap:10px;
+background:rgba(0,0,0,0.5);
+padding:10px 15px;
+border-radius:20px;
+font-weight:700;
+font-size:18px;
+color:#00ffcc;
+backdrop-filter:blur(5px);
+}
+
+#overlayLogo img{
+width:40px;
+height:40px;
+object-fit:contain;
+border-radius:50%;
 }
 
 button{
@@ -193,6 +217,12 @@ font-size:14px;
 <div id="playerPage">
 <h2 id="channelTitle"></h2>
 <video id="video" controls autoplay></video>
+
+<div id="overlayLogo">
+<img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg" alt="Logo">
+<span>Ishaq TV</span>
+</div>
+
 <br>
 <button onclick="goBack()">بازگشت</button>
 </div>
