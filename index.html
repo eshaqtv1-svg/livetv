@@ -250,8 +250,7 @@ document.getElementById("homePage").style.display="none";
 document.getElementById("playerPage").style.display="block";
 
 const video=document.getElementById("video");
-alert("پخش موقتاً متوقف شده است");
-return;
+const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${channel}/chunklist0.m3u8`;
 
 if(hls){ hls.destroy(); }
 
