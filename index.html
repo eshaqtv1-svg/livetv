@@ -244,29 +244,64 @@ font-size:14px;
 
 let hls;
 
-function openChannel(channel,name){
-document.getElementById("channelTitle").innerText=name;
-document.getElementById("homePage").style.display="none";
-document.getElementById("playerPage").style.display="block";
+function openChannel(channel, name) {
+  document.getElementById("channelTitle").innerText = name;
+  document.getElementById("homePage").style.display = "none";
+  document.getElementById("playerPage").style.display = "block";
 
-const video=document.getElementById("video");
-const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${channel}/chunklist0.m3u8`;
+  const video = document.getElementById("video");
+  const url = `https://ishaq-proxy.eshaqtv1.workers.dev/${channel}/chunklist0.m3u8`;
 
-if(hls){ hls.destroy(); }
+  if (hls) hls.destroy();
 
-if(Hls.isSupported()){
-hls=new Hls();
-hls.loadSource(url);
-hls.attachMedia(video);
-}else if(video.canPlayType('application/vnd.apple.mpegurl')){
-video.src=url;
+  if (Hls.isSupported()) {
+    hls = new Hls({
+      maxBufferLength: 60,
+      maxMaxBufferLength: 120,
+      liveSyncDurationCount: 5,
+      liveMaxLatencyDurationCount: 10,
+      backBufferLength: 120,
+      enableWorker: true,
+      lowLatencyMode: false,
+      maxBufferHole: 1,
+      nudgeOffset: 0.1,
+      nudgeMaxRetry: 10,
+      highBufferWatchdogPeriod: 1
+    });
+
+    hls.loadSource(url);
+    hls.attachMedia(video);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+
+    hls.on(Hls.Events.ERROR, (event, data) => {
+      if (data.fatal) {
+        switch (data.type) {
+          case Hls.ErrorTypes.NETWORK_ERROR:
+            console.log("network error, retrying...");
+            hls.startLoad();
+            break;
+          case Hls.ErrorTypes.MEDIA_ERROR:
+            console.log("media error, recovering...");
+            hls.recoverMediaError();
+            break;
+          default:
+            console.log("fatal error, restarting player...");
+            setTimeout(() => openChannel(channel, name), 2000);
+        }
+      }
+    });
+
+  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    video.src = url;
+    video.addEventListener("loadedmetadata", () => video.play());
+  }
 }
-}
 
-function goBack(){
-if(hls){ hls.destroy(); }
-document.getElementById("playerPage").style.display="none";
-document.getElementById("homePage").style.display="block";
+function goBack() {
+  if (hls) hls.destroy();
+  document.getElementById("playerPage").style.display = "none";
+  document.getElementById("homePage").style.display = "block";
 }
 
 </script>
