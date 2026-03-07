@@ -10,14 +10,12 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
 font-family:'Vazirmatn',sans-serif;
 background:radial-gradient(circle at top,#111827,#0f172a,#020617);
 color:#fff;
 overflow-x:hidden;
 }
-
 header{
 text-align:center;
 padding:35px;
@@ -28,7 +26,6 @@ background:linear-gradient(90deg,#00f5ff,#00ff9d);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
-
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -37,7 +34,6 @@ padding:40px;
 max-width:1400px;
 margin:auto;
 }
-
 .card{
 background:rgba(255,255,255,0.05);
 border-radius:30px;
@@ -49,7 +45,6 @@ cursor:pointer;
 position:relative;
 overflow:hidden;
 }
-
 .card:before{
 content:'';
 position:absolute;
@@ -61,16 +56,11 @@ left:-50%;
 transform:rotate(25deg);
 transition:0.7s;
 }
-
-.card:hover:before{
-left:100%;
-}
-
+.card:hover:before{left:100%;}
 .card:hover{
 transform:translateY(-12px) scale(1.05);
 box-shadow:0 0 35px rgba(0,255,255,0.6);
 }
-
 .card img{
 width:100%;
 height:120px;
@@ -78,12 +68,10 @@ object-fit:contain;
 margin-bottom:15px;
 filter:drop-shadow(0 0 10px rgba(0,255,255,0.6));
 }
-
 .card span{
 font-size:20px;
 font-weight:700;
 }
-
 #playerPage{
 display:none;
 text-align:center;
@@ -91,21 +79,17 @@ padding:30px;
 animation:fadeIn 0.5s ease-in-out;
 position:relative;
 }
-
 .videoWrapper{
 position:relative;
 display:inline-block;
 }
-
 video{
 width:95%;
 max-width:1200px;
 border-radius:30px;
-box-shadow:0 0 60px rgba(0,255,255,0.4);
+box-shadow:0 0 60px rgba(0,0,0,0.4);
 display:block;
 }
-
-/* لوگو روی ویدیو */
 #overlayLogo{
 position:absolute;
 bottom:15px;
@@ -122,14 +106,12 @@ color:#00ffcc;
 backdrop-filter:blur(5px);
 z-index:10;
 }
-
 #overlayLogo img{
 width:40px;
 height:40px;
 object-fit:contain;
 border-radius:50%;
 }
-
 button{
 margin-top:25px;
 padding:14px 30px;
@@ -142,17 +124,14 @@ background:linear-gradient(90deg,#00f5ff,#00ff9d);
 color:#000;
 transition:0.3s;
 }
-
 button:hover{
 transform:scale(1.1);
 box-shadow:0 0 25px #00ffcc;
 }
-
 @keyframes fadeIn{
 from{opacity:0;transform:scale(0.95)}
 to{opacity:1;transform:scale(1)}
 }
-
 footer{
 text-align:center;
 padding:30px;
@@ -160,15 +139,13 @@ opacity:0.4;
 font-size:14px;
 }
 </style>
-</head> 
-
+</head>
 <body>
 
 <header>🔥 Ishaq TV 🔥</header>
 
 <div id="homePage">
 <div class="grid">
-
   <div class="card" onclick="openChannel('tolo','طلوع')">
 <img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg">
 <span>طلوع</span>
@@ -218,7 +195,6 @@ font-size:14px;
 <img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg">
 <span>معراج</span>
 </div>
-
 </div>
 </div>
 
@@ -227,7 +203,6 @@ font-size:14px;
 <div class="videoWrapper">
 <video id="video" controls autoplay></video>
 
-<!-- لوگو روی ویدیو -->
 <div id="overlayLogo">
 <img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg" alt="Logo">
 <span>Ishaq TV</span>
@@ -241,69 +216,29 @@ font-size:14px;
 <footer>© 2026 Ishaq TV • All Rights Reserved</footer>
 
 <script>
-
 let hls;
-
-function openChannel(channel, name) {
-  document.getElementById("channelTitle").innerText = name;
-  document.getElementById("homePage").style.display = "none";
-  document.getElementById("playerPage").style.display = "block";
-
-  const video = document.getElementById("video");
-  const url = `https://ishaq-proxy.eshaqtv1.workers.dev/${channel}/chunklist0.m3u8`;
-
-  if (hls) hls.destroy();
-
-  if (Hls.isSupported()) {
-    hls = new Hls({
-      maxBufferLength: 60,
-      maxMaxBufferLength: 120,
-      liveSyncDurationCount: 5,
-      liveMaxLatencyDurationCount: 10,
-      backBufferLength: 120,
-      enableWorker: true,
-      lowLatencyMode: false,
-      maxBufferHole: 1,
-      nudgeOffset: 0.1,
-      nudgeMaxRetry: 10,
-      highBufferWatchdogPeriod: 1
-    });
-
-    hls.loadSource(url);
-    hls.attachMedia(video);
-
-    hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-
-    hls.on(Hls.Events.ERROR, (event, data) => {
-      if (data.fatal) {
-        switch (data.type) {
-          case Hls.ErrorTypes.NETWORK_ERROR:
-            console.log("network error, retrying...");
-            hls.startLoad();
-            break;
-          case Hls.ErrorTypes.MEDIA_ERROR:
-            console.log("media error, recovering...");
-            hls.recoverMediaError();
-            break;
-          default:
-            console.log("fatal error, restarting player...");
-            setTimeout(() => openChannel(channel, name), 2000);
-        }
-      }
-    });
-
-  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-    video.src = url;
-    video.addEventListener("loadedmetadata", () => video.play());
-  }
-}
-
-function goBack() {
-  if (hls) hls.destroy();
-  document.getElementById("playerPage").style.display = "none";
-  document.getElementById("homePage").style.display = "block";
-}
-
+function openChannel(channel,name){
+document.getElementById("channelTitle").innerText=name;
+document.getElementById("homePage").style.display="none";
+document.getElementById("playerPage").style.display="block";
+const video=document.getElementById("video");
+const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${channel}/chunklist0.m3u8`;
+if(hls){hls.destroy();}
+if(Hls.isSupported()){
+hls=new Hls({maxBufferLength:30,liveSyncDurationCount:3,enableWorker:true});
+hls.loadSource(url);
+hls.attachMedia(video);
+hls.on(Hls.Events.MANIFEST_PARSED,function(){video.play();});
+hls.on(Hls.Events.ERROR,function(event,data){
+if(data.fatal){console.log("Stream error retrying...");setTimeout(()=>{hls.startLoad();},2000);}
+});
+}else if(video.canPlayType('application/vnd.apple.mpegurl')){
+video.src=url;
+video.addEventListener('loadedmetadata',function(){video.play();});
+}}
+function goBack(){if(hls){hls.destroy();}
+document.getElementById("playerPage").style.display="none";
+document.getElementById("homePage").style.display="block";}
 </script>
 
 </body>
