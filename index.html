@@ -10,134 +10,25 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:'Vazirmatn',sans-serif;
-background:radial-gradient(circle at top,#111827,#0f172a,#020617);
-color:#fff;
-overflow-x:hidden;
-}
-header{
-text-align:center;
-padding:35px;
-font-size:38px;
-font-weight:900;
-letter-spacing:2px;
-background:linear-gradient(90deg,#00f5ff,#00ff9d);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:30px;
-padding:40px;
-max-width:1400px;
-margin:auto;
-}
-.card{
-background:rgba(255,255,255,0.05);
-border-radius:30px;
-padding:25px;
-text-align:center;
-backdrop-filter:blur(25px);
-transition:0.4s;
-cursor:pointer;
-position:relative;
-overflow:hidden;
-}
-.card:before{
-content:'';
-position:absolute;
-width:200%;
-height:200%;
-background:linear-gradient(45deg,transparent,rgba(0,255,255,0.3),transparent);
-top:-50%;
-left:-50%;
-transform:rotate(25deg);
-transition:0.7s;
-}
+body{font-family:'Vazirmatn',sans-serif;background:radial-gradient(circle at top,#111827,#0f172a,#020617);color:#fff;overflow-x:hidden;}
+header{text-align:center;padding:35px;font-size:38px;font-weight:900;letter-spacing:2px;background:linear-gradient(90deg,#00f5ff,#00ff9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;padding:40px;max-width:1400px;margin:auto;}
+.card{background:rgba(255,255,255,0.05);border-radius:30px;padding:25px;text-align:center;backdrop-filter:blur(25px);transition:0.4s;cursor:pointer;position:relative;overflow:hidden;}
+.card:before{content:'';position:absolute;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(0,255,255,0.3),transparent);top:-50%;left:-50%;transform:rotate(25deg);transition:0.7s;}
 .card:hover:before{left:100%;}
-.card:hover{
-transform:translateY(-12px) scale(1.05);
-box-shadow:0 0 35px rgba(0,255,255,0.6);
-}
-.card img{
-width:100%;
-height:120px;
-object-fit:contain;
-margin-bottom:15px;
-filter:drop-shadow(0 0 10px rgba(0,255,255,0.6));
-}
-.card span{
-font-size:20px;
-font-weight:700;
-}
-#playerPage{
-display:none;
-text-align:center;
-padding:30px;
-animation:fadeIn 0.5s ease-in-out;
-position:relative;
-}
-.videoWrapper{
-position:relative;
-display:inline-block;
-}
-video{
-width:95%;
-max-width:1200px;
-border-radius:30px;
-box-shadow:0 0 60px rgba(0,0,0,0.4);
-display:block;
-}
-#overlayLogo{
-position:absolute;
-bottom:15px;
-left:15px;
-display:flex;
-align-items:center;
-gap:10px;
-background:rgba(0,0,0,0.5);
-padding:10px 15px;
-border-radius:20px;
-font-weight:700;
-font-size:18px;
-color:#00ffcc;
-backdrop-filter:blur(5px);
-z-index:10;
-}
-#overlayLogo img{
-width:40px;
-height:40px;
-object-fit:contain;
-border-radius:50%;
-}
-button{
-margin-top:25px;
-padding:14px 30px;
-border:none;
-border-radius:40px;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-background:linear-gradient(90deg,#00f5ff,#00ff9d);
-color:#000;
-transition:0.3s;
-}
-button:hover{
-transform:scale(1.1);
-box-shadow:0 0 25px #00ffcc;
-}
-@keyframes fadeIn{
-from{opacity:0;transform:scale(0.95)}
-to{opacity:1;transform:scale(1)}
-}
-footer{
-text-align:center;
-padding:30px;
-opacity:0.4;
-font-size:14px;
-}
+.card:hover{transform:translateY(-12px) scale(1.05);box-shadow:0 0 35px rgba(0,255,255,0.6);}
+.card img{width:100%;height:120px;object-fit:contain;margin-bottom:15px;filter:drop-shadow(0 0 10px rgba(0,255,255,0.6));}
+.card span{font-size:20px;font-weight:700;}
+#playerPage{display:none;text-align:center;padding:30px;animation:fadeIn 0.5s ease-in-out;position:relative;}
+.videoWrapper{position:relative;display:inline-block;}
+video{width:95%;max-width:1200px;border-radius:30px;box-shadow:0 0 60px rgba(0,0,0,0.4);display:block;}
+#overlayLogo{position:absolute;bottom:15px;left:15px;display:flex;align-items:center;gap:10px;background:rgba(0,0,0,0.5);padding:10px 15px;border-radius:20px;font-weight:700;font-size:18px;color:#00ffcc;backdrop-filter:blur(5px);z-index:10;}
+#overlayLogo img{width:40px;height:40px;object-fit:contain;border-radius:50%;}
+button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;font-size:17px;font-weight:bold;cursor:pointer;background:linear-gradient(90deg,#00f5ff,#00ff9d);color:#000;transition:0.3s;}
+button:hover{transform:scale(1.1);box-shadow:0 0 25px #00ffcc;}
+#qualitySelector{margin-top:15px;padding:10px 15px;font-size:16px;border-radius:20px;border:none;cursor:pointer;}
+@keyframes fadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+footer{text-align:center;padding:30px;opacity:0.4;font-size:14px;}
 </style>
 </head>
 <body>
@@ -146,55 +37,16 @@ font-size:14px;
 
 <div id="homePage">
 <div class="grid">
-  <div class="card" onclick="openChannel('tolo','طلوع')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg">
-<span>طلوع</span>
-</div>
-  
-<div class="card" onclick="openChannel('irib3','شبکه سه ')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg">
-<span>شبکه سه </span>
-</div>
-
-<div class="card" onclick="openChannel('varzesh','ورزش')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg">
-<span>ورزش</span>
-</div>
-
-<div class="card" onclick="openChannel('persiana','پرشیا اسپورت')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg">
-<span>پرشیا اسپورت</span>
-</div>
-
-<div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')">
-<img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg">
-<span>پرشیا اسپورت 2</span>
-</div>
-
-<div class="card" onclick="openChannel('solh','صلح اسپورت')">
-<img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg">
-<span>صلح اسپورت</span>
-</div>
-
-<div class="card" onclick="openChannel('sportsaf','Sports AF')">
-<img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg">
-<span>Sports AF</span>
-</div>
-
-<div class="card" onclick="openChannel('arezo','آرزو')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg">
-<span>آرزو</span>
-</div>
-
-<div class="card" onclick="openChannel('ariana','آریانا')">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg">
-<span>آریانا</span>
-</div>
-
-<div class="card" onclick="openChannel('meraj','معراج')">
-<img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg">
-<span>معراج</span>
-</div>
+  <div class="card" onclick="openChannel('tolo','طلوع')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg"><span>طلوع</span></div>
+  <div class="card" onclick="openChannel('irib3','شبکه سه ')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg"><span>شبکه سه </span></div>
+  <div class="card" onclick="openChannel('varzesh','ورزش')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg"><span>ورزش</span></div>
+  <div class="card" onclick="openChannel('persiana','پرشیا اسپورت')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg"><span>پرشیا اسپورت</span></div>
+  <div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')"><img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg"><span>پرشیا اسپورت 2</span></div>
+  <div class="card" onclick="openChannel('solh','صلح اسپورت')"><img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg"><span>صلح اسپورت</span></div>
+  <div class="card" onclick="openChannel('sportsaf','Sports AF')"><img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg"><span>Sports AF</span></div>
+  <div class="card" onclick="openChannel('arezo','آرزو')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg"><span>آرزو</span></div>
+  <div class="card" onclick="openChannel('ariana','آریانا')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg"><span>آریانا</span></div>
+  <div class="card" onclick="openChannel('meraj','معراج')"><img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg"><span>معراج</span></div>
 </div>
 </div>
 
@@ -202,12 +54,13 @@ font-size:14px;
 <h2 id="channelTitle"></h2>
 <div class="videoWrapper">
 <video id="video" controls autoplay></video>
+<div id="overlayLogo"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg" alt="Logo"><span>Ishaq TV</span></div>
+</div>
 
-<div id="overlayLogo">
-<img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg" alt="Logo">
-<span>Ishaq TV</span>
-</div>
-</div>
+<!-- کنترل کیفیت -->
+<select id="qualitySelector" onchange="changeQuality()">
+<option value="auto">کیفیت خودکار</option>
+</select>
 
 <br>
 <button onclick="goBack()">بازگشت</button>
@@ -217,28 +70,65 @@ font-size:14px;
 
 <script>
 let hls;
+let currentLevels = [];
+
 function openChannel(channel,name){
-document.getElementById("channelTitle").innerText=name;
-document.getElementById("homePage").style.display="none";
-document.getElementById("playerPage").style.display="block";
-const video=document.getElementById("video");
-const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${channel}/chunklist0.m3u8`;
-if(hls){hls.destroy();}
-if(Hls.isSupported()){
-hls=new Hls({maxBufferLength:30,liveSyncDurationCount:3,enableWorker:true});
-hls.loadSource(url);
-hls.attachMedia(video);
-hls.on(Hls.Events.MANIFEST_PARSED,function(){video.play();});
-hls.on(Hls.Events.ERROR,function(event,data){
-if(data.fatal){console.log("Stream error retrying...");setTimeout(()=>{hls.startLoad();},2000);}
-});
-}else if(video.canPlayType('application/vnd.apple.mpegurl')){
-video.src=url;
-video.addEventListener('loadedmetadata',function(){video.play();});
-}}
-function goBack(){if(hls){hls.destroy();}
-document.getElementById("playerPage").style.display="none";
-document.getElementById("homePage").style.display="block";}
+    document.getElementById("channelTitle").innerText=name;
+    document.getElementById("homePage").style.display="none";
+    document.getElementById("playerPage").style.display="block";
+
+    const video=document.getElementById("video");
+    const qualitySelect=document.getElementById("qualitySelector");
+    qualitySelect.innerHTML='<option value="auto">کیفیت خودکار</option>';
+
+    const url=`https://ishaq-proxy.eshaqtv1.workers.dev/${channel}/playlist.m3u8`;
+
+    if(hls){hls.destroy();}
+
+    if(Hls.isSupported()){
+        hls=new Hls({
+            maxBufferLength:60,
+            liveSyncDurationCount:2,
+            enableWorker:true
+        });
+        hls.loadSource(url);
+        hls.attachMedia(video);
+
+        hls.on(Hls.Events.MANIFEST_PARSED,function(){
+            video.play();
+            currentLevels = hls.levels;
+            currentLevels.forEach((level,index)=>{
+                const opt=document.createElement('option');
+                opt.value=index;
+                opt.text=level.height + 'p';
+                qualitySelect.appendChild(opt);
+            });
+        });
+
+        hls.on(Hls.Events.ERROR,function(event,data){
+            if(data.fatal){console.log("Stream error retrying...");setTimeout(()=>{hls.startLoad();},2000);}
+        });
+    } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+        video.src=url;
+        video.addEventListener('loadedmetadata',function(){video.play();});
+    }
+}
+
+// تغییر کیفیت دستی
+function changeQuality(){
+    const q=document.getElementById("qualitySelector").value;
+    if(q==='auto'){
+        hls.currentLevel=-1; // Auto
+    } else {
+        hls.currentLevel=parseInt(q);
+    }
+}
+
+function goBack(){
+    if(hls){hls.destroy();}
+    document.getElementById("playerPage").style.display="none";
+    document.getElementById("homePage").style.display="block";
+}
 </script>
 
 </body>
