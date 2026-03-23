@@ -17,6 +17,42 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Vazirmatn',sans-serif;background:radial-gradient(circle at top,#111827,#0f172a,#020617);color:#fff;}
+  #sourceMenu{
+position:fixed;
+bottom:90px;
+right:30px;
+z-index:30;
+}
+
+#sourceBtn{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(15px);
+padding:12px 18px;
+border-radius:25px;
+cursor:pointer;
+border:1px solid rgba(255,255,255,0.2);
+font-size:14px;
+}
+
+#sourceOptions{
+display:none;
+margin-top:10px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(20px);
+border-radius:15px;
+overflow:hidden;
+min-width:140px;
+}
+
+#sourceOptions div{
+padding:10px 15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#sourceOptions div:hover{
+background:rgba(0,255,255,0.3);
+}
 header{text-align:center;padding:35px;font-size:38px;font-weight:900;background:linear-gradient(90deg,#00f5ff,#00ff9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;padding:40px;max-width:1400px;margin:auto;}
 .card{background:rgba(255,255,255,0.05);border-radius:30px;padding:25px;text-align:center;backdrop-filter:blur(25px);transition:0.4s;cursor:pointer;}
@@ -131,8 +167,9 @@ background:#00ffcc;
     <div onclick="setQuality(1080)">1080p</div>
     <div onclick="setQuality(720)">720p</div>
   </div>
-</div>
-
+<div id="sourceMenu">
+  <div id="sourceBtn">📡 انتخاب لینک</div>
+  <div id="sourceOptions"></div>
 </div>
 
 <br>
@@ -158,7 +195,49 @@ const channels = {
   ariana: ["https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8"],
   meraj: ["https://ishaq-proxy.eshaqtv1.workers.dev/meraj/playlist.m3u8"]
 };
+let currentLinks = [];
 
+async function openChannel(channel,name){
+  currentChannel = channel;
+  document.getElementById("channelTitle").innerText = name;
+
+  document.getElementById("homePage").style.display="none";
+  document.getElementById("playerPage").style.display="block";
+
+  currentLinks = channels[channel];
+
+  createSourceMenu(); // 👈 ساخت منو
+
+  // اگر میخوای سریع‌ترین لینک را انتخاب کن:
+  // const fastest = await findFastestLink(currentLinks);
+  // loadStream(fastest,currentQuality);
+
+  // یا اگر میخوای لینک اول پیش‌فرض پخش شود:
+  loadStream(currentLinks[0], currentQuality);
+}
+
+function createSourceMenu(){
+  const container = document.getElementById("sourceOptions");
+  container.innerHTML = "";
+
+  currentLinks.forEach((link,index)=>{
+    const item = document.createElement("div");
+    item.innerText = "لینک " + (index+1);
+
+    item.onclick = ()=>{
+      loadStream(link,currentQuality);
+      document.getElementById("sourceOptions").style.display="none";
+    };
+
+    container.appendChild(item);
+  });
+}
+
+document.getElementById("sourceBtn").onclick = ()=>{
+  let menu = document.getElementById("sourceOptions");
+  menu.style.display = menu.style.display==="block" ? "none" : "block";
+};
+  
 // پیدا کردن سریع‌ترین لینک
 async function findFastestLink(links){
   for(let link of links){
