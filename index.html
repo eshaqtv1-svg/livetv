@@ -20,13 +20,11 @@ header{text-align:center;padding:35px;font-size:38px;font-weight:900;background:
 .card:hover{transform:scale(1.05);box-shadow:0 0 35px rgba(0,255,255,0.6);}
 .card img{width:100%;height:120px;object-fit:contain;margin-bottom:15px;}
 .card span{font-size:20px;font-weight:700;}
-
 #playerPage{display:none;text-align:center;padding:30px;}
 .videoWrapper{position:relative;max-width:1200px;margin:auto;}
 video{width:100%;border-radius:20px;}
 #overlayLogo{position:absolute;bottom:15px;left:15px;background:rgba(0,0,0,0.5);padding:8px 15px;border-radius:20px;z-index:10;}
 #linkLabel{position:absolute;top:15px;right:15px;background:rgba(0,0,0,0.6);padding:8px 12px;border-radius:15px;font-size:14px;z-index:10;}
-
 #sourceMenu{position:fixed;bottom:90px;right:30px;z-index:30;}
 #sourceBtn{background:rgba(255,255,255,0.1);backdrop-filter:blur(15px);padding:12px 18px;border-radius:25px;cursor:pointer;border:1px solid rgba(255,255,255,0.2);font-size:14px;}
 #sourceOptions{display:none;margin-top:10px;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);border-radius:15px;overflow:hidden;min-width:140px;}
@@ -41,7 +39,6 @@ button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:p
 
 <div id="homePage">
 <div class="grid">
-<!-- تمام شبکه‌ها -->
 <div class="card" onclick="openChannel('tolo','طلوع')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg"><span>طلوع</span></div>
 <div class="card" onclick="openChannel('irib3','شبکه سه')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg"><span>شبکه سه</span></div>
 <div class="card" onclick="openChannel('varzesh','ورزش')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg"><span>ورزش</span></div>
@@ -59,7 +56,7 @@ button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:p
 <div id="playerPage">
 <h2 id="channelTitle"></h2>
 <div class="videoWrapper">
-<video id="video" playsinline controls webkit-playsinline x5-playsinline></video>
+<video id="video" playsinline controls></video>
 <div id="overlayLogo">Ishaq TV</div>
 <div id="linkLabel">Auto</div>
 </div>
@@ -74,112 +71,112 @@ button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:p
 </div>
 
 <script>
-let hls;
-let player;
-let currentChannel="";
-let currentLinks=[];
-let currentIndex=0;
-let currentQuality="auto";
+let hls, player;
+let currentChannel = "";
+let currentLinks = [];
+let currentIndex = 0;
+let currentQuality = "auto";
+const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-const channels={
-tolo:[
-"https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8",
-"https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8"
-],
-irib3:["https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8"],
-varzesh:["https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8"],
-persiana:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8"],
-persiana2:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8"],
-solh:["https://ishaq-proxy.eshaqtv1.workers.dev/solh/playlist.m3u8"],
-sportsaf:["https://ishaq-proxy.eshaqtv1.workers.dev/sportsaf/playlist.m3u8"],
-arezo:["https://ishaq-proxy.eshaqtv1.workers.dev/arezo/playlist.m3u8"],
-ariana:["https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8"],
-meraj:["https://ishaq-proxy.eshaqtv1.workers.dev/meraj/playlist.m3u8"],
-gem:["https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8"]
+const channels = {
+  tolo:["https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8"],
+  irib3:["https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8"],
+  varzesh:["https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8"],
+  persiana:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8"],
+  persiana2:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8"],
+  solh:["https://ishaq-proxy.eshaqtv1.workers.dev/solh/playlist.m3u8"],
+  sportsaf:["https://ishaq-proxy.eshaqtv1.workers.dev/sportsaf/playlist.m3u8"],
+  arezo:["https://ishaq-proxy.eshaqtv1.workers.dev/arezo/playlist.m3u8"],
+  ariana:["https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8"],
+  meraj:["https://ishaq-proxy.eshaqtv1.workers.dev/meraj/playlist.m3u8"],
+  gem:["https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8"]
 };
 
 function openChannel(channel,name){
-currentChannel=channel;
-document.getElementById("channelTitle").innerText=name;
-document.getElementById("homePage").style.display="none";
-document.getElementById("playerPage").style.display="block";
-currentLinks=channels[channel];
-currentIndex=0;
-createSourceMenu();
-loadStream(currentLinks[currentIndex],currentQuality);
+  currentChannel = channel;
+  document.getElementById("channelTitle").innerText = name;
+  document.getElementById("homePage").style.display="none";
+  document.getElementById("playerPage").style.display="block";
+  currentLinks = channels[channel];
+  currentIndex = 0;
+  createSourceMenu();
+  
+  const video = document.getElementById("video");
+  if(isiOS){
+    video.src = currentLinks[currentIndex];
+    video.play();
+  } else {
+    loadStream(currentLinks[currentIndex], currentQuality);
+  }
 }
 
 function createSourceMenu(){
-const container=document.getElementById("sourceOptions");
-container.innerHTML="";
-currentLinks.forEach((link,index)=>{
-const item=document.createElement("div");
-item.innerText="لینک "+(index+1);
-item.onclick=()=>{
-currentIndex=index;
-loadStream(currentLinks[currentIndex],currentQuality);
-container.style.display="none";
+  const container=document.getElementById("sourceOptions");
+  container.innerHTML="";
+  currentLinks.forEach((link,index)=>{
+    const item=document.createElement("div");
+    item.innerText="لینک "+(index+1);
+    item.addEventListener("click",()=>{
+      if(currentIndex===index) return;
+      currentIndex=index;
+      container.style.display="none";
+      const video=document.getElementById("video");
+      if(hls){ hls.destroy(); hls=null; }
+      if(player){ player.destroy(); player=null; }
+      if(isiOS){
+        video.src = currentLinks[currentIndex];
+        video.play();
+      } else {
+        loadStream(currentLinks[currentIndex],currentQuality);
+      }
+    });
+    container.appendChild(item);
+  });
+}
+
+document.getElementById("sourceBtn").onclick = ()=>{
+  let menu=document.getElementById("sourceOptions");
+  menu.style.display=(menu.style.display==="block")?"none":"block";
 };
-container.appendChild(item);
-});
-}
 
-document.getElementById("sourceBtn").onclick=()=>{
-let menu=document.getElementById("sourceOptions");
-menu.style.display=(menu.style.display==="block")?"none":"block";
-};
+function loadStream(baseUrl, quality){
+  const video=document.getElementById("video");
+  let url = baseUrl;
+  if(quality==="1080") url=baseUrl.replace("playlist.m3u8","chunklist0.m3u8");
+  else if(quality==="720") url=baseUrl.replace("playlist.m3u8","chunklist1.m3u8");
+  document.getElementById("linkLabel").innerText = (quality==="auto")?"Auto":quality+"p";
 
-function loadStream(baseUrl,quality){
-const video=document.getElementById("video");
-
-// برای iOS native player
-const isiOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-let url=baseUrl;
-if(quality==="1080") url=baseUrl.replace("playlist.m3u8","chunklist0.m3u8");
-else if(quality==="720") url=baseUrl.replace("playlist.m3u8","chunklist1.m3u8");
-
-document.getElementById("linkLabel").innerText=(quality==="auto")?"Auto":quality+"p";
-
-if(hls) hls.destroy();
-if(player) player.destroy();
-
-if(isiOS){
-video.src=url;
-video.controls=true;
-video.autoplay=true;
-video.playsInline=true;
-video.addEventListener('loadedmetadata',()=>{video.play();});
-}else{
-if(Hls.isSupported()){
-hls=new Hls();
-hls.loadSource(url);
-hls.attachMedia(video);
-hls.on(Hls.Events.MANIFEST_PARSED,function(){
-player=new Plyr(video,{settings:['speed','quality','fullscreen'],quality:{default:quality,options:['auto','720','1080'],forced:true}});
-video.play();
-});
-hls.on(Hls.Events.ERROR,function(e,d){
-if(d.fatal){
-const nextIndex=currentIndex+1;
-if(nextIndex<currentLinks.length){
-currentIndex=nextIndex;
-loadStream(currentLinks[currentIndex],currentQuality);
-}
-}
-});
-}else if(video.canPlayType('application/vnd.apple.mpegurl')){
-video.src=url;
-video.play();
-}
-}
+  if(Hls.isSupported()){
+    hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,()=>{
+      player = new Plyr(video,{
+        settings:['speed','quality','fullscreen'],
+        quality:{default:quality,options:['auto','720','1080'],forced:true}
+      });
+      video.play();
+    });
+    hls.on(Hls.Events.ERROR,(e,d)=>{
+      if(d.fatal){
+        const nextIndex=currentIndex+1;
+        if(nextIndex<currentLinks.length){
+          currentIndex=nextIndex;
+          loadStream(currentLinks[currentIndex],currentQuality);
+        }
+      }
+    });
+  } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+    video.src=url;
+    video.play();
+  }
 }
 
 function goBack(){
-if(hls) hls.destroy();
-if(player) player.destroy();
-document.getElementById("playerPage").style.display="none";
-document.getElementById("homePage").style.display="block";
+  if(hls){ hls.destroy(); hls=null; }
+  if(player){ player.destroy(); player=null; }
+  document.getElementById("playerPage").style.display="none";
+  document.getElementById("homePage").style.display="block";
 }
 </script>
 </body>
