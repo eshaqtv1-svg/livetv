@@ -41,6 +41,7 @@ button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:p
 
 <div id="homePage">
 <div class="grid">
+<!-- تمام شبکه‌ها -->
 <div class="card" onclick="openChannel('tolo','طلوع')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg"><span>طلوع</span></div>
 <div class="card" onclick="openChannel('irib3','شبکه سه')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg"><span>شبکه سه</span></div>
 <div class="card" onclick="openChannel('varzesh','ورزش')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg"><span>ورزش</span></div>
@@ -58,7 +59,7 @@ button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:p
 <div id="playerPage">
 <h2 id="channelTitle"></h2>
 <div class="videoWrapper">
-<video id="video" playsinline controls></video>
+<video id="video" playsinline controls webkit-playsinline x5-playsinline></video>
 <div id="overlayLogo">Ishaq TV</div>
 <div id="linkLabel">Auto</div>
 </div>
@@ -81,7 +82,10 @@ let currentIndex=0;
 let currentQuality="auto";
 
 const channels={
-tolo:["https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8"],
+tolo:[
+"https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8",
+"https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8"
+],
 irib3:["https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8"],
 varzesh:["https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8"],
 persiana:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8"],
@@ -99,7 +103,6 @@ currentChannel=channel;
 document.getElementById("channelTitle").innerText=name;
 document.getElementById("homePage").style.display="none";
 document.getElementById("playerPage").style.display="block";
-
 currentLinks=channels[channel];
 currentIndex=0;
 createSourceMenu();
@@ -126,17 +129,13 @@ let menu=document.getElementById("sourceOptions");
 menu.style.display=(menu.style.display==="block")?"none":"block";
 };
 
-// انتخاب کیفیت واقعی
-function setQuality(q){
-currentQuality=q;
-loadStream(currentLinks[currentIndex],q);
-}
-
-// منوی کیفیت داخل پلیر (native Plyr)
 function loadStream(baseUrl,quality){
 const video=document.getElementById("video");
-let url=baseUrl;
 
+// برای iOS native player
+const isiOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+let url=baseUrl;
 if(quality==="1080") url=baseUrl.replace("playlist.m3u8","chunklist0.m3u8");
 else if(quality==="720") url=baseUrl.replace("playlist.m3u8","chunklist1.m3u8");
 
@@ -145,6 +144,13 @@ document.getElementById("linkLabel").innerText=(quality==="auto")?"Auto":quality
 if(hls) hls.destroy();
 if(player) player.destroy();
 
+if(isiOS){
+video.src=url;
+video.controls=true;
+video.autoplay=true;
+video.playsInline=true;
+video.addEventListener('loadedmetadata',()=>{video.play();});
+}else{
 if(Hls.isSupported()){
 hls=new Hls();
 hls.loadSource(url);
@@ -167,6 +173,7 @@ video.src=url;
 video.play();
 }
 }
+}
 
 function goBack(){
 if(hls) hls.destroy();
@@ -175,6 +182,5 @@ document.getElementById("playerPage").style.display="none";
 document.getElementById("homePage").style.display="block";
 }
 </script>
-
 </body>
 </html>
