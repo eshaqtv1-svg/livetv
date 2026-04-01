@@ -4,20 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ishaq TV Ultra</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 
 <!-- Plyr -->
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
-<!-- HLS.js -->
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Vazirmatn',sans-serif;background:radial-gradient(circle at top,#111827,#0f172a,#020617);color:#fff;}
-
 header{text-align:center;padding:35px;font-size:38px;font-weight:900;background:linear-gradient(90deg,#00f5ff,#00ff9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;padding:40px;max-width:1400px;margin:auto;}
 .card{background:rgba(255,255,255,0.05);border-radius:30px;padding:25px;text-align:center;backdrop-filter:blur(25px);transition:0.4s;cursor:pointer;}
@@ -28,117 +24,23 @@ header{text-align:center;padding:35px;font-size:38px;font-weight:900;background:
 #playerPage{display:none;text-align:center;padding:30px;}
 .videoWrapper{position:relative;max-width:1200px;margin:auto;}
 video{width:100%;border-radius:20px;}
+#overlayLogo{position:absolute;bottom:15px;left:15px;background:rgba(0,0,0,0.5);padding:8px 15px;border-radius:20px;z-index:10;}
+#linkLabel{position:absolute;top:15px;right:15px;background:rgba(0,0,0,0.6);padding:8px 12px;border-radius:15px;font-size:14px;z-index:10;}
 
-#overlayLogo{
-position:absolute;bottom:15px;left:15px;
-background:rgba(0,0,0,0.5);
-padding:8px 15px;border-radius:20px;
-z-index:10;
-}
-
-#linkLabel{
-position:absolute;top:15px;
-right:15px;
-background:rgba(0,0,0,0.6);
-padding:8px 12px;
-border-radius:15px;
-font-size:14px;
-z-index:10;
-}
-
-/* کیفیت شیشه‌ای */
-#qualityMenu{
-position:absolute;
-bottom:20px;
-right:20px;
-z-index:20;
-font-size:14px;
-}
-
-#qualityBtn{
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(15px);
-padding:10px 15px;
-border-radius:20px;
-cursor:pointer;
-border:1px solid rgba(255,255,255,0.2);
-}
-
-#qualityOptions{
-display:none;
-margin-top:10px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(20px);
-border-radius:15px;
-overflow:hidden;
-}
-
-#qualityOptions div{
-padding:10px 20px;
-cursor:pointer;
-transition:0.3s;
-}
-
-#qualityOptions div:hover{
-background:rgba(0,255,255,0.3);
-}
-
-/* منوی لینک‌ها */
-#sourceMenu{
-position:fixed;
-bottom:90px;
-right:30px;
-z-index:30;
-}
-
-#sourceBtn{
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(15px);
-padding:12px 18px;
-border-radius:25px;
-cursor:pointer;
-border:1px solid rgba(255,255,255,0.2);
-font-size:14px;
-}
-
-#sourceOptions{
-display:none;
-margin-top:10px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(20px);
-border-radius:15px;
-overflow:hidden;
-min-width:140px;
-}
-
-#sourceOptions div{
-padding:10px 15px;
-cursor:pointer;
-transition:0.3s;
-}
-
-#sourceOptions div:hover{
-background:rgba(0,255,255,0.3);
-}
-
-button{
-margin-top:25px;
-padding:14px 30px;
-border:none;
-border-radius:40px;
-cursor:pointer;
-background:#00ffcc;
-}
+#sourceMenu{position:fixed;bottom:90px;right:30px;z-index:30;}
+#sourceBtn{background:rgba(255,255,255,0.1);backdrop-filter:blur(15px);padding:12px 18px;border-radius:25px;cursor:pointer;border:1px solid rgba(255,255,255,0.2);font-size:14px;}
+#sourceOptions{display:none;margin-top:10px;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);border-radius:15px;overflow:hidden;min-width:140px;}
+#sourceOptions div{padding:10px 15px;cursor:pointer;transition:0.3s;}
+#sourceOptions div:hover{background:rgba(0,255,255,0.3);}
+button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:pointer;background:#00ffcc;}
 </style>
 </head>
 
 <body>
-
 <header>🔥 Ishaq TV 🔥</header>
 
 <div id="homePage">
 <div class="grid">
-
 <div class="card" onclick="openChannel('tolo','طلوع')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg"><span>طلوع</span></div>
 <div class="card" onclick="openChannel('irib3','شبکه سه')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg"><span>شبکه سه</span></div>
 <div class="card" onclick="openChannel('varzesh','ورزش')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg"><span>ورزش</span></div>
@@ -150,33 +52,20 @@ background:#00ffcc;
 <div class="card" onclick="openChannel('ariana','آریانا')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg"><span>آریانا</span></div>
 <div class="card" onclick="openChannel('meraj','معراج')"><img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg"><span>معراج</span></div>
 <div class="card" onclick="openChannel('gem','GEM')"><img src="https://kbl-cdn.movie.af/channels/32/media/logo/w300/caf0cede-0c1e-4429-9a26-6775c6d95f17.png"><span>GEM</span></div>
-
 </div>
 </div>
 
 <div id="playerPage">
 <h2 id="channelTitle"></h2>
-
 <div class="videoWrapper">
 <video id="video" playsinline controls></video>
 <div id="overlayLogo">Ishaq TV</div>
 <div id="linkLabel">Auto</div>
 </div>
 
-<!-- منوی کیفیت شیشه‌ای -->
-<div id="qualityMenu">
-  <div id="qualityBtn">⚙️ کیفیت</div>
-  <div id="qualityOptions">
-    <div onclick="setQuality('auto')">Auto</div>
-    <div onclick="setQuality('1080')">1080p</div>
-    <div onclick="setQuality('720')">720p</div>
-  </div>
-</div>
-
-<!-- منوی لینک‌ها -->
 <div id="sourceMenu">
-  <div id="sourceBtn">📡 انتخاب لینک</div>
-  <div id="sourceOptions"></div>
+<div id="sourceBtn">📡 انتخاب لینک</div>
+<div id="sourceOptions"></div>
 </div>
 
 <br>
@@ -187,108 +76,103 @@ background:#00ffcc;
 let hls;
 let player;
 let currentChannel="";
+let currentLinks=[];
+let currentIndex=0;
 let currentQuality="auto";
 
-const channels = {
-  tolo: [
-    "https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8",
-    "https://ishaq-proxy.eshaqtv1.workers.dev/tolo2/playlist.m3u8"
-  ],
-  irib3: ["https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8"],
-  varzesh: ["https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8"],
-  persiana: ["https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8"],
-  persiana2: ["https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8"],
-  solh: ["https://ishaq-proxy.eshaqtv1.workers.dev/solh/playlist.m3u8"],
-  sportsaf: ["https://ishaq-proxy.eshaqtv1.workers.dev/sportsaf/playlist.m3u8"],
-  arezo: ["https://ishaq-proxy.eshaqtv1.workers.dev/arezo/playlist.m3u8"],
-  ariana: ["https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8"],
-  meraj: ["https://ishaq-proxy.eshaqtv1.workers.dev/meraj/playlist.m3u8"],
-  gem: ["https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8"]
+const channels={
+tolo:["https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8"],
+irib3:["https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8"],
+varzesh:["https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8"],
+persiana:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8"],
+persiana2:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8"],
+solh:["https://ishaq-proxy.eshaqtv1.workers.dev/solh/playlist.m3u8"],
+sportsaf:["https://ishaq-proxy.eshaqtv1.workers.dev/sportsaf/playlist.m3u8"],
+arezo:["https://ishaq-proxy.eshaqtv1.workers.dev/arezo/playlist.m3u8"],
+ariana:["https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8"],
+meraj:["https://ishaq-proxy.eshaqtv1.workers.dev/meraj/playlist.m3u8"],
+gem:["https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8"]
 };
 
-let currentLinks = [];
+function openChannel(channel,name){
+currentChannel=channel;
+document.getElementById("channelTitle").innerText=name;
+document.getElementById("homePage").style.display="none";
+document.getElementById("playerPage").style.display="block";
 
-async function openChannel(channel,name){
-  currentChannel = channel;
-  document.getElementById("channelTitle").innerText = name;
-  document.getElementById("homePage").style.display="none";
-  document.getElementById("playerPage").style.display="block";
-
-  currentLinks = channels[channel];
-  createSourceMenu();
-
-  loadStream(currentLinks[0],currentQuality);
+currentLinks=channels[channel];
+currentIndex=0;
+createSourceMenu();
+loadStream(currentLinks[currentIndex],currentQuality);
 }
 
 function createSourceMenu(){
-  const container = document.getElementById("sourceOptions");
-  container.innerHTML = "";
-
-  currentLinks.forEach((link,index)=>{
-    const item = document.createElement("div");
-    item.innerText = "لینک " + (index+1);
-    item.onclick = ()=>{
-      loadStream(link,currentQuality);
-      document.getElementById("sourceOptions").style.display="none";
-    };
-    container.appendChild(item);
-  });
+const container=document.getElementById("sourceOptions");
+container.innerHTML="";
+currentLinks.forEach((link,index)=>{
+const item=document.createElement("div");
+item.innerText="لینک "+(index+1);
+item.onclick=()=>{
+currentIndex=index;
+loadStream(currentLinks[currentIndex],currentQuality);
+container.style.display="none";
+};
+container.appendChild(item);
+});
 }
 
-document.getElementById("sourceBtn").onclick = ()=>{
-  let menu = document.getElementById("sourceOptions");
-  menu.style.display = menu.style.display==="block" ? "none" : "block";
+document.getElementById("sourceBtn").onclick=()=>{
+let menu=document.getElementById("sourceOptions");
+menu.style.display=(menu.style.display==="block")?"none":"block";
 };
 
-document.getElementById("qualityBtn").onclick = ()=>{
-  let menu = document.getElementById("qualityOptions");
-  menu.style.display = menu.style.display==="block" ? "none" : "block";
-};
-
+// انتخاب کیفیت واقعی
 function setQuality(q){
-  currentQuality=q;
-  loadStream(currentLinks[0],q);
-  document.getElementById("qualityOptions").style.display="none";
+currentQuality=q;
+loadStream(currentLinks[currentIndex],q);
 }
 
+// منوی کیفیت داخل پلیر (native Plyr)
 function loadStream(baseUrl,quality){
-  const video=document.getElementById("video");
-  let url = baseUrl;
+const video=document.getElementById("video");
+let url=baseUrl;
 
-  if(quality==="1080") url = baseUrl.replace("playlist.m3u8","chunklist0.m3u8");
-  else if(quality==="720") url = baseUrl.replace("playlist.m3u8","chunklist1.m3u8");
+if(quality==="1080") url=baseUrl.replace("playlist.m3u8","chunklist0.m3u8");
+else if(quality==="720") url=baseUrl.replace("playlist.m3u8","chunklist1.m3u8");
 
-  document.getElementById("linkLabel").innerText = quality==="auto"?"Auto":quality+"p";
+document.getElementById("linkLabel").innerText=(quality==="auto")?"Auto":quality+"p";
 
-  if(hls) hls.destroy();
-  if(player) player.destroy();
+if(hls) hls.destroy();
+if(player) player.destroy();
 
-  if(Hls.isSupported()){
-    hls = new Hls();
-    hls.loadSource(url);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,function(){
-      player = new Plyr(video,{settings:['speed','fullscreen']});
-      video.play();
-    });
-    hls.on(Hls.Events.ERROR,function(e,d){
-      if(d.fatal){
-        const links = channels[currentChannel];
-        const nextIndex = links.indexOf(baseUrl)+1;
-        if(nextIndex<links.length) loadStream(links[nextIndex],quality);
-      }
-    });
-  }else if(video.canPlayType('application/vnd.apple.mpegurl')){
-    video.src=url;
-    video.play();
-  }
+if(Hls.isSupported()){
+hls=new Hls();
+hls.loadSource(url);
+hls.attachMedia(video);
+hls.on(Hls.Events.MANIFEST_PARSED,function(){
+player=new Plyr(video,{settings:['speed','quality','fullscreen'],quality:{default:quality,options:['auto','720','1080'],forced:true}});
+video.play();
+});
+hls.on(Hls.Events.ERROR,function(e,d){
+if(d.fatal){
+const nextIndex=currentIndex+1;
+if(nextIndex<currentLinks.length){
+currentIndex=nextIndex;
+loadStream(currentLinks[currentIndex],currentQuality);
+}
+}
+});
+}else if(video.canPlayType('application/vnd.apple.mpegurl')){
+video.src=url;
+video.play();
+}
 }
 
 function goBack(){
-  if(hls) hls.destroy();
-  if(player) player.destroy();
-  document.getElementById("playerPage").style.display="none";
-  document.getElementById("homePage").style.display="block";
+if(hls) hls.destroy();
+if(player) player.destroy();
+document.getElementById("playerPage").style.display="none";
+document.getElementById("homePage").style.display="block";
 }
 </script>
 
