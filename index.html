@@ -3,10 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ishaq TV Ultra</title>
+
+<title>تماشای زنده تلویزیون | Ishaq TV</title>
+
+<meta name="description" content="تماشای آنلاین و زنده شبکه های تلویزیونی ایرانی و افغانی با کیفیت بالا و رایگان در Ishaq TV">
+<meta name="keywords" content="پخش زنده تلویزیون, live tv, تلویزیون آنلاین, شبکه زنده, Ishaq TV">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://eshaqtv1-svg.github.io/livetv/">
+
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 
-<!-- Plyr -->
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -15,6 +21,8 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Vazirmatn',sans-serif;background:radial-gradient(circle at top,#111827,#0f172a,#020617);color:#fff;}
 header{text-align:center;padding:35px;font-size:38px;font-weight:900;background:linear-gradient(90deg,#00f5ff,#00ff9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-size:26px;text-align:center;margin-top:10px;}
+.intro{max-width:800px;margin:20px auto;text-align:center;line-height:1.8;color:#ccc;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;padding:40px;max-width:1400px;margin:auto;}
 .card{background:rgba(255,255,255,0.05);border-radius:30px;padding:25px;text-align:center;backdrop-filter:blur(25px);transition:0.4s;cursor:pointer;}
 .card:hover{transform:scale(1.05);box-shadow:0 0 35px rgba(0,255,255,0.6);}
@@ -31,26 +39,33 @@ video{width:100%;border-radius:20px;}
 #sourceOptions div{padding:10px 15px;cursor:pointer;transition:0.3s;}
 #sourceOptions div:hover{background:rgba(0,255,255,0.3);}
 button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:pointer;background:#00ffcc;}
+.seo-text{max-width:900px;margin:60px auto;padding:20px;line-height:2;color:#ccc;}
 </style>
 </head>
 
 <body>
 <header>🔥 Ishaq TV 🔥</header>
 
+<h1>تماشای زنده تلویزیون آنلاین</h1>
+<p class="intro">
+در این سایت می‌توانید شبکه‌های تلویزیونی ایرانی و افغانی را به صورت زنده و رایگان مشاهده کنید.
+Ishaq TV بهترین تجربه تماشای تلویزیون اینترنتی با کیفیت بالا و بدون قطعی را ارائه می‌دهد.
+</p>
+
 <div id="homePage">
 <div class="grid">
-<div class="card" onclick="openChannel('tolo','طلوع')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg"><span>طلوع</span></div>
-<div class="card" onclick="openChannel('irib3','شبکه سه')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg"><span>شبکه سه</span></div>
-<div class="card" onclick="openChannel('varzesh','ورزش')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg"><span>ورزش</span></div>
-<div class="card" onclick="openChannel('persiana','پرشیا اسپورت')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg"><span>پرشیا اسپورت</span></div>
-<div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')"><img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg"><span>پرشیا اسپورت 2</span></div>
-<div class="card" onclick="openChannel('solh','صلح اسپورت')"><img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg"><span>صلح اسپورت</span></div>
-<div class="card" onclick="openChannel('sportsaf','Sports AF')"><img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg"><span>Sports AF</span></div>
-<div class="card" onclick="openChannel('arezo','آرزو')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg"><span>آرزو</span></div>
-<div class="card" onclick="openChannel('ariana','آریانا')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg"><span>آریانا</span></div>
-<div class="card" onclick="openChannel('tv1','شبکه یک')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993637-382992096.svg"><span>شبکه یک</span></div>
-<div class="card" onclick="openChannel('meraj','معراج')"><img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg"><span>معراج</span></div>
-<div class="card" onclick="openChannel('gem','GEM')"><img src="https://kbl-cdn.movie.af/channels/32/media/logo/w300/caf0cede-0c1e-4429-9a26-6775c6d95f17.png"><span>GEM</span></div>
+<div class="card" onclick="openChannel('tolo','طلوع')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg" alt="پخش زنده شبکه طلوع"><span>طلوع</span></div>
+<div class="card" onclick="openChannel('irib3','شبکه سه')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg" alt="پخش زنده شبکه سه"><span>شبکه سه</span></div>
+<div class="card" onclick="openChannel('varzesh','ورزش')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg" alt="پخش زنده شبکه ورزش"><span>ورزش</span></div>
+<div class="card" onclick="openChannel('persiana','پرشیا اسپورت')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg" alt="Persiana Sport Live"><span>پرشیا اسپورت</span></div>
+<div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')"><img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg" alt="Persiana Sport 2 Live"><span>پرشیا اسپورت 2</span></div>
+<div class="card" onclick="openChannel('solh','صلح اسپورت')"><img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg" alt="Solh Sport Live"><span>صلح اسپورت</span></div>
+<div class="card" onclick="openChannel('sportsaf','Sports AF')"><img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg" alt="Sports AF Live"><span>Sports AF</span></div>
+<div class="card" onclick="openChannel('arezo','آرزو')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg" alt="Arezo TV Live"><span>آرزو</span></div>
+<div class="card" onclick="openChannel('ariana','آریانا')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg" alt="Ariana TV Live"><span>آریانا</span></div>
+<div class="card" onclick="openChannel('tv1','شبکه یک')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993637-382992096.svg" alt="شبکه یک زنده"><span>شبکه یک</span></div>
+<div class="card" onclick="openChannel('meraj','معراج')"><img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg" alt="Meraj TV Live"><span>معراج</span></div>
+<div class="card" onclick="openChannel('gem','GEM')"><img src="https://kbl-cdn.movie.af/channels/32/media/logo/w300/caf0cede-0c1e-4429-9a26-6775c6d95f17.png" alt="GEM TV Live"><span>GEM</span></div>
 </div>
 </div>
 
@@ -71,6 +86,17 @@ button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:p
 <button onclick="goBack()">بازگشت</button>
 </div>
 
+<div class="seo-text">
+<h2>پخش زنده شبکه های تلویزیونی</h2>
+<p>
+در Ishaq TV شما می‌توانید به راحتی و بدون نیاز به نصب برنامه، شبکه‌های تلویزیونی مختلف را به صورت آنلاین مشاهده کنید.
+این سرویس شامل کانال‌های ایرانی و افغانی مانند طلوع، آریانا، شبکه سه و بسیاری دیگر است.
+</p>
+<p>
+اگر به دنبال یک سایت سریع و رایگان برای تماشای تلویزیون زنده هستید، Ishaq TV بهترین انتخاب برای شماست.
+</p>
+</div>
+
 <script>
 let hls, player;
 let currentChannel = "";
@@ -80,11 +106,8 @@ let currentQuality = "auto";
 const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 const channels = {
-  tolo:["https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8",
-        "https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8"],
-  irib3:["https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8",
-         "https://live-azd1122.telewebion.ir/ek/tv3/live/720p/index.m3u8",
-         ],
+  tolo:["https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8"],
+  irib3:["https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8","https://live-azd1122.telewebion.ir/ek/tv3/live/720p/index.m3u8"],
   varzesh:["https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8"],
   persiana:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8"],
   persiana2:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8"],
@@ -95,7 +118,6 @@ const channels = {
   tv1:["https://ishaq-proxy.eshaqtv1.workers.dev/tv1/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-1tvafg/tracks-v1/mono.m3u8"],
   meraj:["https://ishaq-proxy.eshaqtv1.workers.dev/meraj/playlist.m3u8"],
   gem:["https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8"],
-
 };
 
 function openChannel(channel,name){
@@ -148,8 +170,6 @@ document.getElementById("sourceBtn").onclick = ()=>{
 function loadStream(baseUrl, quality){
   const video=document.getElementById("video");
   let url = baseUrl;
-  if(quality==="1080") url=baseUrl.replace("playlist.m3u8","chunklist0.m3u8");
-  else if(quality==="720") url=baseUrl.replace("playlist.m3u8","chunklist1.m3u8");
   document.getElementById("linkLabel").innerText = (quality==="auto")?"Auto":quality+"p";
 
   if(Hls.isSupported()){
@@ -157,20 +177,8 @@ function loadStream(baseUrl, quality){
     hls.loadSource(url);
     hls.attachMedia(video);
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{
-      player = new Plyr(video,{
-        settings:['speed','quality','fullscreen'],
-        quality:{default:quality,options:['auto','720','1080'],forced:true}
-      });
+      player = new Plyr(video,{settings:['speed','quality','fullscreen']});
       video.play();
-    });
-    hls.on(Hls.Events.ERROR,(e,d)=>{
-      if(d.fatal){
-        const nextIndex=currentIndex+1;
-        if(nextIndex<currentLinks.length){
-          currentIndex=nextIndex;
-          loadStream(currentLinks[currentIndex],currentQuality);
-        }
-      }
     });
   } else if(video.canPlayType('application/vnd.apple.mpegurl')){
     video.src=url;
@@ -186,4 +194,4 @@ function goBack(){
 }
 </script>
 </body>
-</html>
+<
