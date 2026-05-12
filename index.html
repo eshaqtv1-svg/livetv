@@ -1,197 +1,745 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>تماشای زنده تلویزیون | Ishaq TV</title>
-
-<meta name="description" content="تماشای آنلاین و زنده شبکه های تلویزیونی ایرانی و افغانی با کیفیت بالا و رایگان در Ishaq TV">
+<title>Ishaq TV — تماشای زنده</title>
+<meta name="description" content="تماشای آنلاین و زنده شبکه‌های تلویزیونی ایرانی و افغانی با کیفیت بالا و رایگان در Ishaq TV">
 <meta name="keywords" content="پخش زنده تلویزیون, live tv, تلویزیون آنلاین, شبکه زنده, Ishaq TV">
 <meta name="robots" content="index, follow">
+<meta property="og:title" content="Ishaq TV — تماشای زنده تلویزیون">
+<meta property="og:description" content="پخش زنده شبکه‌های ایرانی و افغانی با کیفیت بالا">
+<meta property="og:type" content="website">
 <link rel="canonical" href="https://eshaqtv1-svg.github.io/livetv/">
 
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Vazirmatn',sans-serif;background:radial-gradient(circle at top,#111827,#0f172a,#020617);color:#fff;}
-header{text-align:center;padding:35px;font-size:38px;font-weight:900;background:linear-gradient(90deg,#00f5ff,#00ff9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-h1{font-size:26px;text-align:center;margin-top:10px;}
-.intro{max-width:800px;margin:20px auto;text-align:center;line-height:1.8;color:#ccc;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;padding:40px;max-width:1400px;margin:auto;}
-.card{background:rgba(255,255,255,0.05);border-radius:30px;padding:25px;text-align:center;backdrop-filter:blur(25px);transition:0.4s;cursor:pointer;}
-.card:hover{transform:scale(1.05);box-shadow:0 0 35px rgba(0,255,255,0.6);}
-.card img{width:100%;height:120px;object-fit:contain;margin-bottom:15px;}
-.card span{font-size:20px;font-weight:700;}
-#playerPage{display:none;text-align:center;padding:30px;}
-.videoWrapper{position:relative;max-width:1200px;margin:auto;}
-video{width:100%;border-radius:20px;}
-#overlayLogo{position:absolute;bottom:15px;left:15px;background:rgba(0,0,0,0.5);padding:8px 15px;border-radius:20px;z-index:10;}
-#linkLabel{position:absolute;top:15px;right:15px;background:rgba(0,0,0,0.6);padding:8px 12px;border-radius:15px;font-size:14px;z-index:10;}
-#sourceMenu{position:fixed;bottom:90px;right:30px;z-index:30;}
-#sourceBtn{background:rgba(255,255,255,0.1);backdrop-filter:blur(15px);padding:12px 18px;border-radius:25px;cursor:pointer;border:1px solid rgba(255,255,255,0.2);font-size:14px;}
-#sourceOptions{display:none;margin-top:10px;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);border-radius:15px;overflow:hidden;min-width:140px;}
-#sourceOptions div{padding:10px 15px;cursor:pointer;transition:0.3s;}
-#sourceOptions div:hover{background:rgba(0,255,255,0.3);}
-button{margin-top:25px;padding:14px 30px;border:none;border-radius:40px;cursor:pointer;background:#00ffcc;}
-.seo-text{max-width:900px;margin:60px auto;padding:20px;line-height:2;color:#ccc;}
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dark: #8b6914;
+  --bg-deep: #070a0f;
+  --bg-card: #0d1117;
+  --bg-hover: #141b24;
+  --border: rgba(201,168,76,0.2);
+  --border-hover: rgba(201,168,76,0.6);
+  --text: #f0ebe0;
+  --text-muted: #7a8494;
+  --red-live: #e84040;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background texture */
+body::before {
+  content:'';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── HEADER ─── */
+header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 72px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(7,10,15,0.9);
+  backdrop-filter: blur(20px);
+}
+
+.logo {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.logo span {
+  color: var(--text);
+  font-weight: 400;
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(232,64,64,0.12);
+  border: 1px solid rgba(232,64,64,0.3);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--red-live);
+  font-weight: 600;
+}
+
+.live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--red-live);
+  animation: pulse-red 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-red {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(0.7); }
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 70px 20px 50px;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 200px;
+  margin: 40px auto 50px;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.divider-diamond {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ─── GRID ─── */
+.grid-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px 80px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 20px 22px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(201,168,76,0.08), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover::before { opacity: 1; }
+
+.card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  background: var(--bg-hover);
+}
+
+.card:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.card-img-wrap {
+  width: 80px; height: 80px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+
+.card img {
+  width: 64px; height: 64px;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.card:hover img { transform: scale(1.08); }
+
+.card-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.card-status {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.card-live-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #3dcc6b;
+  margin-left: 5px;
+  vertical-align: middle;
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+  0%,100% { opacity:1; }
+  50% { opacity:0.3; }
+}
+
+/* ─── PLAYER PAGE ─── */
+#playerPage {
+  display: none;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 18px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 13px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.back-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+.back-arrow { font-size: 18px; }
+
+.ch-title-wrap { text-align: center; }
+
+.ch-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ch-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+/* source selector */
+.source-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.src-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 14px;
+  color: var(--text-muted);
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+}
+.src-btn:hover { border-color: var(--border-hover); color: var(--gold); }
+.src-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+
+/* player area */
+.player-wrap {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 30px;
+}
+
+.video-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.1);
+}
+
+video { width: 100%; display: block; }
+
+/* loading overlay */
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(7,10,15,0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 20;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.4s;
+}
+.loading-overlay.hidden { opacity: 0; pointer-events: none; }
+
+.spinner {
+  width: 44px; height: 44px;
+  border: 2px solid rgba(201,168,76,0.15);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+}
+
+/* error overlay */
+.error-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(7,10,15,0.92);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 20;
+  text-align: center;
+  padding: 30px;
+}
+.error-overlay.visible { display: flex; }
+
+.error-icon { font-size: 40px; }
+.error-title { font-size: 16px; font-weight: 600; color: var(--text); }
+.error-msg { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+.retry-btn {
+  margin-top: 8px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 10px 24px;
+  color: var(--gold);
+  cursor: pointer;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 13px;
+  transition: background 0.2s;
+}
+.retry-btn:hover { background: rgba(201,168,76,0.2); }
+
+/* watermark */
+.watermark {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: rgba(201,168,76,0.5);
+  letter-spacing: 2px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ─── PLYR OVERRIDES ─── */
+.plyr--video .plyr__control--overlaid {
+  background: rgba(201,168,76,0.85) !important;
+}
+.plyr--full-ui input[type=range] {
+  color: var(--gold) !important;
+}
+.plyr__control.plyr__tab-focus,
+.plyr__control:hover,
+.plyr__control[aria-expanded=true] {
+  background: var(--gold) !important;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  header { padding: 0 20px; }
+  .logo { font-size: 18px; }
+  .hero { padding: 50px 20px 30px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+  .grid-wrap { padding: 0 16px 60px; }
+  .player-header { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
+  .player-wrap { padding: 0 16px; margin: 24px auto; }
+  .source-bar { flex-wrap: wrap; }
+}
+
+/* animations */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(24px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+.card { animation: fadeUp 0.5s ease both; }
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.10s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.20s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6) { animation-delay: 0.30s; }
+.card:nth-child(7) { animation-delay: 0.35s; }
+.card:nth-child(8) { animation-delay: 0.40s; }
+.card:nth-child(9) { animation-delay: 0.45s; }
+.card:nth-child(10) { animation-delay: 0.50s; }
+.card:nth-child(11) { animation-delay: 0.55s; }
+.card:nth-child(12) { animation-delay: 0.60s; }
 </style>
 </head>
 
 <body>
-<header>🔥 Ishaq TV 🔥</header>
 
-<h1>تماشای زنده تلویزیون آنلاین</h1>
-<p class="intro">
-در این سایت می‌توانید شبکه‌های تلویزیونی ایرانی و افغانی را به صورت زنده و رایگان مشاهده کنید.
-Ishaq TV بهترین تجربه تماشای تلویزیون اینترنتی با کیفیت بالا و بدون قطعی را ارائه می‌دهد.
-</p>
+<!-- HEADER -->
+<header>
+  <div class="logo">ISHAQ <span>TV</span></div>
+  <div class="live-badge">
+    <div class="live-dot"></div>
+    LIVE
+  </div>
+</header>
 
+<!-- HOME PAGE -->
 <div id="homePage">
-<div class="grid">
-<div class="card" onclick="openChannel('tolo','طلوع')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg" alt="پخش زنده شبکه طلوع"><span>طلوع</span></div>
-<div class="card" onclick="openChannel('irib3','شبکه سه')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg" alt="پخش زنده شبکه سه"><span>شبکه سه</span></div>
-<div class="card" onclick="openChannel('varzesh','ورزش')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg" alt="پخش زنده شبکه ورزش"><span>ورزش</span></div>
-<div class="card" onclick="openChannel('persiana','پرشیا اسپورت')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg" alt="Persiana Sport Live"><span>پرشیا اسپورت</span></div>
-<div class="card" onclick="openChannel('persiana2','پرشیا اسپورت 2')"><img src="https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg" alt="Persiana Sport 2 Live"><span>پرشیا اسپورت 2</span></div>
-<div class="card" onclick="openChannel('solh','صلح اسپورت')"><img src="https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg" alt="Solh Sport Live"><span>صلح اسپورت</span></div>
-<div class="card" onclick="openChannel('sportsaf','Sports AF')"><img src="https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg" alt="Sports AF Live"><span>Sports AF</span></div>
-<div class="card" onclick="openChannel('arezo','آرزو')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg" alt="Arezo TV Live"><span>آرزو</span></div>
-<div class="card" onclick="openChannel('ariana','آریانا')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg" alt="Ariana TV Live"><span>آریانا</span></div>
-<div class="card" onclick="openChannel('tv1','شبکه یک')"><img src="https://cdn1.movieland.af/images/channel-logos/1760950993637-382992096.svg" alt="شبکه یک زنده"><span>شبکه یک</span></div>
-<div class="card" onclick="openChannel('meraj','معراج')"><img src="https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg" alt="Meraj TV Live"><span>معراج</span></div>
-<div class="card" onclick="openChannel('gem','GEM')"><img src="https://kbl-cdn.movie.af/channels/32/media/logo/w300/caf0cede-0c1e-4429-9a26-6775c6d95f17.png" alt="GEM TV Live"><span>GEM</span></div>
-</div>
+  <section class="hero">
+    <div class="hero-tag">▸ پخش زنده ۲۴ ساعته</div>
+    <h1>تماشای <em>زنده</em> تلویزیون</h1>
+    <p>بهترین شبکه‌های ایرانی و افغانی را به صورت رایگان و با کیفیت بالا تماشا کنید</p>
+  </section>
+
+  <div class="divider">
+    <div class="divider-diamond"></div>
+  </div>
+
+  <div class="grid-wrap">
+    <div class="grid" id="channelGrid"></div>
+  </div>
 </div>
 
+<!-- PLAYER PAGE -->
 <div id="playerPage">
-<h2 id="channelTitle"></h2>
-<div class="videoWrapper">
-<video id="video" playsinline controls></video>
-<div id="overlayLogo">Ishaq TV</div>
-<div id="linkLabel">Auto</div>
+  <div class="player-header">
+    <button class="back-btn" onclick="goBack()">
+      <span class="back-arrow">→</span>
+      بازگشت
+    </button>
+
+    <div class="ch-title-wrap">
+      <div class="ch-title" id="channelTitle">—</div>
+      <div class="ch-subtitle">LIVE BROADCAST</div>
+    </div>
+
+    <div class="source-bar" id="sourceBar"></div>
+  </div>
+
+  <div class="player-wrap">
+    <div class="video-frame">
+      <video id="video" playsinline controls></video>
+
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="loading-text">در حال بارگذاری...</div>
+      </div>
+
+      <div class="error-overlay" id="errorOverlay">
+        <div class="error-icon">📡</div>
+        <div class="error-title">اتصال برقرار نشد</div>
+        <div class="error-msg" id="errorMsg">در حال امتحان لینک بعدی...</div>
+        <button class="retry-btn" onclick="retryAll()">تلاش مجدد</button>
+      </div>
+
+      <div class="watermark">ISHAQ TV</div>
+    </div>
+  </div>
 </div>
 
-<div id="sourceMenu">
-<div id="sourceBtn">📡 انتخاب لینک</div>
-<div id="sourceOptions"></div>
-</div>
+<footer>
+  © Ishaq TV — پخش زنده تلویزیون آنلاین &nbsp;|&nbsp; ایرانی و افغانی
+</footer>
 
-<br>
-<button onclick="goBack()">بازگشت</button>
-</div>
-
-<div class="seo-text">
-<h2>پخش زنده شبکه های تلویزیونی</h2>
-<p>
-در Ishaq TV شما می‌توانید به راحتی و بدون نیاز به نصب برنامه، شبکه‌های تلویزیونی مختلف را به صورت آنلاین مشاهده کنید.
-این سرویس شامل کانال‌های ایرانی و افغانی مانند طلوع، آریانا، شبکه سه و بسیاری دیگر است.
-</p>
-<p>
-اگر به دنبال یک سایت سریع و رایگان برای تماشای تلویزیون زنده هستید، Ishaq TV بهترین انتخاب برای شماست.
-</p>
-</div>
-
+<!-- SCRIPTS -->
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
-let hls, player;
-let currentChannel = "";
-let currentLinks = [];
-let currentIndex = 0;
-let currentQuality = "auto";
+const channels = [
+  { id:'tolo',      name:'طلوع',           img:'https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8','https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8','https://stream1.liveland.af/hls/tv/tolo/chunklist0.m3u8'] },
+  { id:'irib3',     name:'شبکه سه',        img:'https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8','https://live-azd1122.telewebion.ir/ek/tv3/live/720p/index.m3u8'] },
+  { id:'varzesh',   name:'ورزش',           img:'https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8'] },
+  { id:'persiana',  name:'پرشیا اسپورت',   img:'https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8'] },
+  { id:'persiana2', name:'پرشیا اسپورت ۲', img:'https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg', links:['https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8'] },
+  { id:'solh',      name:'صلح اسپورت',     img:'https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg', links:['https://ishaq-proxy.eshaqtv1.workers.dev/solh/playlist.m3u8'] },
+  { id:'sportsaf',  name:'Sports AF',       img:'https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg', links:['https://ishaq-proxy.eshaqtv1.workers.dev/sportsaf/playlist.m3u8'] },
+  { id:'arezo',     name:'آرزو',            img:'https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/arezo/playlist.m3u8'] },
+  { id:'ariana',    name:'آریانا',          img:'https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8','https://tgn.bozztv.com/eshgtv-dvrfl05/gin-ariana/tracks-v1a1/mono.m3u8'] },
+  { id:'tv1',       name:'شبکه یک',         img:'https://cdn1.movieland.af/images/channel-logos/1760950993637-382992096.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/tv1/playlist.m3u8','https://tgn.bozztv.com/eshgtv-dvrfl05/gin-1tvafg/tracks-v1/mono.m3u8'] },
+  { id:'meraj',     name:'معراج',           img:'https://cdn1.movieland.af/images/channels-logos/1769234333004-354961839.svg', links:['https://ishaq-proxy.eshaqtv1.workers.dev/meraj/playlist.m3u8'] },
+  { id:'gem',       name:'GEM',             img:'https://kbl-cdn.movie.af/channels/32/media/logo/w300/caf0cede-0c1e-4429-9a26-6775c6d95f17.png', links:['https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8'] },
+];
+
+// Build grid
+const grid = document.getElementById('channelGrid');
+channels.forEach(ch => {
+  const card = document.createElement('button');
+  card.className = 'card';
+  card.setAttribute('aria-label', 'تماشای ' + ch.name);
+  card.innerHTML = `
+    <div class="card-img-wrap">
+      <img src="${ch.img}" alt="${ch.name}" loading="lazy">
+    </div>
+    <div class="card-name">${ch.name}</div>
+    <div class="card-status"><span class="card-live-dot"></span> زنده</div>
+  `;
+  card.addEventListener('click', () => openChannel(ch));
+  grid.appendChild(card);
+});
+
+// Player state
+let hlsInstance = null;
+let plyrInstance = null;
+let currentChannel = null;
+let currentLinkIndex = 0;
 const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-const channels = {
-  tolo:["https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8","https://stream1.liveland.af/hls/tv/tolo/chunklist0.m3u8"],
-  irib3:["https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8","https://live-azd1122.telewebion.ir/ek/tv3/live/720p/index.m3u8"],
-  varzesh:["https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8"],
-  persiana:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8"],
-  persiana2:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8"],
-  solh:["https://ishaq-proxy.eshaqtv1.workers.dev/solh/playlist.m3u8"],
-  sportsaf:["https://ishaq-proxy.eshaqtv1.workers.dev/sportsaf/playlist.m3u8"],
-  arezo:["https://ishaq-proxy.eshaqtv1.workers.dev/arezo/playlist.m3u8"],
-  ariana:["https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-ariana/tracks-v1a1/mono.m3u8"],
-  tv1:["https://ishaq-proxy.eshaqtv1.workers.dev/tv1/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-1tvafg/tracks-v1/mono.m3u8"],
-  meraj:["https://ishaq-proxy.eshaqtv1.workers.dev/meraj/playlist.m3u8"],
-  gem:["https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8"],
-};
-
-function openChannel(channel,name){
-  currentChannel = channel;
-  document.getElementById("channelTitle").innerText = name;
-  document.getElementById("homePage").style.display="none";
-  document.getElementById("playerPage").style.display="block";
-  currentLinks = channels[channel];
-  currentIndex = 0;
-  createSourceMenu();
-  
-  const video = document.getElementById("video");
-  if(isiOS){
-    video.src = currentLinks[currentIndex];
-    video.play();
-  } else {
-    loadStream(currentLinks[currentIndex], currentQuality);
-  }
+function showLoading(v) {
+  document.getElementById('loadingOverlay').classList.toggle('hidden', !v);
 }
 
-function createSourceMenu(){
-  const container=document.getElementById("sourceOptions");
-  container.innerHTML="";
-  currentLinks.forEach((link,index)=>{
-    const item=document.createElement("div");
-    item.innerText="لینک "+(index+1);
-    item.addEventListener("click",()=>{
-      if(currentIndex===index) return;
-      currentIndex=index;
-      container.style.display="none";
-      const video=document.getElementById("video");
-      if(hls){ hls.destroy(); hls=null; }
-      if(player){ player.destroy(); player=null; }
-      if(isiOS){
-        video.src = currentLinks[currentIndex];
-        video.play();
-      } else {
-        loadStream(currentLinks[currentIndex],currentQuality);
-      }
+function showError(msg) {
+  const ov = document.getElementById('errorOverlay');
+  document.getElementById('errorMsg').textContent = msg || 'پخش زنده در دسترس نیست';
+  ov.classList.add('visible');
+}
+
+function hideError() {
+  document.getElementById('errorOverlay').classList.remove('visible');
+}
+
+function destroyPlayer() {
+  if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+  if (plyrInstance) { plyrInstance.destroy(); plyrInstance = null; }
+  const video = document.getElementById('video');
+  video.src = '';
+  video.load();
+}
+
+function openChannel(ch) {
+  currentChannel = ch;
+  currentLinkIndex = 0;
+  document.getElementById('channelTitle').textContent = ch.name;
+  document.getElementById('homePage').style.display = 'none';
+  document.getElementById('playerPage').style.display = 'block';
+  buildSourceBar(ch);
+  loadLink(currentLinkIndex);
+}
+
+function buildSourceBar(ch) {
+  const bar = document.getElementById('sourceBar');
+  bar.innerHTML = '';
+  ch.links.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'src-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = 'لینک ' + (i + 1);
+    btn.addEventListener('click', () => {
+      if (currentLinkIndex === i) return;
+      currentLinkIndex = i;
+      updateSourceBar();
+      loadLink(i);
     });
-    container.appendChild(item);
+    bar.appendChild(btn);
   });
 }
 
-document.getElementById("sourceBtn").onclick = ()=>{
-  let menu=document.getElementById("sourceOptions");
-  menu.style.display=(menu.style.display==="block")?"none":"block";
-};
+function updateSourceBar() {
+  document.querySelectorAll('.src-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i === currentLinkIndex);
+  });
+}
 
-function loadStream(baseUrl, quality){
-  const video=document.getElementById("video");
-  let url = baseUrl;
-  document.getElementById("linkLabel").innerText = (quality==="auto")?"Auto":quality+"p";
+function loadLink(index) {
+  destroyPlayer();
+  hideError();
+  showLoading(true);
 
-  if(Hls.isSupported()){
-    hls = new Hls();
-    hls.loadSource(url);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,()=>{
-      player = new Plyr(video,{settings:['speed','quality','fullscreen']});
-      video.play();
+  const url = currentChannel.links[index];
+  const video = document.getElementById('video');
+
+  if (isiOS) {
+    video.src = url;
+    video.play().catch(() => tryNextLink());
+    showLoading(false);
+    return;
+  }
+
+  if (Hls.isSupported()) {
+    hlsInstance = new Hls({ enableWorker: true });
+    hlsInstance.loadSource(url);
+    hlsInstance.attachMedia(video);
+
+    hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+      showLoading(false);
+      plyrInstance = new Plyr(video, {
+        controls: ['play-large','play','progress','current-time','mute','volume','fullscreen'],
+        settings: ['speed','quality'],
+      });
+      video.play().catch(() => {});
     });
-  } else if(video.canPlayType('application/vnd.apple.mpegurl')){
-    video.src=url;
-    video.play();
+
+    hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+      if (data.fatal) tryNextLink();
+    });
+
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = url;
+    video.addEventListener('loadedmetadata', () => showLoading(false), { once: true });
+    video.play().catch(() => tryNextLink());
+  } else {
+    showLoading(false);
+    showError('مرورگر شما از پخش زنده پشتیبانی نمی‌کند.');
   }
 }
 
-function goBack(){
-  if(hls){ hls.destroy(); hls=null; }
-  if(player){ player.destroy(); player=null; }
-  document.getElementById("playerPage").style.display="none";
-  document.getElementById("homePage").style.display="block";
+function tryNextLink() {
+  if (!currentChannel) return;
+  const next = currentLinkIndex + 1;
+  if (next < currentChannel.links.length) {
+    currentLinkIndex = next;
+    updateSourceBar();
+    document.getElementById('errorMsg').textContent = 'در حال امتحان لینک ' + (next + 1) + '...';
+    document.getElementById('errorOverlay').classList.add('visible');
+    setTimeout(() => {
+      hideError();
+      loadLink(next);
+    }, 1200);
+  } else {
+    showLoading(false);
+    showError('هیچ لینک فعالی یافت نشد. لطفاً بعداً دوباره امتحان کنید.');
+  }
+}
+
+function retryAll() {
+  currentLinkIndex = 0;
+  updateSourceBar();
+  hideError();
+  loadLink(0);
+}
+
+function goBack() {
+  destroyPlayer();
+  hideError();
+  showLoading(false);
+  document.getElementById('playerPage').style.display = 'none';
+  document.getElementById('homePage').style.display = 'block';
+  currentChannel = null;
 }
 </script>
 </body>
-<
+</html>
