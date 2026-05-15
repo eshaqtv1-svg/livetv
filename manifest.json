@@ -1,0 +1,20 @@
+{
+  "name": "ISHAQ TV",
+  "short_name": "ISHAQ TV",
+  "start_url": "/livetv/",
+  "display": "standalone",
+  "background_color": "#070a0f",
+  "theme_color": "#070a0f",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
