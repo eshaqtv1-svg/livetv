@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Ishaq TV — Live TV</title>
-<meta name="description" content="Watch Iranian & Afghan TV channels live online for free in HD quality — Ishaq TV">
+<title>Ishaq TV — پخش زنده</title>
+<meta name="description" content="تماشای رایگان شبکه‌های ایرانی و افغانی به صورت زنده با کیفیت HD — Ishaq TV">
 <meta name="theme-color" content="#060810">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta property="og:title" content="Ishaq TV — Live Television">
+<meta property="og:title" content="Ishaq TV — پخش زنده تلویزیون">
+<meta property="og:description" content="تماشای رایگان شبکه‌های ایرانی و افغانی">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23c9a84c'/%3E%3Ctext y='.9em' font-size='80' x='10'%3E📺%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,609 +18,517 @@
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
 
 <style>
-/* ═══════════════════════════════
-   TOKENS
-═══════════════════════════════ */
+/* ═══════════════ TOKENS ═══════════════ */
 :root {
-  --gold:        #c9a84c;
-  --gold-light:  #e8c97a;
-  --gold-glow:   #f0d898;
-  --gold-dark:   #8b6914;
-  --gold-dim:    rgba(201,168,76,0.14);
-  --gold-border: rgba(201,168,76,0.22);
-  --gold-hover:  rgba(201,168,76,0.5);
-
-  --bg:          #060810;
-  --bg-2:        #0b0f1a;
-  --bg-card:     #0e1422;
-  --bg-card-h:   #131929;
-  --bg-glass:    rgba(9,13,24,0.9);
-
-  --text:        #edeae0;
-  --text-2:      #9aa0b0;
-  --text-3:      #50596e;
-
-  --red:         #e84040;
-  --green:       #3dcc6b;
-
-  --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px;
-
-  --shadow-gold: 0 0 40px rgba(201,168,76,0.11), 0 0 1px rgba(201,168,76,0.28);
-  --shadow-deep: 0 24px 80px rgba(0,0,0,0.7);
-  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
-
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bot: env(safe-area-inset-bottom, 0px);
-
-  /* language defaults */
-  --font-main: 'Vazirmatn', sans-serif;
-  --dir: rtl;
+  --gold:#c9a84c; --gold-light:#e8c97a; --gold-glow:#f0d898; --gold-dark:#8b6914;
+  --gold-dim:rgba(201,168,76,0.12); --gold-border:rgba(201,168,76,0.18);
+  --gold-hover:rgba(201,168,76,0.45);
+  --bg:#060810; --bg-2:#0b0f1a; --bg-card:#0e1422; --bg-card-h:#131929;
+  --bg-glass:rgba(6,8,16,0.92);
+  --text:#edeae0; --text-2:#8a92a8; --text-3:#404c62;
+  --red:#e84040; --green:#3dcc6b; --green-dim:rgba(61,204,107,0.12);
+  --border:rgba(255,255,255,0.06);
+  --shadow-gold:0 0 40px rgba(201,168,76,0.1),0 0 1px rgba(201,168,76,0.25);
+  --shadow-card:0 8px 32px rgba(0,0,0,0.5);
+  --shadow-deep:0 24px 80px rgba(0,0,0,0.7);
+  --font-main:'Vazirmatn',sans-serif; --dir:rtl;
 }
-
-/* English overrides */
-html[lang="en"] {
-  --font-main: 'Inter', sans-serif;
-  --dir: ltr;
+.light-mode {
+  --gold:#a07828; --gold-light:#c9953a; --gold-glow:#e8b84c; --gold-dark:#6b5010;
+  --gold-dim:rgba(160,120,40,0.08); --gold-border:rgba(160,120,40,0.2);
+  --gold-hover:rgba(160,120,40,0.35);
+  --bg:#f4f2ec; --bg-2:#ede9e0; --bg-card:#ffffff; --bg-card-h:#faf8f4;
+  --bg-glass:rgba(244,242,236,0.94);
+  --text:#1a1612; --text-2:#5a5248; --text-3:#9a9288;
+  --red:#c0392b; --green:#27ae60; --green-dim:rgba(39,174,96,0.1);
+  --border:rgba(0,0,0,0.07);
+  --shadow-gold:0 0 30px rgba(160,120,40,0.12);
+  --shadow-card:0 4px 20px rgba(0,0,0,0.1);
+  --shadow-deep:0 16px 60px rgba(0,0,0,0.15);
 }
+html[lang="en"] { --font-main:'Inter',sans-serif; --dir:ltr; }
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
-
-body {
-  font-family: var(--font-main);
-  direction: var(--dir);
-  background: var(--bg);
-  color: var(--text);
-  min-height:100vh; min-height:100dvh;
-  overflow-x:hidden;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font-main);direction:var(--dir);
+  background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
+  transition:background .3s,color .3s;
 }
+img{display:block;max-width:100%;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+input{font-family:inherit;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--gold-border);border-radius:99px;}
 
-img { display:block; max-width:100%; }
-button { cursor:pointer; border:none; background:none; font-family:inherit; }
-button:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+/* ── Animations ── */
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 6px currentColor}50%{opacity:.3;box-shadow:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.2;transform:scale(.65)}}
+@keyframes ambient{from{opacity:.5;transform:translateX(-50%) scale(1)}to{opacity:.9;transform:translateX(-50%) scale(1.18)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes indeterminate{0%{width:0%;margin-right:100%}50%{width:60%;margin-right:30%}100%{width:0%;margin-right:100%}}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(16px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
-/* ── AMBIENT ── */
-.bg-ambient { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
-.bg-ambient::before {
-  content:''; position:absolute;
-  width:800px; height:600px; top:-200px; left:50%;
+/* ── Ambient bg ── */
+.bg-ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.bg-ambient::before{
+  content:'';position:absolute;width:900px;height:700px;top:-250px;left:50%;
   transform:translateX(-50%);
-  background:radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 70%);
-  animation:ambient 9s ease-in-out infinite alternate;
+  background:radial-gradient(ellipse,var(--gold-dim) 0%,transparent 70%);
+  animation:ambient 10s ease-in-out infinite alternate;
 }
-.bg-ambient::after {
-  content:''; position:absolute; inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a84c' fill-opacity='0.022'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");
-}
-@keyframes ambient {
-  from { opacity:.6; transform:translateX(-50%) scale(1); }
-  to   { opacity:1;  transform:translateX(-50%) scale(1.15); }
+.bg-ambient::after{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a84c' fill-opacity='0.018'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* ═══════════════════════════════
-   HEADER
-═══════════════════════════════ */
-header {
-  position:sticky; top:0; z-index:100;
-  height:68px;
-  padding:0 clamp(16px,4vw,48px);
-  padding-top:var(--safe-top);
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
+/* ═══════════════ HEADER ═══════════════ */
+header{
+  position:sticky;top:0;z-index:200;height:64px;
+  padding:0 clamp(14px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
   background:var(--bg-glass);
-  backdrop-filter:blur(24px) saturate(1.4);
-  -webkit-backdrop-filter:blur(24px) saturate(1.4);
+  backdrop-filter:blur(28px) saturate(1.5);
+  -webkit-backdrop-filter:blur(28px) saturate(1.5);
   border-bottom:1px solid var(--gold-border);
 }
-
-.logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-
-.logo-icon {
-  width:38px; height:38px; flex-shrink:0;
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;background:none;border:none;}
+.logo-icon{
+  width:36px;height:36px;flex-shrink:0;
   background:linear-gradient(135deg,var(--gold-dark),var(--gold));
-  border-radius:var(--r-sm);
-  display:flex; align-items:center; justify-content:center;
-  font-size:18px;
-  box-shadow:var(--shadow-gold);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:17px;box-shadow:var(--shadow-gold);
 }
+.logo-main{font-family:'Cinzel Decorative',serif;font-size:15px;font-weight:700;color:var(--gold);letter-spacing:2px;display:block;}
+.logo-sub{font-size:9px;letter-spacing:2.5px;color:var(--text-3);text-transform:uppercase;margin-top:3px;font-family:'Inter',sans-serif;display:block;}
+.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
 
-.logo-text { display:flex; flex-direction:column; line-height:1; }
-
-.logo-main {
-  font-family:'Cinzel Decorative',serif;
-  font-size:16px; font-weight:700;
-  color:var(--gold); letter-spacing:2px;
+.fav-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:6px 12px;border-radius:99px;
+  border:1px solid var(--gold-border);background:var(--gold-dim);
+  color:var(--gold);font-size:12px;font-weight:600;
+  transition:all .2s;font-family:'Inter',sans-serif;
 }
-
-.logo-sub {
-  font-size:9px; letter-spacing:2.5px;
-  color:var(--text-2); text-transform:uppercase; margin-top:3px;
+.fav-count{
+  background:var(--gold);color:#000;font-size:10px;font-weight:800;
+  border-radius:99px;padding:1px 5px;min-width:16px;text-align:center;
+  display:none;
 }
-
-.header-right { display:flex; align-items:center; gap:8px; }
-
-/* language toggle */
-.lang-toggle {
-  display:flex; align-items:center;
-  background:var(--bg-card);
-  border:1px solid var(--gold-border);
-  border-radius:99px;
-  padding:3px;
-  gap:2px;
-}
-
-.lang-btn {
-  padding:5px 12px;
-  border-radius:99px;
-  font-size:11px; font-weight:700;
-  letter-spacing:1px;
-  color:var(--text-3);
+.theme-btn{
+  width:36px;height:36px;border-radius:99px;
+  border:1px solid var(--gold-border);background:var(--bg-card);
+  color:var(--text-2);font-size:15px;
+  display:flex;align-items:center;justify-content:center;
   transition:all .2s;
+}
+.lang-toggle{
+  display:flex;align-items:center;background:var(--bg-card);
+  border:1px solid var(--gold-border);border-radius:99px;padding:3px;gap:2px;
+}
+.lang-btn{
+  padding:5px 11px;border-radius:99px;font-size:11px;font-weight:700;
+  letter-spacing:1px;color:var(--text-3);transition:all .2s;
   font-family:'Inter',sans-serif;
 }
-
-.lang-btn.active {
-  background:var(--gold);
-  color:#000;
+.lang-btn.active{background:var(--gold);color:#000;}
+.live-pill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(232,64,64,0.1);border:1px solid rgba(232,64,64,0.25);
+  border-radius:99px;padding:5px 12px 5px 10px;
+  font-size:11px;font-weight:700;letter-spacing:2.5px;
+  color:var(--red);font-family:'Inter',sans-serif;
 }
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.6s ease-in-out infinite;}
 
-.lang-btn:not(.active):hover { color:var(--gold); }
+/* ═══════════════ HOME ═══════════════ */
+#homePage{position:relative;z-index:1;}
 
-.live-pill {
-  display:flex; align-items:center; gap:6px;
-  background:rgba(232,64,64,0.1);
-  border:1px solid rgba(232,64,64,0.25);
-  border-radius:99px;
-  padding:5px 12px 5px 10px;
-  font-size:11px; font-weight:700;
-  letter-spacing:2.5px; color:var(--red);
+.hero{
+  padding:clamp(52px,9vh,110px) 20px clamp(36px,5vh,60px);
+  text-align:center;animation:fadeUp .6s ease both;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;opacity:.8;
   font-family:'Inter',sans-serif;
 }
-
-.live-dot {
-  width:7px; height:7px; border-radius:50%;
-  background:var(--red);
-  animation:blink 1.6s ease-in-out infinite;
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:24px;height:1px;background:var(--gold);opacity:.5;}
+.hero-title{
+  font-size:clamp(36px,7vw,86px);font-weight:900;line-height:1.12;
+  margin-bottom:18px;letter-spacing:-0.5px;
+  background:linear-gradient(110deg,var(--gold-glow),var(--gold),var(--gold-dark));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-
-@keyframes blink {
-  0%,100% { opacity:1; box-shadow:0 0 6px var(--red); }
-  50%      { opacity:.3; box-shadow:none; }
+.hero-desc{
+  font-size:clamp(15px,2.2vw,18px);color:var(--text-2);
+  max-width:480px;margin:0 auto 36px;line-height:1.9;font-weight:300;
 }
+.hero-stats{display:flex;justify-content:center;gap:clamp(24px,5vw,64px);flex-wrap:wrap;}
+.stat{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.stat-num{font-size:clamp(24px,3.5vw,36px);font-weight:800;color:var(--gold);line-height:1;font-family:'Inter',sans-serif;}
+.stat-lbl{font-size:10px;letter-spacing:2.5px;color:var(--text-3);text-transform:uppercase;font-family:'Inter',sans-serif;}
 
-/* ═══════════════════════════════
-   HOME PAGE
-═══════════════════════════════ */
-#homePage { position:relative; z-index:1; }
-
-/* ── HERO ── */
-.hero {
-  padding:clamp(48px,8vh,100px) 20px clamp(36px,6vh,70px);
-  text-align:center;
+/* ── Search ── */
+.search-wrap{position:relative;max-width:520px;margin:0 auto 14px;padding:0 20px;}
+.search-icon{
+  position:absolute;top:50%;transform:translateY(-50%);
+  right:38px;color:var(--text-3);font-size:16px;pointer-events:none;
 }
-
-.hero-eyebrow {
-  display:inline-flex; align-items:center; gap:8px;
-  font-size:10px; letter-spacing:4px;
-  text-transform:uppercase; color:var(--gold);
-  margin-bottom:24px; opacity:.85;
+html[lang="en"] .search-icon{right:auto;left:38px;}
+.search-box{
+  width:100%;height:50px;background:var(--bg-card);
+  border:1px solid var(--gold-border);border-radius:99px;
+  padding:0 48px 0 20px;color:var(--text);font-size:14px;
+  outline:none;transition:border-color .2s,box-shadow .2s;
 }
-.hero-eyebrow::before,.hero-eyebrow::after {
-  content:''; width:24px; height:1px;
-  background:var(--gold); opacity:.5;
+html[lang="en"] .search-box{padding:0 20px 0 48px;}
+.search-box::placeholder{color:var(--text-3);}
+.search-box:focus{border-color:var(--gold-hover);box-shadow:0 0 0 3px var(--gold-dim);}
+
+/* ── Filters ── */
+.filter-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 20px 32px;}
+.filter-tab{
+  padding:7px 18px;border-radius:99px;border:1px solid var(--gold-border);
+  font-size:12px;font-weight:600;letter-spacing:.5px;color:var(--text-2);
+  transition:all .2s;cursor:pointer;
 }
+.filter-tab:hover{border-color:var(--gold-hover);color:var(--gold);background:var(--gold-dim);}
+.filter-tab.active{border-color:var(--gold);color:#000;background:var(--gold);}
 
-.hero-title {
-  font-size:clamp(34px,7vw,82px);
-  font-weight:900; line-height:1.15;
-  color:var(--text); margin-bottom:20px;
-  letter-spacing:-0.5px;
-}
-
-.hero-title em {
-  font-style:normal;
-  background:linear-gradient(100deg,var(--gold-glow) 0%,var(--gold) 45%,var(--gold-dark) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-
-.hero-desc {
-  font-size:clamp(15px,2.5vw,19px);
-  color:var(--text-2); max-width:500px;
-  margin:0 auto 36px; line-height:1.9; font-weight:300;
-}
-
-.hero-stats { display:flex; justify-content:center; gap:clamp(20px,4vw,60px); flex-wrap:wrap; }
-
-.stat { display:flex; flex-direction:column; align-items:center; gap:4px; }
-.stat-num { font-size:clamp(22px,3vw,32px); font-weight:800; color:var(--gold); line-height:1; font-family:'Inter',sans-serif; }
-.stat-lbl { font-size:10px; letter-spacing:2.5px; color:var(--text-3); text-transform:uppercase; }
-
-/* ── SEARCH ── */
-.search-wrap {
-  position:relative; z-index:1;
-  max-width:500px; margin:0 auto 16px;
-  padding:0 20px;
-}
-
-.search-box {
-  width:100%; height:48px;
-  background:var(--bg-card);
-  border:1px solid var(--gold-border);
-  border-radius:99px;
-  padding:0 48px;
-  color:var(--text);
-  font-family:var(--font-main);
-  font-size:14px;
-  transition:border-color .2s, box-shadow .2s;
-}
-.search-box::placeholder { color:var(--text-3); }
-.search-box:focus { outline:none; border-color:var(--gold-hover); box-shadow:0 0 0 3px rgba(201,168,76,0.09); }
-
-.search-icon {
-  position:absolute; top:50%; transform:translateY(-50%);
-  right:38px; color:var(--text-3); font-size:16px; pointer-events:none;
-}
-html[lang="en"] .search-icon { right:auto; left:38px; }
-
-/* ── FILTER TABS ── */
-.filter-tabs {
-  position:relative; z-index:1;
-  display:flex; gap:8px; justify-content:center;
-  flex-wrap:wrap; padding:0 20px 36px;
-}
-
-.filter-tab {
-  padding:7px 18px; border-radius:99px;
-  border:1px solid var(--gold-border);
-  font-size:12px; font-weight:600; letter-spacing:.5px;
-  color:var(--text-2); transition:all .2s;
-}
-.filter-tab:hover { border-color:var(--gold-hover); color:var(--gold); background:var(--gold-dim); }
-.filter-tab.active { border-color:var(--gold); color:#000; background:var(--gold); }
-
-/* ── SECTION LABEL ── */
-.section-label {
-  display:flex; align-items:center; gap:12px;
-  max-width:1340px; margin:0 auto 20px;
+/* ── Section label ── */
+.section-label{
+  display:flex;align-items:center;gap:12px;
+  max-width:1340px;margin:0 auto 20px;
   padding:0 clamp(14px,3vw,36px);
 }
-.section-label-line { flex:1; height:1px; background:linear-gradient(to left,transparent,var(--gold-border)); }
-html[lang="en"] .section-label-line { background:linear-gradient(to right,transparent,var(--gold-border)); }
-.section-label-text { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--text-3); white-space:nowrap; font-family:'Inter',sans-serif; }
+.section-label-text{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);white-space:nowrap;font-family:'Inter',sans-serif;}
+.section-label-line{flex:1;height:1px;background:linear-gradient(to left,transparent,var(--gold-border));}
+html[lang="en"] .section-label-line{background:linear-gradient(to right,transparent,var(--gold-border));}
 
-/* ── GRID ── */
-.grid-wrap {
-  position:relative; z-index:1;
-  max-width:1340px; margin:0 auto;
-  padding:0 clamp(14px,3vw,36px) 80px;
+/* ── Row (recent/fav) ── */
+.row-section{max-width:1340px;margin:0 auto 28px;padding:0 clamp(14px,3vw,36px);}
+.row-title{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);
+  margin-bottom:12px;display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;
 }
+.row-title::after{content:'';flex:1;height:1px;background:var(--gold-border);}
+.row-scroll{
+  display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.row-scroll::-webkit-scrollbar{display:none;}
+.row-chip{
+  flex-shrink:0;display:flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:99px;
+  border:1px solid var(--gold-border);background:var(--bg-card);
+  cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;
+}
+.row-chip:hover{border-color:var(--gold-hover);background:var(--bg-card-h);}
+.row-chip img{width:24px;height:24px;border-radius:4px;object-fit:contain;}
+.row-chip span{font-size:12px;font-weight:600;color:var(--text-2);white-space:nowrap;}
 
-.grid {
+/* ── Grid ── */
+.grid-wrap{max-width:1340px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 80px;}
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr));
+  grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));
   gap:clamp(12px,2vw,20px);
 }
 
-/* ── CARD ── */
-.card {
-  position:relative;
-  background:var(--bg-card); border:1px solid var(--gold-border);
-  border-radius:var(--r-lg);
-  padding:clamp(18px,3vw,28px) 16px clamp(16px,2.5vw,22px);
-  text-align:center; cursor:pointer;
-  transition:border-color .25s, transform .25s cubic-bezier(.34,1.56,.64,1), background .25s, box-shadow .25s;
-  overflow:hidden;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
+/* ── Card ── */
+.card{
+  position:relative;background:var(--bg-card);border:1px solid var(--gold-border);
+  border-radius:18px;padding:clamp(18px,3vw,26px) 16px clamp(16px,2.5vw,20px);
+  text-align:center;cursor:pointer;
+  transition:border-color .25s,transform .25s cubic-bezier(.34,1.56,.64,1),background .25s,box-shadow .25s;
+  overflow:hidden;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  opacity:0;animation:cardIn .45s ease both;
 }
-
-.card-shine {
-  position:absolute; inset:0;
+.card-shine{
+  position:absolute;inset:0;
   background:radial-gradient(circle at 50% -10%,rgba(201,168,76,0.1),transparent 65%);
-  opacity:0; transition:opacity .3s;
+  opacity:0;transition:opacity .3s;pointer-events:none;
 }
-.card:hover .card-shine { opacity:1; }
-.card:hover {
-  border-color:rgba(201,168,76,0.5);
+.card:hover .card-shine{opacity:1;}
+.card:hover{
+  border-color:rgba(201,168,76,0.45);
   transform:translateY(-5px) scale(1.02);
   background:var(--bg-card-h);
   box-shadow:var(--shadow-gold),var(--shadow-card);
 }
-.card:active { transform:translateY(-2px) scale(1); transition-duration:.08s; }
+.card:active{transform:translateY(-2px) scale(1);transition-duration:.08s;}
 
-.card-badge {
-  position:absolute; top:10px; font-size:9px; font-weight:700;
-  letter-spacing:1.5px; padding:3px 8px; border-radius:99px;
-  text-transform:uppercase; font-family:'Inter',sans-serif;
+.badge-live{
+  position:absolute;top:10px;right:10px;
+  font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 8px;
+  border-radius:99px;text-transform:uppercase;font-family:'Inter',sans-serif;
+  background:var(--green-dim);border:1px solid rgba(61,204,107,0.28);color:var(--green);
 }
-.badge-live { right:10px; background:rgba(61,204,107,0.13); border:1px solid rgba(61,204,107,0.3); color:var(--green); }
-html[lang="en"] .badge-live { right:auto; left:10px; }
-.badge-hd   { left:10px; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); color:var(--gold); }
-html[lang="en"] .badge-hd { left:auto; right:10px; }
-
-.card-logo-wrap {
-  width:clamp(70px,12vw,96px); height:clamp(70px,12vw,96px);
-  margin:0 auto 14px;
-  background:rgba(255,255,255,0.04);
-  border-radius:var(--r-md);
-  border:1px solid rgba(255,255,255,0.06);
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden; transition:transform .3s;
+html[lang="en"] .badge-live{right:auto;left:10px;}
+.badge-hd{
+  position:absolute;top:10px;left:10px;
+  font-size:9px;font-weight:700;letter-spacing:1.5px;padding:3px 8px;
+  border-radius:99px;text-transform:uppercase;font-family:'Inter',sans-serif;
+  background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);
 }
-.card:hover .card-logo-wrap { transform:scale(1.08); }
-.card-logo-wrap img { width:75%; height:75%; object-fit:contain; }
+html[lang="en"] .badge-hd{left:auto;right:10px;}
 
-.card-name {
-  font-size:clamp(13px,2.5vw,15px); font-weight:700;
-  color:var(--text); margin-bottom:6px;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+.fav-toggle{
+  position:absolute;top:8px;left:50%;transform:translateX(-50%);
+  opacity:0;font-size:16px;color:var(--text-3);
+  transition:opacity .2s,color .2s;background:none;border:none;cursor:pointer;padding:4px;
 }
+.fav-toggle.is-fav{color:var(--red);opacity:1;}
+.card:hover .fav-toggle{opacity:1;}
 
-.card-meta { display:flex; align-items:center; justify-content:center; gap:6px; font-size:11px; color:var(--text-3); }
-
-.pulse-dot {
-  width:6px; height:6px; border-radius:50%;
-  background:var(--green);
-  animation:pdot 2.2s ease-in-out infinite;
-  flex-shrink:0;
+.card-logo-wrap{
+  width:clamp(72px,12vw,96px);height:clamp(72px,12vw,96px);
+  margin:0 auto 14px;background:rgba(255,255,255,0.04);
+  border-radius:14px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;transition:transform .3s;
 }
-@keyframes pdot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.2;transform:scale(.7)} }
+.card:hover .card-logo-wrap{transform:scale(1.08);}
+.card-logo-wrap img{width:75%;height:75%;object-fit:contain;}
+.card-name{
+  font-size:clamp(13px,2vw,15px);font-weight:700;color:var(--text);margin-bottom:6px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.card-meta{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11px;color:var(--text-3);}
+.pulse-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--green);
+  animation:pdot 2.2s ease-in-out infinite;flex-shrink:0;
+}
+.empty-state{display:none;grid-column:1/-1;padding:60px 20px;text-align:center;}
+.empty-icon{font-size:48px;margin-bottom:14px;}
+.empty-text{color:var(--text-2);font-size:16px;}
 
-.empty-state { display:none; grid-column:1/-1; padding:60px 20px; text-align:center; }
-.empty-icon { font-size:48px; margin-bottom:16px; }
-.empty-text { color:var(--text-2); font-size:16px; }
-
-/* ═══════════════════════════════
-   PLAYER PAGE
-═══════════════════════════════ */
-#playerPage { display:none; position:relative; z-index:1; min-height:100vh; min-height:100dvh; }
-
-.player-header {
-  position:sticky; top:0; z-index:50;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:14px clamp(16px,4vw,40px);
-  padding-top:calc(14px + var(--safe-top));
+/* ═══════════════ PLAYER ═══════════════ */
+#playerPage{display:none;position:relative;z-index:1;min-height:100vh;}
+.player-topbar{
+  position:sticky;top:64px;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px clamp(14px,4vw,40px);
   background:var(--bg-glass);
   backdrop-filter:blur(24px) saturate(1.4);
   -webkit-backdrop-filter:blur(24px) saturate(1.4);
   border-bottom:1px solid var(--gold-border);
   flex-wrap:wrap;
 }
+.back-btn{
+  display:flex;align-items:center;gap:7px;
+  padding:8px 16px;border-radius:10px;border:1px solid var(--gold-border);
+  color:var(--text-2);font-size:13px;font-weight:500;
+  transition:all .2s;flex-shrink:0;white-space:nowrap;
+}
+.back-btn:hover{border-color:var(--gold-hover);color:var(--gold);background:var(--gold-dim);}
+.ch-info{text-align:center;flex:1;min-width:100px;}
+.ch-name{font-size:clamp(14px,2.5vw,19px);font-weight:700;color:var(--text);margin-bottom:2px;}
+.ch-status{
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--green);font-family:'Inter',sans-serif;
+}
+.ch-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pdot 2s ease-in-out infinite;}
+.src-bar{display:flex;align-items:center;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;}
+html[lang="en"] .src-bar{justify-content:flex-start;}
+.src-btn{
+  padding:6px 12px;border-radius:8px;border:1px solid var(--gold-border);
+  font-size:11px;font-weight:600;color:var(--text-2);
+  transition:all .2s;font-family:'Inter',sans-serif;cursor:pointer;
+}
+.src-btn:hover{border-color:var(--gold-hover);color:var(--gold);background:var(--gold-dim);}
+.src-btn.active{border-color:var(--gold);color:#000;background:var(--gold);}
+.icon-btn{
+  width:34px;height:34px;border-radius:8px;border:1px solid var(--gold-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:var(--text-2);transition:all .2s;cursor:pointer;
+}
+.icon-btn:hover{border-color:var(--gold-hover);background:var(--gold-dim);}
+.icon-btn.active{color:var(--red);border-color:rgba(232,64,64,0.4);background:rgba(232,64,64,0.1);}
 
-.back-btn {
-  display:flex; align-items:center; gap:8px;
-  padding:9px 16px; border-radius:var(--r-sm);
+/* Share dropdown */
+.share-wrap{position:relative;}
+.share-menu{
+  position:absolute;top:calc(100% + 8px);
+  background:var(--bg-2);border:1px solid var(--gold-border);
+  border-radius:12px;padding:6px;min-width:160px;
+  box-shadow:var(--shadow-card);z-index:300;
+  animation:slideIn .2s ease both;
+}
+html[dir="rtl"] .share-menu{left:0;}
+html[dir="ltr"] .share-menu{right:0;}
+.share-item{
+  display:flex;align-items:center;gap:8px;width:100%;
+  padding:8px 12px;border-radius:8px;color:var(--text-2);
+  font-size:12px;font-weight:500;background:none;cursor:pointer;
+  transition:background .2s;text-decoration:none;
+}
+.share-item:hover{background:var(--gold-dim);}
+
+/* Player body */
+.player-body{max-width:940px;margin:0 auto;padding:clamp(16px,3vw,36px) clamp(14px,4vw,36px) 0;}
+.video-frame{
+  position:relative;border-radius:22px;overflow:hidden;background:#000;
   border:1px solid var(--gold-border);
-  color:var(--text-2); font-size:13px; font-weight:500;
-  transition:all .2s; white-space:nowrap; flex-shrink:0;
+  box-shadow:var(--shadow-gold),var(--shadow-deep);aspect-ratio:16/9;
 }
-.back-btn:hover { border-color:var(--gold-hover); color:var(--gold); background:var(--gold-dim); }
-
-.ch-info { text-align:center; flex:1; min-width:100px; }
-.ch-name { font-size:clamp(15px,2.5vw,20px); font-weight:700; color:var(--text); margin-bottom:2px; }
-.ch-status {
-  display:flex; align-items:center; justify-content:center; gap:5px;
-  font-size:10px; letter-spacing:2px; text-transform:uppercase;
-  color:var(--green); font-family:'Inter',sans-serif;
+.video-frame video{width:100%;height:100%;object-fit:contain;display:block;}
+.watermark{
+  position:absolute;bottom:52px;left:16px;
+  font-family:'Cinzel Decorative',serif;font-size:10px;
+  color:rgba(201,168,76,0.4);letter-spacing:2px;z-index:5;
+  pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,0.6);
 }
-.ch-dot { width:5px; height:5px; border-radius:50%; background:var(--green); animation:pdot 2s ease-in-out infinite; }
+html[lang="en"] .watermark{left:auto;right:16px;}
 
-.source-bar { display:flex; align-items:center; gap:6px; flex-shrink:0; flex-wrap:wrap; justify-content:flex-end; }
-html[lang="en"] .source-bar { justify-content:flex-start; }
-
-.src-btn {
-  padding:6px 12px; border-radius:var(--r-sm);
-  border:1px solid var(--gold-border);
-  font-size:11px; font-weight:600; letter-spacing:.5px;
-  color:var(--text-2); transition:all .2s;
-  font-family:'Inter',sans-serif;
+.loading-overlay{
+  position:absolute;inset:0;background:rgba(6,8,16,0.9);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  z-index:20;backdrop-filter:blur(8px);transition:opacity .4s,visibility .4s;
 }
-.src-btn:hover { border-color:var(--gold-hover); color:var(--gold); background:var(--gold-dim); }
-.src-btn.active { border-color:var(--gold); color:#000; background:var(--gold); }
-
-/* ── PLAYER BODY ── */
-.player-body {
-  max-width:920px; margin:0 auto;
-  padding:clamp(16px,3vw,36px) clamp(14px,4vw,36px) 0;
+.loading-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+.spinner{
+  width:50px;height:50px;border:2px solid rgba(201,168,76,0.12);
+  border-top-color:var(--gold);border-radius:50%;animation:spin .75s linear infinite;
 }
+.loading-label{font-size:11px;letter-spacing:3px;color:var(--text-2);text-transform:uppercase;font-family:'Inter',sans-serif;}
+.loading-bar-wrap{width:120px;height:2px;background:rgba(255,255,255,0.05);border-radius:1px;overflow:hidden;}
+.loading-bar{height:100%;background:var(--gold);animation:indeterminate 1.6s ease-in-out infinite;}
 
-.video-frame {
-  position:relative; border-radius:var(--r-xl);
-  overflow:hidden; background:#000;
-  border:1px solid var(--gold-border);
-  box-shadow:var(--shadow-gold),var(--shadow-deep);
-  aspect-ratio:16/9;
+.error-overlay{
+  position:absolute;inset:0;background:rgba(6,8,16,0.95);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;z-index:20;padding:30px;text-align:center;
 }
-
-.video-frame video { width:100%; height:100%; object-fit:contain; display:block; }
-
-.watermark {
-  position:absolute; bottom:52px; left:16px;
-  font-family:'Cinzel Decorative',serif;
-  font-size:10px; color:rgba(201,168,76,0.42);
-  letter-spacing:2px; z-index:5; pointer-events:none;
-  text-shadow:0 1px 4px rgba(0,0,0,0.6);
+.error-overlay.visible{display:flex;}
+.error-icon{font-size:44px;margin-bottom:4px;}
+.error-title{font-size:17px;font-weight:700;color:var(--text);}
+.error-msg{font-size:13px;color:var(--text-2);line-height:1.7;max-width:280px;}
+.retry-btn{
+  margin-top:6px;padding:11px 28px;border-radius:14px;
+  border:1px solid var(--gold);background:var(--gold-dim);color:var(--gold);
+  font-size:13px;font-weight:600;cursor:pointer;transition:background .2s;
 }
-html[lang="en"] .watermark { left:auto; right:16px; }
+.retry-btn:hover{background:rgba(201,168,76,0.2);}
 
-/* Loading */
-.loading-overlay {
-  position:absolute; inset:0;
-  background:rgba(6,8,16,0.88);
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:16px;
-  z-index:20; backdrop-filter:blur(8px);
-  transition:opacity .4s, visibility .4s;
+/* Controls bar */
+.controls-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:14px 4px;flex-wrap:wrap;
 }
-.loading-overlay.hidden { opacity:0; visibility:hidden; }
-
-.spinner-ring {
-  width:50px; height:50px;
-  border:2px solid rgba(201,168,76,0.12);
-  border-top-color:var(--gold);
-  border-radius:50%;
-  animation:spin .75s linear infinite;
+.quality-wrap{display:flex;align-items:center;gap:10px;}
+.quality-label{font-size:11px;letter-spacing:2px;color:var(--text-3);text-transform:uppercase;white-space:nowrap;font-family:'Inter',sans-serif;}
+.quality-btns{display:flex;gap:5px;flex-wrap:wrap;}
+.q-btn{
+  padding:5px 11px;border-radius:8px;border:1px solid var(--gold-border);
+  font-size:11px;font-weight:600;color:var(--text-2);
+  transition:all .2s;cursor:pointer;font-family:'Inter',sans-serif;
 }
-@keyframes spin { to { transform:rotate(360deg); } }
-
-.loading-label { font-size:11px; letter-spacing:3px; color:var(--text-2); text-transform:uppercase; font-family:'Inter',sans-serif; }
-
-.loading-bar-wrap { width:120px; height:2px; background:rgba(255,255,255,0.05); border-radius:1px; overflow:hidden; }
-.loading-bar { height:100%; width:0; background:var(--gold); animation:indeterminate 1.6s ease-in-out infinite; }
-@keyframes indeterminate {
-  0%   { width:0%;  margin-right:100%; }
-  50%  { width:60%; margin-right:30%; }
-  100% { width:0%;  margin-right:100%; }
+.q-btn:hover{border-color:var(--gold-hover);color:var(--gold);background:var(--gold-dim);}
+.q-btn.active{border-color:var(--gold);color:#000;background:var(--gold);}
+.stream-info{
+  display:flex;align-items:center;gap:14px;
+  font-size:11px;color:var(--text-3);letter-spacing:.5px;
+  font-family:'Inter',sans-serif;flex-wrap:wrap;
 }
 
-/* Error */
-.error-overlay {
-  position:absolute; inset:0;
-  background:rgba(6,8,16,0.94);
-  display:none; flex-direction:column;
-  align-items:center; justify-content:center;
-  gap:12px; z-index:20; padding:30px; text-align:center;
+/* Suggestions */
+.suggestions-section{
+  max-width:940px;margin:0 auto;
+  padding:clamp(12px,2vw,24px) clamp(14px,4vw,36px) 60px;
 }
-.error-overlay.visible { display:flex; }
-.error-icon { font-size:44px; margin-bottom:4px; }
-.error-title { font-size:17px; font-weight:700; color:var(--text); }
-.error-msg { font-size:13px; color:var(--text-2); line-height:1.7; max-width:280px; }
-.retry-btn {
-  margin-top:6px; padding:11px 28px;
-  border-radius:var(--r-md); border:1px solid var(--gold);
-  background:var(--gold-dim); color:var(--gold);
-  font-size:13px; font-weight:600;
-  transition:background .2s, box-shadow .2s;
+.suggestions-title{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;
 }
-.retry-btn:hover { background:rgba(201,168,76,0.2); box-shadow:var(--shadow-gold); }
+.suggestions-title::after{content:'';flex:1;height:1px;background:var(--gold-border);}
+.suggestions-scroll{
+  display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.suggestions-scroll::-webkit-scrollbar{display:none;}
+.sug-chip{
+  flex-shrink:0;display:flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:99px;
+  border:1px solid var(--gold-border);background:var(--bg-card);
+  cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;
+}
+.sug-chip:hover{border-color:var(--gold-hover);background:var(--bg-card-h);}
+.sug-chip:active{transform:scale(.96);}
+.sug-chip img{width:22px;height:22px;border-radius:4px;object-fit:contain;}
+.sug-chip span{font-size:12px;font-weight:600;color:var(--text-2);white-space:nowrap;}
 
-/* ── CONTROLS BAR ── */
-.player-controls-bar {
-  display:flex; align-items:center; justify-content:space-between;
-  gap:12px; padding:14px 4px; flex-wrap:wrap;
+/* ═══════════════ FAVORITES PAGE ═══════════════ */
+#favPage{display:none;position:relative;z-index:1;}
+.fav-page-inner{max-width:1340px;margin:0 auto;padding:32px clamp(14px,3vw,36px) 80px;}
+.page-header{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.page-title{font-size:clamp(18px,3vw,26px);font-weight:800;color:var(--text);}
+.fav-empty{text-align:center;padding:60px 20px;color:var(--text-2);}
+.fav-empty-icon{font-size:48px;margin-bottom:14px;}
+.sub-section-title{
+  font-size:14px;font-weight:700;color:var(--text-2);
+  margin-bottom:16px;display:flex;align-items:center;gap:10px;
 }
+.sub-section-title::after{content:'';flex:1;height:1px;background:var(--gold-border);}
 
-.quality-selector-wrap { display:flex; align-items:center; gap:10px; }
-.quality-label { font-size:11px; letter-spacing:2px; color:var(--text-3); text-transform:uppercase; white-space:nowrap; font-family:'Inter',sans-serif; }
+/* ── Plyr gold ── */
+.plyr{border-radius:0;}
+.plyr--video .plyr__control--overlaid{background:var(--gold)!important;color:#000!important;}
+.plyr--video .plyr__control--overlaid:hover{background:var(--gold-light)!important;}
+.plyr--full-ui input[type=range]{color:var(--gold)!important;}
+.plyr__control.plyr__tab-focus,.plyr__control:hover,.plyr__control[aria-expanded=true]{background:var(--gold)!important;color:#000!important;}
+.plyr--video .plyr__controls{background:linear-gradient(to top,rgba(0,0,0,0.8),transparent)!important;}
+.plyr__menu__container{background:var(--bg-2)!important;border:1px solid var(--gold-border)!important;border-radius:12px!important;}
+.plyr__menu__container .plyr__control,
+.plyr__menu__container label.plyr__control{color:var(--text)!important;}
+.plyr__badge{background:var(--gold)!important;color:#000!important;}
+.plyr__progress__buffered{color:rgba(201,168,76,0.2)!important;}
 
-.quality-btns { display:flex; gap:5px; flex-wrap:wrap; }
-.quality-btn {
-  padding:5px 11px; border-radius:var(--r-sm);
-  border:1px solid var(--gold-border);
-  font-size:11px; font-weight:600; color:var(--text-2);
-  transition:all .2s; letter-spacing:.3px;
-  font-family:'Inter',sans-serif;
+/* ── Footer ── */
+footer{
+  position:relative;z-index:1;
+  padding:24px 20px;border-top:1px solid var(--gold-border);text-align:center;
 }
-.quality-btn:hover { border-color:var(--gold-hover); color:var(--gold); background:var(--gold-dim); }
-.quality-btn.active { border-color:var(--gold); color:#000; background:var(--gold); }
-
-.stream-info { display:flex; align-items:center; gap:14px; font-size:11px; color:var(--text-3); letter-spacing:.5px; font-family:'Inter',sans-serif; flex-wrap:wrap; }
-.info-chip { display:flex; align-items:center; gap:5px; }
-
-/* ── SUGGESTIONS ── */
-.suggestions-section {
-  max-width:920px; margin:0 auto;
-  padding:clamp(16px,3vw,32px) clamp(14px,4vw,36px) 60px;
+.footer-inner{
+  display:flex;align-items:center;justify-content:center;
+  gap:18px;flex-wrap:wrap;font-size:11px;letter-spacing:1.5px;
+  color:var(--text-3);text-transform:uppercase;font-family:'Inter',sans-serif;
 }
+.footer-brand{color:var(--gold);font-weight:700;}
+.footer-sep{width:3px;height:3px;border-radius:50%;background:var(--gold-border);}
 
-.suggestions-title {
-  font-size:10px; letter-spacing:3px;
-  text-transform:uppercase; color:var(--text-3);
-  margin-bottom:16px;
-  display:flex; align-items:center; gap:10px;
-  font-family:'Inter',sans-serif;
+/* ── Toast ── */
+.toast{
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:var(--bg-2);border:1px solid var(--gold-border);
+  border-radius:99px;padding:10px 22px;
+  font-size:13px;color:var(--text);z-index:9999;
+  box-shadow:var(--shadow-card);white-space:nowrap;
+  pointer-events:none;opacity:0;
+  transition:opacity .3s,transform .35s cubic-bezier(.34,1.56,.64,1);
 }
-.suggestions-title::after { content:''; flex:1; height:1px; background:var(--gold-border); }
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-.suggestions-scroll {
-  display:flex; gap:10px;
-  overflow-x:auto; padding-bottom:8px;
-  scrollbar-width:none; -ms-overflow-style:none;
+/* ── Responsive ── */
+@media(max-width:600px){
+  .logo-sub{display:none;}
+  .player-topbar{gap:8px;}
+  .ch-info{flex:1 1 100%;order:-1;}
+  .controls-bar{flex-direction:column;align-items:flex-start;gap:8px;}
 }
-.suggestions-scroll::-webkit-scrollbar { display:none; }
-
-.suggestion-chip {
-  flex-shrink:0; display:flex; align-items:center; gap:8px;
-  padding:8px 14px; border-radius:99px;
-  border:1px solid var(--gold-border); background:var(--bg-card);
-  cursor:pointer; transition:all .2s;
-  -webkit-tap-highlight-color:transparent;
-}
-.suggestion-chip:hover { border-color:var(--gold-hover); background:var(--bg-card-h); }
-.suggestion-chip:active { transform:scale(.96); }
-.suggestion-chip img { width:22px; height:22px; border-radius:4px; object-fit:contain; }
-.suggestion-chip span { font-size:12px; font-weight:600; color:var(--text-2); white-space:nowrap; }
-
-/* ═══════════════════════════════
-   PLYR THEME
-═══════════════════════════════ */
-.plyr { border-radius:0; }
-.plyr--video .plyr__control--overlaid { background:var(--gold) !important; color:#000 !important; }
-.plyr--video .plyr__control--overlaid:hover { background:var(--gold-light) !important; }
-.plyr--full-ui input[type=range] { color:var(--gold) !important; }
-.plyr__control.plyr__tab-focus,.plyr__control:hover,.plyr__control[aria-expanded=true] { background:var(--gold) !important; color:#000 !important; }
-.plyr--video .plyr__controls { background:linear-gradient(to top,rgba(0,0,0,0.75),transparent) !important; }
-.plyr__menu__container { background:var(--bg-2) !important; border:1px solid var(--gold-border) !important; border-radius:var(--r-md) !important; }
-.plyr__menu__container .plyr__control { color:var(--text) !important; }
-.plyr__menu__container label.plyr__control { color:var(--text) !important; }
-.plyr__badge { background:var(--gold) !important; color:#000 !important; }
-.plyr__progress__buffered { color:rgba(201,168,76,0.22) !important; }
-
-/* ═══════════════════════════════
-   FOOTER
-═══════════════════════════════ */
-footer {
-  position:relative; z-index:1;
-  padding:24px 20px;
-  padding-bottom:calc(24px + var(--safe-bot));
-  border-top:1px solid var(--gold-border);
-  text-align:center;
-}
-.footer-inner {
-  display:flex; align-items:center; justify-content:center;
-  gap:18px; flex-wrap:wrap;
-  font-size:11px; letter-spacing:1.5px;
-  color:var(--text-3); text-transform:uppercase;
-  font-family:'Inter',sans-serif;
-}
-.footer-sep { width:3px; height:3px; border-radius:50%; background:var(--gold-border); }
-
-/* ── TOAST ── */
-.toast {
-  position:fixed;
-  bottom:calc(20px + var(--safe-bot)); left:50%;
-  transform:translateX(-50%) translateY(80px);
-  background:var(--bg-2); border:1px solid var(--gold-border);
-  border-radius:99px; padding:10px 22px;
-  font-size:13px; color:var(--text); z-index:999;
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .35s;
-  opacity:0; white-space:nowrap;
-  box-shadow:var(--shadow-card); pointer-events:none;
-}
-.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
-
-/* ── ANIMATIONS ── */
-@keyframes card-in {
-  from { opacity:0; transform:translateY(18px) scale(.97); }
-  to   { opacity:1; transform:translateY(0) scale(1); }
-}
-.card { opacity:0; animation:card-in .45s ease both; }
-
-/* ── RESPONSIVE ── */
-@media(max-width:600px) {
-  .logo-sub { display:none; }
-  .search-wrap { padding:0 14px; }
-  .player-header { gap:8px; }
-  .ch-info { flex:1 1 100%; order:-1; }
-  .player-controls-bar { flex-direction:column; align-items:flex-start; gap:8px; }
-  .stream-info { flex-wrap:wrap; gap:8px; }
-}
-@media(min-width:1024px) {
-  .grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); }
-}
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
 }
 </style>
 </head>
@@ -627,69 +536,69 @@ footer {
 <body>
 <div class="bg-ambient" aria-hidden="true"></div>
 
-<!-- HEADER -->
+<!-- ══════ HEADER ══════ -->
 <header>
-  <a class="logo" href="#" onclick="showHome(event)">
+  <button class="logo" onclick="goHome()" aria-label="Ishaq TV Home">
     <div class="logo-icon">📺</div>
-    <div class="logo-text">
+    <div>
       <span class="logo-main">ISHAQ TV</span>
-      <span class="logo-sub" data-fa="پخش زنده ۲۴ ساعته" data-en="24/7 Live Broadcast">پخش زنده ۲۴ ساعته</span>
+      <span class="logo-sub" id="logoSub">پخش زنده ۲۴ ساعته</span>
     </div>
-  </a>
+  </button>
   <div class="header-right">
+    <button class="fav-btn" onclick="showFavPage()" id="favBtn" title="علاقه‌مندی‌ها">
+      ♥ <span class="fav-count" id="favCount">0</span>
+    </button>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="تغییر تم">☀️</button>
     <div class="lang-toggle">
       <button class="lang-btn active" id="btnFa" onclick="setLang('fa')">FA</button>
       <button class="lang-btn"        id="btnEn" onclick="setLang('en')">EN</button>
     </div>
-    <div class="live-pill">
-      <div class="live-dot"></div>
-      LIVE
-    </div>
+    <div class="live-pill"><div class="live-dot"></div>LIVE</div>
   </div>
 </header>
 
-<!-- HOME -->
+<!-- ══════ HOME ══════ -->
 <div id="homePage">
   <section class="hero">
-    <div class="hero-eyebrow" data-fa="پخش زنده ۲۴ ساعته" data-en="24/7 Live Streaming">پخش زنده ۲۴ ساعته</div>
-    <h1 class="hero-title">
-      <span data-fa="تماشای " data-en="Watch ">تماشای </span><em data-fa="زنده" data-en="Live">زنده</em><br>
-      <span data-fa="تلویزیون" data-en="Television">تلویزیون</span>
-    </h1>
-    <p class="hero-desc" data-fa="بهترین شبکه‌های ایرانی و افغانی را به صورت رایگان با کیفیت بالا تماشا کنید" data-en="Watch the best Iranian and Afghan TV channels for free in high quality — anytime, anywhere.">بهترین شبکه‌های ایرانی و افغانی را به صورت رایگان با کیفیت بالا تماشا کنید</p>
+    <div class="hero-eyebrow" id="heroEyebrow">پخش زنده ۲۴ ساعته</div>
+    <h1 class="hero-title" id="heroTitle">تماشای زنده تلویزیون</h1>
+    <p class="hero-desc" id="heroDesc">بهترین شبکه‌های ایرانی و افغانی را به صورت رایگان با کیفیت HD تماشا کنید</p>
     <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num" id="chCount">21</span>
-        <span class="stat-lbl" data-fa="شبکه" data-en="Channels">شبکه</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">HD</span>
-        <span class="stat-lbl" data-fa="کیفیت" data-en="Quality">کیفیت</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">24/7</span>
-        <span class="stat-lbl" data-fa="زنده" data-en="Live">زنده</span>
-      </div>
+      <div class="stat"><span class="stat-num" id="chCount">0</span><span class="stat-lbl" id="statChLbl">شبکه</span></div>
+      <div class="stat"><span class="stat-num">HD</span><span class="stat-lbl" id="statQlbl">کیفیت</span></div>
+      <div class="stat"><span class="stat-num">24/7</span><span class="stat-lbl" id="statLiveLbl">زنده</span></div>
     </div>
   </section>
 
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input class="search-box" type="text" id="searchBox"
-      placeholder="جستجوی شبکه..." autocomplete="off"
-      data-ph-fa="جستجوی شبکه..." data-ph-en="Search channels...">
+    <input class="search-box" type="text" id="searchBox" autocomplete="off"
+      placeholder="جستجوی شبکه، کشور، دسته‌بندی...">
   </div>
 
   <div class="filter-tabs" id="filterTabs">
-    <button class="filter-tab active" data-filter="all"   data-fa="همه"        data-en="All">همه</button>
-    <button class="filter-tab"        data-filter="sport" data-fa="ورزشی"      data-en="Sports">ورزشی</button>
-    <button class="filter-tab"        data-filter="news"  data-fa="خبری"       data-en="News">خبری</button>
-    <button class="filter-tab"        data-filter="afghan" data-fa="افغانی"    data-en="Afghan">افغانی</button>
-    <button class="filter-tab"        data-filter="iran"  data-fa="ایرانی"     data-en="Iranian">ایرانی</button>
+    <button class="filter-tab active" data-filter="all">همه</button>
+    <button class="filter-tab" data-filter="sport">ورزشی</button>
+    <button class="filter-tab" data-filter="news">خبری</button>
+    <button class="filter-tab" data-filter="afghan">افغانی</button>
+    <button class="filter-tab" data-filter="iran">ایرانی</button>
+  </div>
+
+  <!-- Recent -->
+  <div class="row-section" id="recentRow" style="display:none;">
+    <div class="row-title" id="recentTitle">اخیراً تماشا شده</div>
+    <div class="row-scroll" id="recentScroll"></div>
+  </div>
+
+  <!-- Favorites strip -->
+  <div class="row-section" id="favRow" style="display:none;">
+    <div class="row-title" id="favRowTitle">علاقه‌مندی‌ها</div>
+    <div class="row-scroll" id="favScroll"></div>
   </div>
 
   <div class="section-label">
-    <span class="section-label-text" data-fa="شبکه‌ها" data-en="Channels">شبکه‌ها</span>
+    <span class="section-label-text" id="sectionLbl">شبکه‌ها</span>
     <div class="section-label-line"></div>
   </div>
 
@@ -697,74 +606,82 @@ footer {
     <div class="grid" id="channelGrid">
       <div class="empty-state" id="emptyState">
         <div class="empty-icon">📡</div>
-        <div class="empty-text" data-fa="شبکه‌ای یافت نشد" data-en="No channels found">شبکه‌ای یافت نشد</div>
+        <div class="empty-text" id="emptyText">شبکه‌ای یافت نشد</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PLAYER -->
+<!-- ══════ PLAYER ══════ -->
 <div id="playerPage">
-  <div class="player-header">
+  <div class="player-topbar">
     <button class="back-btn" onclick="goBack()">
       <span id="backArrow">→</span>
-      <span data-fa="بازگشت" data-en="Back">بازگشت</span>
+      <span id="backLbl">بازگشت</span>
     </button>
     <div class="ch-info">
       <div class="ch-name" id="channelTitle">—</div>
-      <div class="ch-status">
-        <div class="ch-dot"></div>
-        <span data-fa="پخش زنده" data-en="Live Broadcast">پخش زنده</span>
-      </div>
+      <div class="ch-status"><div class="ch-dot"></div><span id="broadcastLbl">پخش زنده</span></div>
     </div>
-    <div class="source-bar" id="sourceBar"></div>
+    <div class="src-bar" id="sourceBar"></div>
   </div>
 
   <div class="player-body">
     <div class="video-frame" id="videoFrame">
       <video id="video" playsinline></video>
-
       <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner-ring"></div>
-        <div class="loading-label" data-fa="در حال بارگذاری" data-en="Loading...">در حال بارگذاری</div>
+        <div class="spinner"></div>
+        <div class="loading-label" id="loadingLbl">در حال بارگذاری...</div>
         <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
       </div>
-
       <div class="error-overlay" id="errorOverlay">
         <div class="error-icon">📡</div>
-        <div class="error-title" data-fa="اتصال برقرار نشد" data-en="Connection Failed">اتصال برقرار نشد</div>
+        <div class="error-title" id="errTitle">اتصال برقرار نشد</div>
         <div class="error-msg" id="errorMsg"></div>
-        <button class="retry-btn" onclick="retryAll()" data-fa="تلاش مجدد" data-en="Retry">تلاش مجدد</button>
+        <button class="retry-btn" onclick="retryAll()" id="retryBtn">تلاش مجدد</button>
       </div>
-
       <div class="watermark">ISHAQ TV</div>
     </div>
 
-    <div class="player-controls-bar">
-      <div class="quality-selector-wrap">
-        <span class="quality-label" data-fa="کیفیت" data-en="Quality">کیفیت</span>
+    <div class="controls-bar">
+      <div class="quality-wrap">
+        <span class="quality-label" id="qualityLbl">کیفیت</span>
         <div class="quality-btns" id="qualityBtns"></div>
       </div>
       <div class="stream-info">
-        <div class="info-chip">📶 <span id="infoType">HLS</span></div>
-        <div class="info-chip">🔗 <span id="infoLink">Link 1</span></div>
+        <span>📶 <span id="infoType">HLS</span></span>
+        <span>🔗 <span id="infoLink">لینک ۱</span></span>
       </div>
     </div>
   </div>
 
   <div class="suggestions-section">
-    <div class="suggestions-title" data-fa="شبکه‌های دیگر" data-en="Other Channels">شبکه‌های دیگر</div>
+    <div class="suggestions-title" id="suggestionsTitle">شبکه‌های دیگر</div>
     <div class="suggestions-scroll" id="suggestionsScroll"></div>
+  </div>
+</div>
+
+<!-- ══════ FAVORITES PAGE ══════ -->
+<div id="favPage">
+  <div class="fav-page-inner">
+    <div class="page-header">
+      <button class="back-btn" onclick="goHome()">
+        <span id="backArrow2">→</span> <span id="backLbl2">بازگشت</span>
+      </button>
+      <div class="page-title" id="favPageTitle">♥ علاقه‌مندی‌ها</div>
+    </div>
+    <div id="favGrid"></div>
+    <div id="recentSection" style="margin-top:40px;"></div>
   </div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <span>Ishaq TV</span>
+    <span class="footer-brand">Ishaq TV</span>
     <div class="footer-sep"></div>
-    <span data-fa="پخش زنده ایرانی و افغانی" data-en="Iranian & Afghan Live TV">پخش زنده ایرانی و افغانی</span>
+    <span id="footer1">پخش زنده ایرانی و افغانی</span>
     <div class="footer-sep"></div>
-    <span data-fa="رایگان و بدون تبلیغ" data-en="Free & Ad-Free">رایگان و بدون تبلیغ</span>
+    <span id="footer2">رایگان و بدون تبلیغ</span>
   </div>
 </footer>
 
@@ -773,259 +690,466 @@ footer {
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
-/* ══════════════════════════════
-   LANGUAGE SYSTEM
-══════════════════════════════ */
-let currentLang = localStorage.getItem('ishaqtv-lang') || 'fa';
+/* ══════════════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════════════ */
+const CHANNELS = [
+  {id:"tolo",name:"طلوع / Tolo",nameEn:"Tolo TV",category:["afghan"],country:"AF",tags:["entertainment","afghan"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8"]},
+  {id:"solh",name:"صلح اسپورت",nameEn:"Solh Sport",category:["afghan","sport"],country:"AF",tags:["sport","afghan"],
+   img:"https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/solh/playlist.m3u8"]},
+  {id:"irib3",name:"شبکه سه",nameEn:"IRIB 3",category:["iran"],country:"IR",tags:["iran","entertainment"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg",
+   links:["https://e.eshaqtv1.workers.dev/irib3/tv3test.m3u8","https://live.eshaqtv1.workers.dev/tv3/index.m3u8","https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8","https://i.eshaqtv1.workers.dev/irrb3/index.m3u8","https://i.eshaqtv1.workers.dev/irib3/index.m3u8"]},
+  {id:"varzesh",name:"ورزش",nameEn:"Varzesh TV",category:["iran","sport"],country:"IR",tags:["sport","iran"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg",
+   links:["https://i.eshaqtv1.workers.dev/varzesh/index.m3u8","https://live.eshaqtv1.workers.dev/varzesh/index.m3u8","https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8"]},
+  {id:"persiana",name:"Persiana Sport",nameEn:"Persiana Sport",category:["sport"],country:"IR",tags:["sport","premium"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg",
+   links:["https://e.eshaqtv1.workers.dev/persiana/persiana.m3u8","https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8","https://i.eshaqtv1.workers.dev/sport/index.m3u8"]},
+  {id:"persiana2",name:"Persiana Sport 2",nameEn:"Persiana Sport 2",category:["sport"],country:"IR",tags:["sport","premium"],
+   img:"https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8"]},
+  {id:"persiana3",name:"Persiana Sport 3",nameEn:"Persiana Sport 3",category:["sport"],country:"IR",tags:["sport","premium"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana3/playlist.m3u8"]},
+  {id:"persiana4",name:"Persiana Sport 4",nameEn:"Persiana Sport 4",category:["sport"],country:"IR",tags:["sport","premium"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/persiana4/playlist.m3u8"]},
+  {id:"sportsaf",name:"Sports AF",nameEn:"Sports AF",category:["afghan","sport"],country:"AF",tags:["sport","afghan"],
+   img:"https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/sportsaf/playlist.m3u8"]},
+  {id:"gem",name:"GEM Sport",nameEn:"GEM Sport",category:["sport"],country:"IR",tags:["sport","gem"],
+   img:"https://cdn1.movieland.af/images/channels-logos/1775453278334-539833654.svg",
+   links:["https://i.eshaqtv1.workers.dev/gem/index.m3u8","https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8"]},
+  {id:"gem2",name:"GEM World Cup",nameEn:"GEM World Cup",category:["sport"],country:"IR",tags:["sport","gem","football"],
+   img:"https://image.liveland.af/images/channel/1781088282421-759824467.svg?width=256&quality=95&sharpen=60",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/gem2/playlist.m3u8"]},
+  {id:"sport1",name:"Sport 1",nameEn:"Sport 1",category:["sport"],country:"IR",tags:["sport"],
+   img:"https://static.telewebion.ir/channelsLogo/7bc81b96-3a06-4d5a-9349-a3ed837e3f0f/default",
+   links:["https://live.eshaqtv1.workers.dev/a/index.m3u8","https://live.eshaqtv1.workers.dev/b/index.m3u8"]},
+  {id:"sport2",name:"Sport 2",nameEn:"Sport 2",category:["sport"],country:"IR",tags:["sport"],
+   img:"https://static.telewebion.ir/channelsLogo/7bc81b96-3a06-4d5a-9349-a3ed837e3f0f/default",
+   links:["https://live.eshaqtv1.workers.dev/d/index.m3u8","https://live.eshaqtv1.workers.dev/c/index.m3u8"]},
+  {id:"sport3",name:"Sport 3",nameEn:"Sport 3",category:["sport"],country:"IR",tags:["sport"],
+   img:"https://static.telewebion.ir/channelsLogo/7bc81b96-3a06-4d5a-9349-a3ed837e3f0f/default",
+   links:["https://live.eshaqtv1.workers.dev/e/index.m3u8","https://live.eshaqtv1.workers.dev/f/index.m3u8"]},
+  {id:"footbaltj",name:"Football Tajikistan",nameEn:"Football Tajikistan",category:["sport"],country:"TJ",tags:["sport","football"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993999-145346146.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/footbaltajikistan/playlist.m3u8"]},
+  {id:"varzeshtj",name:"Varzesh Tajikistan",nameEn:"Varzesh Tajikistan",category:["sport"],country:"TJ",tags:["sport"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950994016-338336644.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/varzeshtajikistan/playlist.m3u8"]},
+  {id:"faza",name:"فضا / Faza",nameEn:"Faza TV",category:["afghan"],country:"AF",tags:["afghan","entertainment"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993653-57536261.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/faza/playlist.m3u8"]},
+  {id:"arezo",name:"آرزو / Arezo",nameEn:"Arezo TV",category:["afghan"],country:"AF",tags:["afghan","entertainment"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/arezo/playlist.m3u8"]},
+  {id:"ariana",name:"آریانا / Ariana",nameEn:"Ariana TV",category:["afghan"],country:"AF",tags:["afghan","entertainment"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-ariana/tracks-v1a1/mono.m3u8"]},
+  {id:"tv1",name:"شبکه یک / 1TV",nameEn:"1TV Afghanistan",category:["afghan"],country:"AF",tags:["afghan","news"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993637-382992096.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/tv1/playlist.m3u8","https://tgn.bozztv.com/eshgtv-dvrfl05/gin-1tvafg/tracks-v1/mono.m3u8"]},
+  {id:"tolonews",name:"Tolo News",nameEn:"Tolo News",category:["afghan","news"],country:"AF",tags:["news","afghan"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993534-94388838.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/tolonews/playlist.m3u8"]},
+  {id:"tvnews",name:"شبکه خبر",nameEn:"IRIB News",category:["iran","news"],country:"IR",tags:["news","iran"],
+   img:"https://static.telewebion.ir/channelsLogo/6557542f-fa8d-407f-9947-b9c3b055192e/default",
+   links:["https://live.eshaqtv1.workers.dev/tvnews/index.m3u8"]},
+  {id:"binsport1",name:"beIN Sports 1",nameEn:"beIN Sports 1",category:["sport"],country:"QA",tags:["sport","premium","football"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993472-280683327.svg",
+   links:["https://i.eshaqtv1.workers.dev/bin/index.m3u8","https://ishaq-proxy.eshaqtv1.workers.dev/binsport1/playlist.m3u8"]},
+  {id:"binsport2",name:"beIN Sports 2",nameEn:"beIN Sports 2",category:["sport"],country:"QA",tags:["sport","premium","football"],
+   img:"https://cdn1.movieland.af/images/channel-logos/1760950993504-17568997.svg",
+   links:["https://ishaq-proxy.eshaqtv1.workers.dev/binsport2/playlist.m3u8"]},
+  {id:"bbc",name:"BBC Sport",nameEn:"BBC Sport",category:["sport","news"],country:"GB",tags:["sport","international"],
+   img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/BBC_One_logo_%28box_variant%29.svg/330px-BBC_One_logo_%28box_variant%29.svg.png",
+   links:["https://i.eshaqtv1.workers.dev/bbc/index.m3u8"]},
+];
 
-const i18n = {
-  fa: {
-    live: 'زنده', playing: 'در حال پخش',
-    linkLabel: (n) => 'لینک ' + toFarsiNum(n),
-    quality: 'کیفیت خودکار',
-    qualitySet: 'کیفیت تنظیم شد',
-    tryingLink: (n) => 'در حال امتحان لینک ' + toFarsiNum(n) + '...',
-    noLinks: 'هیچ لینک فعالی یافت نشد. لطفاً بعداً دوباره امتحان کنید.',
-    noSupport: 'مرورگر شما از پخش زنده پشتیبانی نمی‌کند. لطفاً از Chrome یا Firefox استفاده کنید.',
-    noStream: 'پخش زنده در دسترس نیست',
-    back: '←',
-    plyrPlay: 'پخش', plyrPause: 'توقف', plyrMute: 'بی‌صدا',
-    plyrUnmute: 'صدا', plyrSettings: 'تنظیمات',
-    plyrFS: 'تمام صفحه', plyrExitFS: 'خروج از تمام صفحه',
-    plyrSpeed: 'سرعت', plyrNormal: 'معمولی',
+/* ══════════════════════════════════════════════════════
+   i18n
+══════════════════════════════════════════════════════ */
+const T = {
+  fa:{
+    tagline:"پخش زنده ۲۴ ساعته",heroTitle:"تماشای زنده تلویزیون",
+    heroDesc:"بهترین شبکه‌های ایرانی و افغانی را به صورت رایگان با کیفیت HD تماشا کنید",
+    statCh:"شبکه",statQ:"کیفیت",statLive:"زنده",
+    search:"جستجوی شبکه، کشور، دسته‌بندی...",
+    all:"همه",sport:"ورزشی",news:"خبری",afghan:"افغانی",iran:"ایرانی",
+    recent:"اخیراً تماشا شده",favorites:"علاقه‌مندی‌ها",channels:"شبکه‌ها",
+    liveNow:"پخش زنده",back:"بازگشت",broadcast:"پخش زنده",
+    quality:"کیفیت",loading:"در حال بارگذاری...",
+    errTitle:"اتصال برقرار نشد",errMsg:"لطفاً لینک دیگری را امتحان کنید.",
+    retry:"تلاش مجدد",noChannels:"شبکه‌ای یافت نشد",
+    otherCh:"شبکه‌های دیگر",
+    link:(n)=>"لینک "+["۱","۲","۳","۴","۵"][n-1],
+    tryingLink:(n)=>"در حال امتحان لینک "+["۱","۲","۳","۴","۵"][n-1]+"...",
+    noLinks:"هیچ لینک فعالی یافت نشد. لطفاً بعداً امتحان کنید.",
+    autoQ:"کیفیت خودکار",qChanged:"کیفیت تغییر کرد",
+    copyLink:"کپی لینک",copied:"لینک کپی شد! ✓",
+    share:"اشتراک‌گذاری",
+    favPageTitle:"♥ علاقه‌مندی‌ها",noFav:"هنوز شبکه‌ای اضافه نشده",
+    footer1:"پخش زنده ایرانی و افغانی",footer2:"رایگان و بدون تبلیغ",
+    darkMode:"تم تاریک",lightMode:"تم روشن",
   },
-  en: {
-    live: 'Live', playing: 'Now Playing',
-    linkLabel: (n) => 'Link ' + n,
-    quality: 'Auto Quality',
-    qualitySet: 'Quality changed',
-    tryingLink: (n) => 'Trying link ' + n + '...',
-    noLinks: 'No active streams found. Please try again later.',
-    noSupport: 'Your browser does not support live streaming. Please use Chrome or Firefox.',
-    noStream: 'Stream unavailable',
-    back: '→',
-    plyrPlay: 'Play', plyrPause: 'Pause', plyrMute: 'Mute',
-    plyrUnmute: 'Unmute', plyrSettings: 'Settings',
-    plyrFS: 'Fullscreen', plyrExitFS: 'Exit Fullscreen',
-    plyrSpeed: 'Speed', plyrNormal: 'Normal',
+  en:{
+    tagline:"24/7 Live Broadcast",heroTitle:"Watch Live Television",
+    heroDesc:"Watch the best Iranian and Afghan TV channels for free in HD quality — anytime, anywhere.",
+    statCh:"Channels",statQ:"Quality",statLive:"Live",
+    search:"Search channels, country, category...",
+    all:"All",sport:"Sports",news:"News",afghan:"Afghan",iran:"Iranian",
+    recent:"Recently Watched",favorites:"Favorites",channels:"Channels",
+    liveNow:"Live Now",back:"Back",broadcast:"Live Broadcast",
+    quality:"Quality",loading:"Loading...",
+    errTitle:"Connection Failed",errMsg:"Please try a different source.",
+    retry:"Retry",noChannels:"No channels found",
+    otherCh:"Other Channels",
+    link:(n)=>"Link "+n,
+    tryingLink:(n)=>"Trying link "+n+"...",
+    noLinks:"No active streams found. Please try again later.",
+    autoQ:"Auto Quality",qChanged:"Quality changed",
+    copyLink:"Copy Link",copied:"Link copied! ✓",
+    share:"Share",
+    favPageTitle:"♥ Favorites",noFav:"No favorites yet",
+    footer1:"Iranian & Afghan Live TV",footer2:"Free & Ad-Free",
+    darkMode:"Dark Mode",lightMode:"Light Mode",
   }
 };
 
-function t(key, ...args) {
-  const val = i18n[currentLang][key];
-  return typeof val === 'function' ? val(...args) : val;
-}
+/* ══════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════ */
+let lang = "fa";
+let isDark = true;
+let currentFilter = "all";
+let searchQuery = "";
+let currentChannel = null;
+let currentLinkIdx = 0;
+let hlsInstance = null;
+let plyrInstance = null;
+let hlsLevels = [];
+let currentLevel = -1;
+let favorites = [];
+let recent = [];
+let shareOpen = false;
 
-function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem('ishaqtv-lang', lang);
+const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+/* ══════════════════════════════════════════════════════
+   LANGUAGE & THEME
+══════════════════════════════════════════════════════ */
+function setLang(l) {
+  lang = l;
   const html = document.documentElement;
-  html.setAttribute('lang', lang);
-  html.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
+  html.setAttribute("lang", l);
+  html.setAttribute("dir", l === "fa" ? "rtl" : "ltr");
+  document.getElementById("btnFa").classList.toggle("active", l === "fa");
+  document.getElementById("btnEn").classList.toggle("active", l === "en");
 
-  // Toggle lang buttons
-  document.getElementById('btnFa').classList.toggle('active', lang === 'fa');
-  document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+  const s = T[l];
+  // header
+  document.getElementById("logoSub").textContent = s.tagline;
+  // hero
+  document.getElementById("heroEyebrow").textContent = s.tagline;
+  document.getElementById("heroTitle").textContent = s.heroTitle;
+  document.getElementById("heroDesc").textContent = s.heroDesc;
+  document.getElementById("statChLbl").textContent = s.statCh;
+  document.getElementById("statQlbl").textContent = s.statQ;
+  document.getElementById("statLiveLbl").textContent = s.statLive;
+  // search
+  document.getElementById("searchBox").placeholder = s.search;
+  // filter tabs
+  const tabs = document.querySelectorAll(".filter-tab");
+  const keys = ["all","sport","news","afghan","iran"];
+  tabs.forEach((tab,i) => { tab.textContent = s[keys[i]]; });
+  // section
+  document.getElementById("sectionLbl").textContent = s.channels;
+  document.getElementById("recentTitle").textContent = s.recent;
+  document.getElementById("favRowTitle").textContent = s.favorites;
+  document.getElementById("emptyText").textContent = s.noChannels;
+  // player
+  const backArrow = l === "fa" ? "→" : "←";
+  document.getElementById("backArrow").textContent = backArrow;
+  document.getElementById("backLbl").textContent = s.back;
+  document.getElementById("backArrow2").textContent = backArrow;
+  document.getElementById("backLbl2").textContent = s.back;
+  document.getElementById("broadcastLbl").textContent = s.broadcast;
+  document.getElementById("qualityLbl").textContent = s.quality;
+  document.getElementById("loadingLbl").textContent = s.loading;
+  document.getElementById("errTitle").textContent = s.errTitle;
+  document.getElementById("retryBtn").textContent = s.retry;
+  document.getElementById("suggestionsTitle").textContent = s.otherCh;
+  // fav page
+  document.getElementById("favPageTitle").textContent = s.favPageTitle;
+  // footer
+  document.getElementById("footer1").textContent = s.footer1;
+  document.getElementById("footer2").textContent = s.footer2;
 
-  // Back arrow direction
-  document.getElementById('backArrow').textContent = lang === 'fa' ? '→' : '←';
-
-  // Search placeholder
-  const sb = document.getElementById('searchBox');
-  sb.placeholder = sb.dataset['ph' + lang.charAt(0).toUpperCase() + lang.slice(1)];
-
-  // All data-fa/data-en elements
-  document.querySelectorAll('[data-fa]').forEach(el => {
-    if (el.tagName === 'INPUT') return;
-    el.textContent = el.dataset[lang];
-  });
-
-  // Filter tabs
-  document.querySelectorAll('.filter-tab').forEach(btn => {
-    btn.textContent = btn.dataset[lang];
-  });
-
-  // Re-render grid for card meta
   renderGrid();
-
-  // If player open, refresh labels
-  if (currentChannel) {
-    updateSourceBar();
-    updateQualityLabel();
-  }
+  if (currentChannel) { buildSourceBar(currentChannel); updateInfoLink(); }
 }
 
-function toFarsiNum(n) {
-  return currentLang === 'fa'
-    ? String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
-    : String(n);
+function toggleTheme() {
+  isDark = !isDark;
+  document.body.classList.toggle("light-mode", !isDark);
+  document.getElementById("themeBtn").textContent = isDark ? "☀️" : "🌙";
 }
 
-/* ══════════════════════════════
-   DATA
-══════════════════════════════ */
-const channels = [
-  { id:'tolo',      name:'طلوع / Tolo',            category:['afghan'],         img:'https://cdn1.movieland.af/images/channel-logos/1760950993521-914660414.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/tolo/playlist.m3u8',
-                                                                                                                                                                          'https://tgn.bozztv.com/eshgtv-dvrfl05/gin-tolohd/tracks-v1a1/mono.m3u8'] },
-  { id:'solh',      name:'صلح اسپورت',              category:['afghan','sport'],  img:'https://cdn1.movieland.af/images/channels-logos/1769243953209-579707064.svg', links:['https://ishaq-proxy.eshaqtv1.workers.dev/solh/playlist.m3u8'] },
-  { id:'irib3',     name:'شبکه سه / IRIB 3',        category:['iran'],            img:'https://cdn1.movieland.af/images/channel-logos/1760950993719-124056621.svg',  links:['https://e.eshaqtv1.workers.dev/irib3/tv3test.m3u8',
-                                                                                                                                                                            'https://live.eshaqtv1.workers.dev/tv3/index.m3u8',
-                                                                                                                                                                            'https://ishaq-proxy.eshaqtv1.workers.dev/irib3/playlist.m3u8',
-                                                                                                                                                                           'https://i.eshaqtv1.workers.dev/irrb3/index.m3u8',
-                                                                                                                                                                            'https://i.eshaqtv1.workers.dev/irib3/index.m3u8', ] },
-  { id:'varzesh',   name:'ورزش / Varzesh',           category:['iran','sport'],    img:'https://cdn1.movieland.af/images/channel-logos/1760950993702-549827287.svg',  links:['https://i.eshaqtv1.workers.dev/varzesh/index.m3u8',
-                                                                                                                                                                             'https://live.eshaqtv1.workers.dev/varzesh/index.m3u8',
-                                                                                                                                                                             'https://ishaq-proxy.eshaqtv1.workers.dev/varzesh/playlist.m3u8',] },
-  { id:'persiana',  name:'Persiana Sport',            category:['sport'],           img:'https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg',  links:[
-                                                                                                                                                                              'https://e.eshaqtv1.workers.dev/persiana/persiana.m3u8',
-                                                                                                                                                                              'https://ishaq-proxy.eshaqtv1.workers.dev/persiana/playlist.m3u8',
-                                                                                                                                                                               'https://i.eshaqtv1.workers.dev/sport/index.m3u8',] },
-  { id:'persiana2', name:'Persiana Sport 2',          category:['sport'],           img:'https://cdn1.movieland.af/images/channels-logos/1763529079539-200808624.svg', links:['https://ishaq-proxy.eshaqtv1.workers.dev/persiana2/playlist.m3u8',] },
-  { id:'persiana3', name:'Persiana Sport 3',          category:['sport'],           img:'https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/persiana3/playlist.m3u8'] },
-  { id:'persiana4', name:'Persiana Sport 4',          category:['sport'],           img:'https://cdn1.movieland.af/images/channel-logos/1760950993686-807307490.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/persiana4/playlist.m3u8',] },
-  { id:'sportsaf',  name:'Sports AF',                 category:['afghan','sport'],  img:'https://cdn1.movieland.af/images/channels-logos/1768027145119-177342014.svg', links:['https://ishaq-proxy.eshaqtv1.workers.dev/sportsaf/playlist.m3u8'] },
-  { id:'gem',       name:'GEM Sport',                 category:['sport'],           img:'https://cdn1.movieland.af/images/channels-logos/1775453278334-539833654.svg', links:['https://i.eshaqtv1.workers.dev/gem/index.m3u8',
-                                                                                                                                                                              'https://ishaq-proxy.eshaqtv1.workers.dev/gem/playlist.m3u8'] },
-  { id:'gem2',      name:'GEM World Cup',             category:['sport'],           img:'https://image.liveland.af/images/channel/1781088282421-759824467.svg?width=256&quality=95&sharpen=60', links:['https://ishaq-proxy.eshaqtv1.workers.dev/gem2/playlist.m3u8'] },
-  { id:'sport',       name:'varzesh 3 ',                 category:['sport'],           img:'https://static.telewebion.ir/channelsLogo/7bc81b96-3a06-4d5a-9349-a3ed837e3f0f/default', links:[''] },
-  { id:'sport1',       name:'Sport 1',                 category:['sport'],           img:'https://static.telewebion.ir/channelsLogo/7bc81b96-3a06-4d5a-9349-a3ed837e3f0f/default', links:['https://live.eshaqtv1.workers.dev/a/index.m3u8','https://live.eshaqtv1.workers.dev/b/index.m3u8'] },
-  { id:'sport2',       name:'Sport 2',                 category:['sport'],           img:'https://static.telewebion.ir/channelsLogo/7bc81b96-3a06-4d5a-9349-a3ed837e3f0f/default', links:['https://live.eshaqtv1.workers.dev/d/index.m3u8','https://live.eshaqtv1.workers.dev/c/index.m3u8'] },
-  { id:'sport3',       name:'Sport 3',                 category:['sport'],           img:'https://static.telewebion.ir/channelsLogo/7bc81b96-3a06-4d5a-9349-a3ed837e3f0f/default', links:['https://live.eshaqtv1.workers.dev/e/index.m3u8','https://live.eshaqtv1.workers.dev/f/index.m3u8'] },
-  { id:'footbaltj', name:'Football Tajikistan',       category:['sport'],           img:'https://cdn1.movieland.af/images/channel-logos/1760950993999-145346146.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/footbaltajikistan/playlist.m3u8'] },
-  { id:'varzeshtj', name:'Varzesh Tajikistan',        category:['sport'],           img:'https://cdn1.movieland.af/images/channel-logos/1760950994016-338336644.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/varzeshtajikistan/playlist.m3u8'] },
-  { id:'faza',      name:'فضا / Faza',               category:['afghan'],          img:'https://cdn1.movieland.af/images/channel-logos/1760950993653-57536261.svg',   links:['https://ishaq-proxy.eshaqtv1.workers.dev/faza/playlist.m3u8'] },
-  { id:'arezo',     name:'آرزو / Arezo',             category:['afghan'],          img:'https://cdn1.movieland.af/images/channel-logos/1760950993620-281627637.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/arezo/playlist.m3u8'] },
-  { id:'ariana',    name:'آریانا / Ariana',          category:['afghan'],          img:'https://cdn1.movieland.af/images/channel-logos/1760950993561-302702845.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/ariana/playlist.m3u8',
-                                                                                                                                                                             'https://tgn.bozztv.com/eshgtv-dvrfl05/gin-ariana/tracks-v1a1/mono.m3u8'] },
-  { id:'tv1',       name:'شبکه یک / 1TV',            category:['afghan'],          img:'https://cdn1.movieland.af/images/channel-logos/1760950993637-382992096.svg',  links:['https://ishaq-proxy.eshaqtv1.workers.dev/tv1/playlist.m3u8',
-                                                                                                                                                                             'https://tgn.bozztv.com/eshgtv-dvrfl05/gin-1tvafg/tracks-v1/mono.m3u8'] },
-  { id:'tolonews',  name:'Tolo News',                 category:['afghan','news'],   img:'https://cdn1.movieland.af/images/channel-logos/1760950993534-94388838.svg',   links:['https://ishaq-proxy.eshaqtv1.workers.dev/tolonews/playlist.m3u8'] },
-  { id:'tvnews',    name:'شبکه خبر / IRIB News',     category:['iran','news'],     img:'https://static.telewebion.ir/channelsLogo/6557542f-fa8d-407f-9947-b9c3b055192e/default', links:['https://live.eshaqtv1.workers.dev/tvnews/index.m3u8'] },
-  { id:'binsport1', name:'beIN Sports 1',             category:['sport'],           img:'https://cdn1.movieland.af/images/channel-logos/1760950993472-280683327.svg',  links:['https://i.eshaqtv1.workers.dev/bin/index.m3u8',
-                                                                                                                                                                              'https://ishaq-proxy.eshaqtv1.workers.dev/binsport1/playlist.m3u8'] },
-  { id:'binsport2', name:'beIN Sports 2',             category:['sport'],           img:'https://cdn1.movieland.af/images/channel-logos/1760950993504-17568997.svg',   links:['https://ishaq-proxy.eshaqtv1.workers.dev/binsport2/playlist.m3u8'] },
-  { id:'bbc',       name:'BCC Sport',                 category:['sport'],           img:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/BBC_One_logo_%28box_variant%29.svg/330px-BBC_One_logo_%28box_variant%29.svg.png', links:['https://i.eshaqtv1.workers.dev/bbc/index.m3u8'] },
-  
-   
-];
-
-document.getElementById('chCount').textContent = channels.length;
-
-/* ══════════════════════════════
+/* ══════════════════════════════════════════════════════
    GRID
-══════════════════════════════ */
-let currentFilter = 'all';
-let searchQuery = '';
+══════════════════════════════════════════════════════ */
+document.getElementById("chCount").textContent = CHANNELS.length;
 
 function renderGrid() {
-  const grid = document.getElementById('channelGrid');
-  const empty = document.getElementById('emptyState');
+  const grid = document.getElementById("channelGrid");
+  const empty = document.getElementById("emptyState");
   const q = searchQuery.trim().toLowerCase();
 
-  Array.from(grid.querySelectorAll('.card')).forEach(c => c.remove());
+  // remove existing cards
+  grid.querySelectorAll(".card").forEach(c => c.remove());
 
-  const filtered = channels.filter(ch => {
-    const matchCat = currentFilter === 'all' || ch.category.includes(currentFilter);
-    const matchQ = !q || ch.name.toLowerCase().includes(q) || ch.id.includes(q);
+  const filtered = CHANNELS.filter(ch => {
+    const matchCat = currentFilter === "all" || ch.category.includes(currentFilter);
+    const matchQ = !q || ch.name.toLowerCase().includes(q) || ch.nameEn.toLowerCase().includes(q)
+      || ch.id.includes(q) || (ch.tags||[]).some(t=>t.includes(q)) || (ch.country||"").toLowerCase().includes(q);
     return matchCat && matchQ;
   });
 
-  if (!filtered.length) { empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
+  if (!filtered.length) { empty.style.display = "block"; return; }
+  empty.style.display = "none";
 
   filtered.forEach((ch, i) => {
-    const card = document.createElement('button');
-    card.className = 'card';
-    card.setAttribute('aria-label', (currentLang === 'fa' ? 'تماشای ' : 'Watch ') + ch.name);
-    card.style.animationDelay = (i * 0.045) + 's';
+    const card = document.createElement("div");
+    card.className = "card";
+    card.setAttribute("role","button");
+    card.setAttribute("tabindex","0");
+    card.style.animationDelay = (i * 0.04) + "s";
 
-    const playingLabel = currentLang === 'fa' ? 'در حال پخش' : 'Live Now';
+    const isFav = favorites.includes(ch.id);
+    const liveLabel = lang === "fa" ? "پخش زنده" : "Live Now";
 
     card.innerHTML = `
       <div class="card-shine"></div>
-      <div class="card-badge badge-live">LIVE</div>
-      <div class="card-badge badge-hd">HD</div>
+      <div class="badge-live">LIVE</div>
+      <div class="badge-hd">HD</div>
+      <button class="fav-toggle ${isFav ? "is-fav" : ""}" data-id="${ch.id}" title="${isFav ? T[lang].favorites : "♡"}">${isFav ? "♥" : "♡"}</button>
       <div class="card-logo-wrap">
         <img src="${ch.img}" alt="${ch.name}" loading="lazy"
           onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22%3E%3Crect width=%2264%22 height=%2264%22 fill=%22%23141b24%22 rx=%228%22/%3E%3Ctext x=%2232%22 y=%2244%22 font-size=%2228%22 text-anchor=%22middle%22%3E📺%3C/text%3E%3C/svg%3E'">
       </div>
       <div class="card-name">${ch.name}</div>
-      <div class="card-meta"><span class="pulse-dot"></span>${playingLabel}</div>
+      <div class="card-meta"><span class="pulse-dot"></span>${liveLabel}</div>
     `;
-    card.addEventListener('click', () => openChannel(ch));
+
+    // fav button
+    card.querySelector(".fav-toggle").addEventListener("click", e => {
+      e.stopPropagation();
+      toggleFav(ch.id);
+    });
+
+    card.addEventListener("click", () => openChannel(ch));
+    card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openChannel(ch); });
     grid.appendChild(card);
   });
+
+  // update rows
+  renderRows();
 }
 
-// Filters
-document.getElementById('filterTabs').addEventListener('click', e => {
-  const btn = e.target.closest('.filter-tab');
+function renderRows() {
+  // recent
+  const recentChs = recent.map(id => CHANNELS.find(c => c.id === id)).filter(Boolean);
+  const recentRow = document.getElementById("recentRow");
+  const recentScroll = document.getElementById("recentScroll");
+  if (recentChs.length && !searchQuery) {
+    recentRow.style.display = "block";
+    recentScroll.innerHTML = "";
+    recentChs.forEach(ch => recentScroll.appendChild(makeChip(ch)));
+  } else {
+    recentRow.style.display = "none";
+  }
+
+  // fav strip
+  const favChs = favorites.map(id => CHANNELS.find(c => c.id === id)).filter(Boolean);
+  const favRow = document.getElementById("favRow");
+  const favScroll = document.getElementById("favScroll");
+  if (favChs.length && !searchQuery) {
+    favRow.style.display = "block";
+    favScroll.innerHTML = "";
+    favChs.forEach(ch => favScroll.appendChild(makeChip(ch)));
+  } else {
+    favRow.style.display = "none";
+  }
+}
+
+function makeChip(ch) {
+  const chip = document.createElement("button");
+  chip.className = "row-chip";
+  chip.innerHTML = `<img src="${ch.img}" alt="${ch.name}" onerror="this.style.display='none'"><span>${ch.name}</span>`;
+  chip.addEventListener("click", () => openChannel(ch));
+  return chip;
+}
+
+/* Filter & search events */
+document.getElementById("filterTabs").addEventListener("click", e => {
+  const btn = e.target.closest(".filter-tab");
   if (!btn) return;
-  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll(".filter-tab").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
   currentFilter = btn.dataset.filter;
   renderGrid();
 });
-
-// Search
-document.getElementById('searchBox').addEventListener('input', e => {
+document.getElementById("searchBox").addEventListener("input", e => {
   searchQuery = e.target.value;
   renderGrid();
 });
 
-/* ══════════════════════════════
+/* ══════════════════════════════════════════════════════
+   FAVORITES
+══════════════════════════════════════════════════════ */
+function toggleFav(id) {
+  if (favorites.includes(id)) {
+    favorites = favorites.filter(x => x !== id);
+  } else {
+    favorites = [...favorites, id];
+  }
+  // update count
+  const count = favorites.length;
+  const countEl = document.getElementById("favCount");
+  countEl.textContent = count;
+  countEl.style.display = count > 0 ? "inline-block" : "none";
+  // re-render
+  renderGrid();
+}
+
+function showFavPage() {
+  document.getElementById("homePage").style.display = "none";
+  document.getElementById("playerPage").style.display = "none";
+  document.getElementById("favPage").style.display = "block";
+  renderFavPage();
+  window.scrollTo({top:0});
+}
+
+function renderFavPage() {
+  const s = T[lang];
+  const favGrid = document.getElementById("favGrid");
+  const recentSection = document.getElementById("recentSection");
+  const favChs = favorites.map(id => CHANNELS.find(c => c.id === id)).filter(Boolean);
+  const recentChs = recent.map(id => CHANNELS.find(c => c.id === id)).filter(Boolean);
+
+  if (!favChs.length) {
+    favGrid.innerHTML = `<div class="fav-empty"><div class="fav-empty-icon">♡</div><div>${s.noFav}</div></div>`;
+  } else {
+    favGrid.innerHTML = "";
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    favChs.forEach((ch, i) => {
+      const card = makeFavCard(ch, i);
+      grid.appendChild(card);
+    });
+    favGrid.appendChild(grid);
+  }
+
+  if (recentChs.length) {
+    recentSection.innerHTML = "";
+    const title = document.createElement("div");
+    title.className = "sub-section-title";
+    title.textContent = "🕐 " + s.recent;
+    const grid2 = document.createElement("div");
+    grid2.className = "grid";
+    recentChs.forEach((ch, i) => {
+      grid2.appendChild(makeFavCard(ch, i));
+    });
+    recentSection.appendChild(title);
+    recentSection.appendChild(grid2);
+  } else {
+    recentSection.innerHTML = "";
+  }
+}
+
+function makeFavCard(ch, i) {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.style.animationDelay = (i * 0.04) + "s";
+  const isFav = favorites.includes(ch.id);
+  const liveLabel = lang === "fa" ? "پخش زنده" : "Live Now";
+  card.innerHTML = `
+    <div class="card-shine"></div>
+    <div class="badge-live">LIVE</div>
+    <div class="badge-hd">HD</div>
+    <button class="fav-toggle ${isFav ? "is-fav" : ""}" data-id="${ch.id}">${isFav ? "♥" : "♡"}</button>
+    <div class="card-logo-wrap">
+      <img src="${ch.img}" alt="${ch.name}" loading="lazy"
+        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22%3E%3Crect width=%2264%22 height=%2264%22 fill=%22%23141b24%22 rx=%228%22/%3E%3Ctext x=%2232%22 y=%2244%22 font-size=%2228%22 text-anchor=%22middle%22%3E📺%3C/text%3E%3C/svg%3E'">
+    </div>
+    <div class="card-name">${ch.name}</div>
+    <div class="card-meta"><span class="pulse-dot"></span>${liveLabel}</div>
+  `;
+  card.querySelector(".fav-toggle").addEventListener("click", e => {
+    e.stopPropagation();
+    toggleFav(ch.id);
+    renderFavPage();
+  });
+  card.addEventListener("click", () => openChannel(ch));
+  return card;
+}
+
+/* ══════════════════════════════════════════════════════
    PLAYER
-══════════════════════════════ */
-let hlsInstance = null;
-let plyrInstance = null;
-let currentChannel = null;
-let currentLinkIdx = 0;
-let hlsLevels = [];
-let currentLevel = -1;
-
-const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-function showLoading(v) { document.getElementById('loadingOverlay').classList.toggle('hidden', !v); }
-function showError(msg) {
-  document.getElementById('errorMsg').textContent = msg || t('noStream');
-  document.getElementById('errorOverlay').classList.add('visible');
-}
-function hideError() { document.getElementById('errorOverlay').classList.remove('visible'); }
-
-function destroyPlayer() {
-  if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
-  if (plyrInstance) { plyrInstance.destroy(); plyrInstance = null; }
-  const v = document.getElementById('video');
-  v.src = ''; v.load();
-  hlsLevels = []; currentLevel = -1;
-}
-
+══════════════════════════════════════════════════════ */
 function openChannel(ch) {
   currentChannel = ch;
   currentLinkIdx = 0;
-  document.getElementById('channelTitle').textContent = ch.name;
-  document.getElementById('homePage').style.display = 'none';
-  document.getElementById('playerPage').style.display = 'block';
+  // track recent
+  recent = [ch.id, ...recent.filter(id => id !== ch.id)].slice(0, 12);
+
+  document.getElementById("channelTitle").textContent = ch.name;
+  document.getElementById("homePage").style.display = "none";
+  document.getElementById("favPage").style.display = "none";
+  document.getElementById("playerPage").style.display = "block";
+
   buildSourceBar(ch);
   buildSuggestions(ch);
+  updateInfoLink();
   loadLink(0);
-  window.scrollTo({ top:0, behavior:'smooth' });
+  window.scrollTo({top:0, behavior:"smooth"});
+
+  // URL
+  window.history.pushState(null, "", "#/channel/" + ch.id);
+  document.title = ch.name + " — Ishaq TV";
 }
 
-function showHome(e) {
-  if (e) e.preventDefault();
-  if (document.getElementById('playerPage').style.display !== 'none') goBack();
+function goHome() {
+  destroyPlayer();
+  hideError();
+  showLoading(false);
+  document.getElementById("playerPage").style.display = "none";
+  document.getElementById("favPage").style.display = "none";
+  document.getElementById("homePage").style.display = "block";
+  currentChannel = null;
+  renderGrid();
+  window.history.pushState(null, "", "#");
+  document.title = "Ishaq TV — پخش زنده";
+  window.scrollTo({top:0});
 }
+
+function goBack() { goHome(); }
 
 function buildSourceBar(ch) {
-  const bar = document.getElementById('sourceBar');
-  bar.innerHTML = '';
+  const bar = document.getElementById("sourceBar");
+  bar.innerHTML = "";
+
   ch.links.forEach((_, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'src-btn' + (i === 0 ? ' active' : '');
-    btn.textContent = t('linkLabel', i + 1);
-    btn.addEventListener('click', () => {
+    const btn = document.createElement("button");
+    btn.className = "src-btn" + (i === currentLinkIdx ? " active" : "");
+    btn.textContent = T[lang].link(i + 1);
+    btn.addEventListener("click", () => {
       if (currentLinkIdx === i) return;
       currentLinkIdx = i;
       updateSourceBar();
@@ -1033,71 +1157,139 @@ function buildSourceBar(ch) {
     });
     bar.appendChild(btn);
   });
+
+  // fav
+  const isFav = favorites.includes(ch.id);
+  const favB = document.createElement("button");
+  favB.className = "icon-btn" + (isFav ? " active" : "");
+  favB.id = "playerFavBtn";
+  favB.textContent = isFav ? "♥" : "♡";
+  favB.title = T[lang].favorites;
+  favB.addEventListener("click", () => {
+    toggleFav(ch.id);
+    const nowFav = favorites.includes(ch.id);
+    favB.textContent = nowFav ? "♥" : "♡";
+    favB.classList.toggle("active", nowFav);
+  });
+  bar.appendChild(favB);
+
+  // share
+  const shareWrap = document.createElement("div");
+  shareWrap.className = "share-wrap";
+  const shareB = document.createElement("button");
+  shareB.className = "icon-btn";
+  shareB.textContent = "⤴";
+  shareB.title = T[lang].share;
+  shareB.addEventListener("click", (e) => { e.stopPropagation(); toggleShare(shareWrap, ch); });
+  shareWrap.appendChild(shareB);
+  bar.appendChild(shareWrap);
+}
+
+function toggleShare(wrap, ch) {
+  const existing = wrap.querySelector(".share-menu");
+  if (existing) { existing.remove(); return; }
+  const menu = document.createElement("div");
+  menu.className = "share-menu";
+  const url = window.location.origin + window.location.pathname + "#/channel/" + ch.id;
+  const items = [
+    {icon:"🔗", label: T[lang].copyLink, action: () => { navigator.clipboard?.writeText(url).then(()=>showToast(T[lang].copied)).catch(()=>showToast(T[lang].copyLink)); menu.remove(); }},
+    {icon:"💬", label:"WhatsApp", href:`https://wa.me/?text=${encodeURIComponent(ch.name+" | Ishaq TV — "+url)}`},
+    {icon:"✈️", label:"Telegram", href:`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(ch.name)}`},
+    {icon:"🐦", label:"X (Twitter)", href:`https://twitter.com/intent/tweet?text=${encodeURIComponent("Watch "+ch.name+" live on Ishaq TV")}&url=${encodeURIComponent(url)}`},
+  ];
+  items.forEach(item => {
+    if (item.href) {
+      const a = document.createElement("a");
+      a.className = "share-item"; a.href = item.href;
+      a.target = "_blank"; a.rel = "noopener noreferrer";
+      a.textContent = item.icon + " " + item.label;
+      menu.appendChild(a);
+    } else {
+      const b = document.createElement("button");
+      b.className = "share-item"; b.textContent = item.icon + " " + item.label;
+      b.addEventListener("click", item.action);
+      menu.appendChild(b);
+    }
+  });
+  wrap.appendChild(menu);
+  // close on outside click
+  setTimeout(() => { document.addEventListener("click", function h(){ menu.remove(); document.removeEventListener("click",h); }); }, 0);
 }
 
 function updateSourceBar() {
-  document.querySelectorAll('.src-btn').forEach((b, i) => {
-    b.classList.toggle('active', i === currentLinkIdx);
-    b.textContent = t('linkLabel', i + 1);
+  document.querySelectorAll(".src-btn").forEach((b, i) => {
+    b.classList.toggle("active", i === currentLinkIdx);
+    b.textContent = T[lang].link(i + 1);
   });
-  document.getElementById('infoLink').textContent = t('linkLabel', currentLinkIdx + 1);
+  updateInfoLink();
 }
 
-function buildQualityBtns() {
-  const wrap = document.getElementById('qualityBtns');
-  wrap.innerHTML = '';
-  const autoBtn = document.createElement('button');
-  autoBtn.className = 'quality-btn active';
-  autoBtn.textContent = 'Auto';
-  autoBtn.dataset.level = '-1';
-  autoBtn.addEventListener('click', () => setQuality(-1));
-  wrap.appendChild(autoBtn);
+function updateInfoLink() {
+  document.getElementById("infoLink").textContent = T[lang].link(currentLinkIdx + 1);
+}
 
-  hlsLevels.forEach((lvl, i) => {
-    const label = lvl.height ? lvl.height + 'p' : (lvl.bitrate ? Math.round(lvl.bitrate/1000)+'k' : 'Q'+(i+1));
-    const btn = document.createElement('button');
-    btn.className = 'quality-btn';
-    btn.textContent = label;
-    btn.dataset.level = i;
-    btn.addEventListener('click', () => setQuality(i));
-    wrap.appendChild(btn);
+function buildSuggestions(current) {
+  const scroll = document.getElementById("suggestionsScroll");
+  scroll.innerHTML = "";
+  CHANNELS.filter(c => c.id !== current.id).slice(0, 14).forEach(ch => {
+    const chip = document.createElement("button");
+    chip.className = "sug-chip";
+    chip.innerHTML = `<img src="${ch.img}" alt="${ch.name}" onerror="this.style.display='none'"><span>${ch.name}</span>`;
+    chip.addEventListener("click", () => openChannel(ch));
+    scroll.appendChild(chip);
   });
 }
 
-function updateQualityLabel() {
-  document.querySelectorAll('.quality-btn').forEach(b => {
-    b.classList.toggle('active', parseInt(b.dataset.level) === currentLevel);
-  });
+/* ── Player loading/error ── */
+function showLoading(v) { document.getElementById("loadingOverlay").classList.toggle("hidden", !v); }
+function showError(msg) {
+  document.getElementById("errorMsg").textContent = msg || T[lang].errMsg;
+  document.getElementById("errorOverlay").classList.add("visible");
+}
+function hideError() { document.getElementById("errorOverlay").classList.remove("visible"); }
+
+function destroyPlayer() {
+  if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+  if (plyrInstance) { plyrInstance.destroy(); plyrInstance = null; }
+  const v = document.getElementById("video");
+  if (v) { v.src = ""; v.load(); }
+  hlsLevels = []; currentLevel = -1;
+  document.getElementById("qualityBtns").innerHTML = "";
 }
 
-function setQuality(level) {
-  if (!hlsInstance) return;
-  currentLevel = level;
-  hlsInstance.currentLevel = level;
-  updateQualityLabel();
-  showToast(level === -1 ? t('quality') : t('qualitySet'));
+function initPlyr(video) {
+  if (plyrInstance) return;
+  try {
+    plyrInstance = new Plyr(video, {
+      controls:["play-large","play","rewind","fast-forward","progress","current-time","mute","volume","settings","pip","airplay","fullscreen"],
+      settings:["speed"],speed:{selected:1,options:[0.5,0.75,1,1.25,1.5]},
+      tooltips:{controls:true,seek:true},
+      keyboard:{focused:true,global:false},
+      fullscreen:{enabled:true,fallback:true,iosNative:true},
+      invertTime:false,
+    });
+  } catch(e){}
 }
 
-function loadLink(index) {
+function loadLink(idx) {
   destroyPlayer();
   hideError();
   showLoading(true);
-
-  const url = currentChannel.links[index];
-  const video = document.getElementById('video');
-  document.getElementById('infoLink').textContent = t('linkLabel', index + 1);
+  const url = currentChannel.links[idx];
+  const video = document.getElementById("video");
+  document.getElementById("infoLink").textContent = T[lang].link(idx + 1);
 
   if (isiOS || isSafari) {
-    document.getElementById('infoType').textContent = 'Native HLS';
+    document.getElementById("infoType").textContent = "Native HLS";
     video.src = url;
-    video.addEventListener('loadedmetadata', () => { showLoading(false); initPlyr(video); video.play().catch(()=>{}); }, { once:true });
-    video.addEventListener('error', () => tryNextLink(), { once:true });
+    video.addEventListener("loadedmetadata", () => { showLoading(false); initPlyr(video); video.play().catch(()=>{}); }, {once:true});
+    video.addEventListener("error", () => tryNextLink(idx), {once:true});
     return;
   }
 
   if (Hls.isSupported()) {
-    document.getElementById('infoType').textContent = 'HLS.js';
-    hlsInstance = new Hls({ enableWorker:true, lowLatencyMode:true, backBufferLength:60 });
+    document.getElementById("infoType").textContent = "HLS.js";
+    hlsInstance = new Hls({enableWorker:true,lowLatencyMode:true,backBufferLength:60});
     hlsInstance.loadSource(url);
     hlsInstance.attachMedia(video);
     hlsInstance.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
@@ -1110,53 +1302,56 @@ function loadLink(index) {
     hlsInstance.on(Hls.Events.ERROR, (_, data) => {
       if (data.fatal) {
         if (data.type === Hls.ErrorTypes.NETWORK_ERROR) hlsInstance.startLoad();
-        else tryNextLink();
+        else tryNextLink(idx);
       }
     });
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    document.getElementById('infoType').textContent = 'Native';
+  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    document.getElementById("infoType").textContent = "Native";
     video.src = url;
-    video.addEventListener('loadedmetadata', () => showLoading(false), { once:true });
-    video.play().catch(() => tryNextLink());
+    video.addEventListener("loadedmetadata", () => showLoading(false), {once:true});
+    video.play().catch(() => tryNextLink(idx));
   } else {
     showLoading(false);
-    showError(t('noSupport'));
+    showError("Your browser does not support live streaming. Please use Chrome or Firefox.");
   }
 }
 
-function initPlyr(video) {
-  if (plyrInstance) return;
-  const lang = i18n[currentLang];
-  plyrInstance = new Plyr(video, {
-    controls:['play-large','play','rewind','fast-forward','progress','current-time','mute','volume','settings','pip','airplay','fullscreen'],
-    settings:['speed'],
-    speed:{ selected:1, options:[0.5,0.75,1,1.25,1.5] },
-    tooltips:{ controls:true, seek:true },
-    keyboard:{ focused:true, global:false },
-    fullscreen:{ enabled:true, fallback:true, iosNative:true },
-    invertTime:false,
-    i18n:{
-      play:lang.plyrPlay, pause:lang.plyrPause,
-      mute:lang.plyrMute, unmute:lang.plyrUnmute,
-      settings:lang.plyrSettings,
-      fullscreen:lang.plyrFS, exitFullscreen:lang.plyrExitFS,
-      speed:lang.plyrSpeed, normal:lang.plyrNormal,
-    }
+function buildQualityBtns() {
+  const wrap = document.getElementById("qualityBtns");
+  wrap.innerHTML = "";
+  const autoBtn = document.createElement("button");
+  autoBtn.className = "q-btn active"; autoBtn.textContent = "Auto"; autoBtn.dataset.level = "-1";
+  autoBtn.addEventListener("click", () => setQuality(-1));
+  wrap.appendChild(autoBtn);
+  hlsLevels.forEach((lvl, i) => {
+    const label = lvl.height ? lvl.height+"p" : lvl.bitrate ? Math.round(lvl.bitrate/1000)+"k" : "Q"+(i+1);
+    const btn = document.createElement("button");
+    btn.className = "q-btn"; btn.textContent = label; btn.dataset.level = i;
+    btn.addEventListener("click", () => setQuality(i));
+    wrap.appendChild(btn);
   });
 }
 
-function tryNextLink() {
+function setQuality(level) {
+  if (!hlsInstance) return;
+  currentLevel = level;
+  hlsInstance.currentLevel = level;
+  document.querySelectorAll(".q-btn").forEach(b => b.classList.toggle("active", parseInt(b.dataset.level) === level));
+  showToast(level === -1 ? T[lang].autoQ : T[lang].qChanged);
+}
+
+function tryNextLink(idx) {
   if (!currentChannel) return;
-  const next = currentLinkIdx + 1;
+  const next = idx + 1;
   if (next < currentChannel.links.length) {
     currentLinkIdx = next;
     updateSourceBar();
-    document.getElementById('errorMsg').textContent = t('tryingLink', next + 1);
-    document.getElementById('errorOverlay').classList.add('visible');
+    document.getElementById("errorMsg").textContent = T[lang].tryingLink(next + 1);
+    document.getElementById("errorOverlay").classList.add("visible");
     setTimeout(() => { hideError(); loadLink(next); }, 1400);
   } else {
     showLoading(false);
-    showError(t('noLinks'));
+    showError(T[lang].noLinks);
   }
 }
 
@@ -1167,41 +1362,43 @@ function retryAll() {
   loadLink(0);
 }
 
-function goBack() {
-  destroyPlayer(); hideError(); showLoading(false);
-  document.getElementById('playerPage').style.display = 'none';
-  document.getElementById('homePage').style.display = 'block';
-  currentChannel = null;
-  window.scrollTo({ top:0 });
-}
-
-function buildSuggestions(current) {
-  const scroll = document.getElementById('suggestionsScroll');
-  scroll.innerHTML = '';
-  channels.filter(ch => ch.id !== current.id).slice(0, 12).forEach(ch => {
-    const chip = document.createElement('button');
-    chip.className = 'suggestion-chip';
-    chip.innerHTML = `<img src="${ch.img}" alt="${ch.name}" onerror="this.style.display='none'"><span>${ch.name}</span>`;
-    chip.addEventListener('click', () => openChannel(ch));
-    scroll.appendChild(chip);
-  });
-}
-
+/* ══════════════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════════════ */
 let toastTimer;
 function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2400);
 }
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.getElementById('playerPage').style.display !== 'none') goBack();
+/* ══════════════════════════════════════════════════════
+   URL ROUTING
+══════════════════════════════════════════════════════ */
+function handleHash() {
+  const hash = window.location.hash;
+  const m = hash.match(/^#\/channel\/(.+)/);
+  if (m) {
+    const ch = CHANNELS.find(c => c.id === m[1]);
+    if (ch) { openChannel(ch); return; }
+  }
+  goHome();
+}
+window.addEventListener("hashchange", handleHash);
+
+/* ══════════════════════════════════════════════════════
+   KEYBOARD
+══════════════════════════════════════════════════════ */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && document.getElementById("playerPage").style.display !== "none") goBack();
 });
 
-// Init
-setLang(currentLang);
-renderGrid();
+/* ══════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════ */
+setLang("fa");
+handleHash();
 </script>
 </body>
 </html>
